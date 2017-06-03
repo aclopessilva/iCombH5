@@ -6,4 +6,8 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('home/get');
 	}
+	public function exercicios()
+	{
+		$this->load->view('exercicio/get');
+	}
 }

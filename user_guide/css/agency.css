@@ -534,15 +534,15 @@ section h3.section-subheading {
     padding: 0 100px 20px 20px;
   }
 }
-.team-member {
+.universo-item {
   text-align: center;
   margin-bottom: 50px;
 }
-.team-member img {
+.universo-item img {
   margin: 0 auto;
   border: 7px solid white;
 }
-.team-member h4 {
+.universo-item h4 {
   margin-top: 25px;
   margin-bottom: 0;
   text-transform: none;

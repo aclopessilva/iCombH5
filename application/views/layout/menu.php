@@ -10,10 +10,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a  data-toggle="modal" data-target="#myModal">Tutorial</a>
+                    <a  data-toggle="modal" data-tarindex="#myModal">Tutorial</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    <a class="" href="<?php echo site_url("exercicios")?>">Exercicíos</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#about">About</a>
