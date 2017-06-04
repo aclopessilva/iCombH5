@@ -11,11 +11,11 @@
 
 <section id="exercicio">
     <div class="container">
-        <h2 class="display-3">Exercicio 01</h2>
+        <h2 class="display-3">Exercicio <?php echo $exercicio['exer_id']?></h2>
         <br />
         <div class="row">
             <div class="jumbotron col-xs-8">
-                <h3 class="">explicação do exercicio</h3>
+                <h3 class=""><?php echo $exercicio['exer_desc']?></h3>
             </div>
             <div class="col-xs-4" style="padding-top: 20px; padding-left: 80px;">
                 <button type="button" class="btn btn-info buttonExercicio" data-toggle="modal" data-target="#ModalUniverso">Tutorial</button>
@@ -65,10 +65,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Dica</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <p><?php echo $exercicio['exer_dica']?></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
