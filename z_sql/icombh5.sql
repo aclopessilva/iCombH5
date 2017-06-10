@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Jun-2017 às 00:10
--- Versão do servidor: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Generation Time: 10-Jun-2017 às 22:21
+-- Versão do servidor: 10.1.10-MariaDB
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `exercicio` (
   `exer_id` int(3) NOT NULL,
   `exer_desc` varchar(200) NOT NULL,
-  `exer_dica` varchar(100) NOT NULL
+  `exer_dica` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -37,10 +37,12 @@ CREATE TABLE `exercicio` (
 --
 
 INSERT INTO `exercicio` (`exer_id`, `exer_desc`, `exer_dica`) VALUES
-(1, 'Com um baralho de 32 cartas, quantas mão de 2 cartas é possível formar com exatamente uma Dama e um Ás?', 'Lorem ipsum dolor sit amet.'),
-(2, 'Com um baralho de 32 cartas, quantas mãos de 5 cartas é possível formar com exatamente 2 Copas e duas Espadas?', 'Lorem ipsum dolor sit amet.\r\n\r\n'),
-(3, 'Com um baralho de 52 cartas, quantas mãos de 8 cartas é possível formar com exatamente 1 Ás, 2 Reis e 2 Valetes?', 'Lorem ipsum dolor sit amet.'),
-(4, 'Com um baralho de 32 cartas, quantas mãos de 8 cartas é possível formar com exatamente 4 Ases e 4 Reis?', 'Lorem ipsum dolor sit amet.');
+(1, 'Quantas possibilidades de 1 carta tipo Ás?', 'Baralho completo, com 52 cartas, 4 de cada.\n'),
+(2, 'Com um baralho de 32 cartas, quantas mãos de 2 cartas é possível formar com exatamente uma Dama e um Ás?', 'Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).'),
+(3, 'Com um baralho de 32 cartas, quantas mãos de 5 cartas é possível formar com exatamente 2 cartas de Copas e exatamente duas cartas de Espadas?\n', 'Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).'),
+(4, 'Com um baralho de 32 cartas, quantas mãos de 20 cartas é possível formar com 3 ases, 4 espadas e 16 cartas vermelhas?\n', 'O conjunto de subconjuntos com 20 elementos tomados em um baralho com 32 cartas. Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que 7 (7,8,9,10, Valete, Dama, Rei e Ás).\n '),
+(5, 'Quantos times de 13 jogadores podemos formar com exatamente 5 jogadores do time azul e exatamente 5 jogadores do time verde?', 'O Universo Futebol corresponde a quatro equipe com 11 jogadores. Equipe Azul, Amarelo, Verde e Vermelho. O jogador número 1 sempre será goleiro, de 2 a 4 são todos zagueiros. Meio-campo são de 5 a 9 enquanto 10 e 11 são atacantes.\r\n'),
+(6, 'Quantos jogadores existem que tenham camisa número 11?\r\n', 'Lembre-se que são 4 times.\r\n');
 
 -- --------------------------------------------------------
 
@@ -89,12 +91,12 @@ ALTER TABLE `formula`
 -- AUTO_INCREMENT for table `exercicio`
 --
 ALTER TABLE `exercicio`
-  MODIFY `exer_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `exer_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `formula`
 --
 ALTER TABLE `formula`
-  MODIFY `form_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `form_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
