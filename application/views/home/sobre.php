@@ -1,25 +1,8 @@
-<body id="page-top" class="index">
-    <header>
-        <div class="container">
-            <div class="intro-text">
-           
-            <div class="intro-lead-in">
-                O iCombH5 veio para ajuda-lo com
-            </div>
-                <div class="intro-heading">Análise Combinatoria</div>
-                
-                 <div class="intro-lead-in"> Exercite seu conhecimento e aprenda mais. </div>
-                 
-                <a href="<?php echo site_url("exercicios")?>" class="page-scroll btn btn-xl">Pratique com os Exercícios</a>
-            </div>
-        </div>
-    </header>
-
-    <section id="universos" class="bg-light-gray">
+    <section id="sobre" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Universos</h2>
+                    <h2 class="section-heading">Sobre</h2>
                     <h3 class="section-subheading text-muted">Universos que utilizamos em nossos exercicíos:</h3>
                 </div>
             </div>
@@ -51,5 +34,3 @@
             </div>
         </div>
     </section>
-
-

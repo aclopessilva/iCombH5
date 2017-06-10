@@ -1,13 +1,13 @@
 <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container">
         <div class="navbar-header page-scroll">
-            <a class="navbar-brand page-scroll" href="#page-top">iCombH5</a>
+            <a class="navbar-brand page-scroll" href="../../../icombh5">iCombH5</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden">
-                    <a href="#page-top"></a>
+                    <a href="#"></a>
                 </li>
                 <li>
                     <a  data-toggle="modal" data-tarindex="#myModal">Tutorial</a>
@@ -16,27 +16,24 @@
                     <a class="" href="<?php echo site_url("exercicios")?>">Exercicíos</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#about">About</a>
+                    <a class="page-scroll" href="#sobre">Sobre</a>
                 </li>
-                <li>
+                <!--li>
                     <a class="page-scroll" href="#team">Team</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
-                </li>
+                </li-->
             </ul>
     </div>
 </nav>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<!--div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
-      <div class="modal-content">
+      <!--div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Tutorial</h4>
         </div>
         <div class="modal-body">
           <p>Some text in the modal.</p>
@@ -47,4 +44,4 @@
       </div>
       
     </div>
-</div>
+</div-->
