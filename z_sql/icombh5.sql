@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jun-2017 às 22:21
--- Versão do servidor: 10.1.10-MariaDB
--- PHP Version: 7.0.4
+-- Generation Time: 11-Jun-2017 às 02:33
+-- Versão do servidor: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -63,9 +63,9 @@ CREATE TABLE `formula` (
 --
 
 INSERT INTO `formula` (`form_id`, `form_img`, `form_expl`, `form_nome`, `form_expr`) VALUES
-(1, 'faltadefinir', 'Dado um conjunto qualquer com n elementos e um valor para natural p. Será formado um arranjo simples de p elementos distintos de um conjunto qualquer seqüência formada por p elementos do conjunto.', 'Arranjo simples', 'A(n,p)'),
-(2, 'faltadefinir', 'As combinações simples podem ser consideradas um tipo particular de arranjo simples, pois os agrupamentos formados nos arranjos são diferenciados pela ordem e pela natureza dos seus elementos. A combinação simples são esses arranjos diferenciados apenas pela natureza de seus elementos.\r\n', 'Combinação simples', 'C(n,p)'),
-(3, 'faltadefinir', 'Podemos considerar a permutação simples como um caso particular de arranjo, onde os elementos formarão agrupamentos que se diferenciarão somente pela ordem. ', 'Permutação simples', 'Pn = p!');
+(1, 'user_guide/img/formulas/Arranjo.png', 'Dado um conjunto qualquer com n elementos e um valor para natural p. Será formado um arranjo simples de p elementos distintos de um conjunto qualquer seqüência formada por p elementos do conjunto.', 'Arranjo simples', 'A(n,p)'),
+(2, 'user_guide/img/formulas/Combinacao.png', 'As combinações simples podem ser consideradas um tipo particular de arranjo simples, pois os agrupamentos formados nos arranjos são diferenciados pela ordem e pela natureza dos seus elementos. A combinação simples são esses arranjos diferenciados apenas pela natureza de seus elementos.\r\n', 'Combinação simples', 'C(n,p)'),
+(3, 'user_guide/img/formulas/Permutacao.jpg', 'Podemos considerar a permutação simples como um caso particular de arranjo, onde os elementos formarão agrupamentos que se diferenciarão somente pela ordem. ', 'Permutação simples', 'Pn = p!');
 
 --
 -- Indexes for dumped tables
