@@ -14,9 +14,9 @@
                 <div class="col-md-4">
                     <span class="fa-stack fa-2x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-question-circle-o fa-stack-1x fa-inverse"></i>
+                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                     </span>
-                    <a style="text-align: left;" href="<?php echo site_url('exercicio/resolucao/'.$row['exer_id'])?>"><h4 class="service-heading">Exercício <?= $row['exer_id'] ?></h4></a>
+                    <a href="<?php echo site_url('exercicio/resolucao/'.$row['exer_id'])?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row['exer_id'] ?></h4></a>
                     <p class="text-muted"><?= $row['exer_desc'] ?></p>
                 </div>
              <?php endforeach; ?>

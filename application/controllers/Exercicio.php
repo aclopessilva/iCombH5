@@ -7,16 +7,17 @@ class Exercicio extends CI_Controller {
 		// Recupera os contatos através do model
 		$exercicio = $this->Exercicio_model->GetAll('exercicio');
 		$arrayExercicio = array('exercicio' => $exercicio);
-		// var_dump($exercicio);
-		// die();
 		$this->load->view('exercicio/get', $arrayExercicio);
 	}
+
 	public function resolucao($id)
 	{
-		//echo ($id);
+		$this->load->model('Formula_model');
+		$formula = $this->Formula_model->GetAll();
+
 		$exercicio = $this->Exercicio_model->GetById($id);
-		//print_r($exercicio);
-		$arrayDadosExercicio = array('exercicio' => $exercicio);
+		$arrayDadosExercicio = array('exercicio' => $exercicio, 'formula' => $formula);
+
 		$this->load->view('/layout/header.php');
 		$this->load->view('/layout/menu.php');
 		$this->load->view('exercicio/exercicio', $arrayDadosExercicio);
