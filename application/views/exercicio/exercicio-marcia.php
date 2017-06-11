@@ -1,42 +1,97 @@
-<style type="text/css">
-    
-    .buttonExercicio{
-        float: left;
-    }
 
-    .buttonNvExercicio{
-        float: right;
-    }
-</style>
+
+
 
 <section id="exercicio">
-    <div class="container">
-        <div class="row">
-            <div class="">
-                <button type="button" class="btn btn-warning buttonFormulas" data-toggle="modal" data-target="#ModalFormulas">Ver fórmulas</button>
-            </div>
+    <div class="container" >
+
+      <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">EXERCÍCIO 1</h3>
         </div>
-        <h2 class="display-3">Exercício <?php echo $exercicio['exer_id']?></h2>
-        <br />
-        <div class="row">
-            <div class="jumbotron col-xs-8">
+        <div class="panel-body">
+          <div class="well col-xs-10">
                 <h3 class=""><?php echo $exercicio['exer_desc']?></h3>
-            </div>
-            <div class="col-xs-4" style="padding-top: 20px; padding-left: 80px;">
+            </div>            
+
+            <div class="col-xs-2" >
                 <button type="button" class="btn btn-info buttonExercicio" data-toggle="modal" data-target="#ModalDica">Dica</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-8" style="padding: 10px;">
+
+      </div>
+      </div>
+ 
+      <div class="row">
+
+       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Universo</h3>
+        </div>
+        <div class="panel-body">
+
+
+          <div class="col-xs-10">
+
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5s.gif'?>" alt="">
+                
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6s.gif'?>" alt="">
+
+
+          </div>
+
+
+            <div class="col-xs-2" >
+                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#ModalUniverso">Universo</button>
+            </div>
+
+        </div>
+      </div>
+      </div>
+
+
+<div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Construção da solução</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-xs-8" style="padding: 10px;">
+          
+                <h3 class="">Reservado para resolução de estágio</h3>
                 <button type="button" class="btn btn-default buttonNvExercicio">Novo Estágio</button>
             </div>
         </div>
-        <div class="row">
-            <div class="jumbotron col-xs-8">
-                <h3 class="">Reservado para resolução de estágio</h3>
-            </div>
-        </div>
-    </div>
+
+      </div>
+      </div>
+
+
+
+
+  </div>
 </section>
 
 
@@ -58,7 +113,7 @@
     </div>
 </div>
 
-<div id="ModalUniverso" class="modal fade" role="dialog">
+<div id="ModalTutorial" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -196,3 +251,55 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalUniverso" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Universo</h3>
+      </div>
+      <div class="modal-body">
+
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'2s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'3s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'4s.gif'?>" alt="">
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'5s.gif'?>" alt="">
+                
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'6s.gif'?>" alt="">        
+        
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'7c.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'7d.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'7h.gif'?>" alt="">
+              <img src="<?= base_url().'user_guide/universo/baralho/original-imagens/'.'7s.gif'?>" alt="">
+      </div>
+      <div class="modal-  ">
+        <button class="btn" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
