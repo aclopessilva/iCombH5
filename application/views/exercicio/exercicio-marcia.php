@@ -8,7 +8,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">EXERCÍCIO 1</h3>
+                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio['exer_id'] ?></h3>
                 </div>
                 <div class="panel-body">
                     <div class="well col-xs-10">
@@ -128,7 +128,7 @@
                             <div class="title-tutorial-item"><b>Exercício</b></div>
                             <div class="col-sm-2 hidden-xs">
                                 <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="../../user_guide/img/tutorial/lapis.png" alt="">
+                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/lapis.png" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-10">
@@ -151,7 +151,7 @@
                             </div>
                             <div class="col-sm-2  hidden-xs">
                                 <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="../../user_guide/img/tutorial/lampada.png" alt="">
+                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/lampada.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="title-tutorial-item"><b>Estágios</b></div>
                             <div class="col-sm-2  hidden-xs">
                                 <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="../../user_guide/img/tutorial/estagios.png" alt="">
+                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/estagios.png" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-10">
@@ -190,7 +190,7 @@
                             </div>
                             <div class="col-sm-2  hidden-xs">
                                 <div class="tutorial-item-image">
-                                    <img src="../../user_guide/img/tutorial/interrogacao.png" class="img-responsive img-circle" alt="">
+                                    <img src="<?= base_url()?>user_guide/img/tutorial/interrogacao.png" class="img-responsive img-circle" alt="">
                                 </div>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                             <div class="title-tutorial-item"><b>Terminar o exercício</b></div>
                             <div class="col-sm-2 hidden-xs">
                                 <div class="tutorial-item-image">
-                                    <img src="../../user_guide/img/tutorial/exclamacao.png" class="img-responsive img-circle" alt="">
+                                    <img src="<?= base_url()?>user_guide/img/tutorial/exclamacao.png" class="img-responsive img-circle" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-10">

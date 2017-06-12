@@ -6,7 +6,10 @@ class Exercicio extends CI_Controller {
 	{
 		// Recupera os contatos através do model
 		$exercicio = $this->Exercicio_model->GetAll('exercicio');
-		$arrayExercicio = array('exercicio' => $exercicio);
+		$this->load->model('Formula_model');
+		$formula = $this->Formula_model->GetAll();
+
+		$arrayExercicio = array('exercicio' => $exercicio, 'formula' => $formula);
 		$this->load->view('exercicio/get', $arrayExercicio);
 	}
 

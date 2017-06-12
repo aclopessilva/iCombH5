@@ -11,6 +11,7 @@
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#ModalTutorial">Tutorial</a>
+                    
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#ModalFormulas">Fórmulas</a>
