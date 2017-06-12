@@ -4,7 +4,7 @@
             <div class="intro-text">
            
             <div class="intro-lead-in">
-                O iCombH5 veio para ajuda-lo com
+                O iCombH5 veio para ajudá-lo com
             </div>
                 <div class="intro-heading">Análise Combinatoria</div>
                 
