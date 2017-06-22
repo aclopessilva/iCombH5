@@ -23,7 +23,7 @@ class Exercicio extends CI_Controller {
 
 		//$this->load->view('/layout/header.php');		
 		$this->load->view('/layout/header.php');
-		$this->load->view('/layout/menu-exercicio.php');
+		$this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
 		$this->load->view('exercicio/exercicio-marcia', $arrayDadosExercicio);
 		$this->load->view('/layout/footer.php');
 	}
