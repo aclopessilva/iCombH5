@@ -489,3 +489,17 @@ body {
 #text-formula{
   padding-top: 50px;
 }
+
+.titleIndicador{
+  text-align: center;
+  font-size: 35px;
+  color: green;
+}
+
+.d1{
+  font-weight: 400;
+  font-size: 22px;
+}
+.d2{
+  font-size: 18px;
+}

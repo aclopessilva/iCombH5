@@ -27,4 +27,16 @@ class Exercicio extends CI_Controller {
 		$this->load->view('exercicio/exercicio-marcia', $arrayDadosExercicio);
 		$this->load->view('/layout/footer.php');
 	}
+
+	public function indicador()
+	{	
+		$this->load->model('Formula_model');
+		$formula = $this->Formula_model->GetAll();
+		$arrayDadosExercicio = array('formula' => $formula);
+
+		$this->load->view('/layout/header.php');
+		$this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
+		$this->load->view('/exercicio/indicador.php');
+		$this->load->view('/layout/footer.php');
+	}
 }

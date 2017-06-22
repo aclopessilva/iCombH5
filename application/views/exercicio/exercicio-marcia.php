@@ -1,7 +1,3 @@
-
-
-
-
 <section id="exercicio">
     <div class="container" >
 
@@ -30,43 +26,32 @@
                     <h3 class="panel-title">Universo</h3>
                 </div>
                 <div class="panel-body">
-
-
                     <div class="col-xs-10">
-
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2c.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2d.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2h.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2s.gif' ?>" alt="">
-
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3c.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3d.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3h.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3s.gif' ?>" alt="">
-
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4c.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4d.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4h.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4s.gif' ?>" alt="">
-
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5c.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5d.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5h.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5s.gif' ?>" alt="">
-
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6c.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6d.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6h.gif' ?>" alt="">
                         <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6s.gif' ?>" alt="">
-
-
                     </div>
-
 
                     <div class="col-xs-2" >
                         <button type="button" class="btn btn-info " data-toggle="modal" data-target="#ModalUniverso">Universo</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -81,16 +66,17 @@
                     <div class="col-xs-8" style="padding: 10px;">
 
                         <h3 class="">Reservado para resolução de estágio</h3>
-                        <button type="button" class="btn btn-default buttonNvExercicio">Novo Estágio</button>
+                        <a href="<?php echo site_url(). 'user_guide/img/resolucaoIframe.png' ?>"><button type="button" class="btn btn-default buttonNvExercicio">Novo Estágio</button></a>
                     </div>
                 </div>
 
             </div>
         </div>
-
-
-
-
+    </div>
+    <div class="row">
+        <div class="col-xs-2" style="float: right;" >
+            <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btn-info buttonExercicio">Finalizar</button></a>
+        </div>
     </div>
 </section>
 
@@ -267,32 +253,26 @@
                 <h3 class="modal-title">Universo</h3>
             </div>
             <div class="modal-body">
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2h.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2s.gif' ?>" alt="">
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3h.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3s.gif' ?>" alt="">
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4h.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4s.gif' ?>" alt="">
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5h.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5s.gif' ?>" alt="">
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6h.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6s.gif' ?>" alt="">        
-
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7c.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7d.gif' ?>" alt="">
                 <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7h.gif' ?>" alt="">
