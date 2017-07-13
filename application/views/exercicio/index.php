@@ -16,8 +16,8 @@
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                     </span>
-                    <a href="<?php echo site_url('exercicio/resolucao/'.$row['exer_id'])?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row['exer_id'] ?></h4></a>
-                    <p class="text-muted"><?= $row['exer_desc'] ?></p>
+                    <a href="<?php echo site_url('exercicio/resolucao/'.$row['id'])?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row['id'] ?></h4></a>
+                    <p class="text-muted"><?= $row['descricao'] ?></p>
                 </div>
              <?php endforeach; ?>
          </div>
@@ -146,16 +146,16 @@
                 <?php foreach ($formula as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="<?= base_url($row['form_img']) ?>" alt="">
+                            <img src="<?= base_url($row['imagem']) ?>" alt="">
                         </div>
                         <div class="col-md-1" id="text-formula">
-                            <p><?= $row['form_expr'] ?></p>
+                            <p><?= $row['expressao'] ?></p>
                         </div>
                         <div class="col-md-2" id="text-formula">
-                            <p><?= $row['form_nome'] ?></p>
+                            <p><?= $row['nome'] ?></p>
                         </div>
                         <div class="col-md-5">
-                            <p><?= $row['form_expl'] ?></p>
+                            <p><?= $row['explicacao'] ?></p>
                         </div>
                     </div>
                     <hr>

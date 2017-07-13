@@ -16,11 +16,11 @@
                 <button type="button" class="btn btn-warning buttonFormulas" data-toggle="modal" data-target="#ModalFormulas">Ver fórmulas</button>
             </div>
         </div>
-        <h2 class="display-3">Exercício <?php echo $exercicio['exer_id']?></h2>
+        <h2 class="display-3">Exercício <?php echo $exercicio['id']?></h2>
         <br />
         <div class="row">
             <div class="jumbotron col-xs-8">
-                <h3 class=""><?php echo $exercicio['exer_desc']?></h3>
+                <h3 class=""><?php echo $exercicio['descricao']?></h3>
             </div>
             <div class="col-xs-4" style="padding-top: 20px; padding-left: 80px;">
                 <button type="button" class="btn btn-info buttonExercicio" data-toggle="modal" data-target="#ModalDica">Dica</button>
@@ -49,7 +49,7 @@
           <h4 class="modal-title">Dica</h4>
         </div>
         <div class="modal-body">
-          <p><?php echo $exercicio['exer_dica']?></p>
+          <p><?php echo $exercicio['dica']?></p>
         </div>       
       </div>
       <div class="modal-footer">
@@ -175,16 +175,16 @@
         <?php foreach ($formula as $row): ?>
           <div class="row">
             <div class="col-md-4">
-              <img src="<?= base_url($row['form_img'])?>" alt="">
+              <img src="<?= base_url($row['imagem'])?>" alt="">
             </div>
             <div class="col-md-1" id="text-formula">
-                <p><?= $row['form_expr']?></p>
+                <p><?= $row['expressao']?></p>
             </div>
             <div class="col-md-2" id="text-formula">
-                <p><?= $row['form_nome']?></p>
+                <p><?= $row['nome']?></p>
             </div>
             <div class="col-md-5">
-                <p><?= $row['form_expl']?></p>
+                <p><?= $row['explicacao']?></p>
             </div>
           </div>
           <hr>

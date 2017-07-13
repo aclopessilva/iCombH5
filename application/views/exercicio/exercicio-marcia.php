@@ -4,11 +4,11 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio['exer_id'] ?></h3>
+                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio['id'] ?></h3>
                 </div>
                 <div class="panel-body">
                     <div class="well col-xs-10">
-                        <h3 class=""><?php echo $exercicio['exer_desc'] ?></h3>
+                        <h3 class=""><?php echo $exercicio['descricao'] ?></h3>
                     </div>            
 
                     <div class="col-xs-2" >
@@ -90,7 +90,7 @@
                 <h4 class="modal-title">Dica</h4>
             </div>
             <div class="modal-body">
-                <p><?php echo $exercicio['exer_dica'] ?></p>
+                <p><?php echo $exercicio['dica'] ?></p>
             </div>       
         </div>
         <div class="modal-footer">
@@ -220,16 +220,16 @@
                 <?php foreach ($formula as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="<?= base_url($row['form_img']) ?>" alt="">
+                            <img src="<?= base_url($row['imagem']) ?>" alt="">
                         </div>
                         <div class="col-md-1" id="text-formula">
-                            <p><?= $row['form_expr'] ?></p>
+                            <p><?= $row['expressao'] ?></p>
                         </div>
                         <div class="col-md-2" id="text-formula">
-                            <p><?= $row['form_nome'] ?></p>
+                            <p><?= $row['nome'] ?></p>
                         </div>
                         <div class="col-md-5">
-                            <p><?= $row['form_expl'] ?></p>
+                            <p><?= $row['explicacao'] ?></p>
                         </div>
                     </div>
                     <hr>

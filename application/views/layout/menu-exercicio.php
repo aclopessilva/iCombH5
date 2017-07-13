@@ -140,16 +140,16 @@
                 <?php foreach ($formula as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="<?= base_url($row['form_img']) ?>" alt="">
+                            <img src="<?= base_url($row['imagem']) ?>" alt="">
                         </div>
                         <div class="col-md-1" id="text-formula">
-                            <p><?= $row['form_expr'] ?></p>
+                            <p><?= $row['expressao'] ?></p>
                         </div>
                         <div class="col-md-2" id="text-formula">
-                            <p><?= $row['form_nome'] ?></p>
+                            <p><?= $row['nome'] ?></p>
                         </div>
                         <div class="col-md-5">
-                            <p><?= $row['form_expl'] ?></p>
+                            <p><?= $row['explicacao'] ?></p>
                         </div>
                     </div>
                     <hr>

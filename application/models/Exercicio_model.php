@@ -11,7 +11,7 @@ class Exercicio_model extends CI_Model {
   function GetById($id) {
     if(is_null($id))
       return false;
-    $this->db->where('exer_id', $id);
+    $this->db->where('id', $id);
     $query = $this->db->get($this->table);
     if ($query->num_rows() > 0) {
       return $query->row_array();
