@@ -63,227 +63,162 @@
                     <h3 class="panel-title">Construção da solução</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-xs-8" style="padding: 10px;">
+                    <div>
+                        <div class="col-xs-10">
+                            <form class="form-horizontal">
 
-                        <h3 class="">Reservado para resolução de estágio</h3>
-                        <a href="<?php echo site_url(). 'user_guide/img/resolucaoIframe.png' ?>"><button type="button" class="btn btn-default buttonNvExercicio">Novo Estágio</button></a>
+                                <label class="col-sm-12 well" >Passo 1: Definir restrição</label>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2" for="num_elementos">Eu quero:</label>
+
+                                    <div class="col-sm-1">
+                                        <input type="text" class="form-control" id="num_elementos" />
+                                    </div>
+
+                                    <label class="col-sm-4" for="num_propriedades">elemento(s) que verifique(m):</label>
+
+
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="num_propriedades">
+                                            <option value = 1>Uma propriedade</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos:</label>
+
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="atributo">
+                                            <option value = 'valor'>Valor</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="pertence">
+                                            <option value = 'e'>é</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="caracteristica">
+                                            <option value = 'as'>Às</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-sm-12">
+                                        <br>
+                                        <button type="button" class="btn btn-default">Validar estagio</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+
+                                <label class="col-sm-12 well" >Passo 2: Definir formula</label>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2" for="formula">Formula:</label>
+
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="formula">
+                                            <option value = '1'>C(n,p)</option>
+                                        </select>
+                                    </div>
+
+
+                                    <label class="col-sm-1" for="n">n:</label>
+
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="n">
+                                            <option value = '4'>4</option>
+                                        </select>
+                                    </div>
+
+
+                                    <label class="col-sm-1" for="p">p:</label>
+
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="p">
+                                            <option value = '1'>1</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-default">Validar formula</button>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="form-group col-sm-12 ">
+                            
+                                <button type="button" class="btn btn-default bottom-right">Adicionar</button>
+                            
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-default glyphicon glyphicon-plus"></button>
+                            <button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+                            
+                        </div>
+
                     </div>
                 </div>
 
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-2" style="float: right;" >
-            <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btn-info buttonExercicio">Finalizar</button></a>
+            
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Lista de estagios</h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div class="col-xs-9">
+                            
+                            -01 elemeto tais que...
+                        </div>
+                        <div class="col-xs-3">
+                            
+                            <label class="col-sm-12" for="relacionamento">Relacione estágios:</label>
+
+                            <div class="col-sm-12">
+                                
+                                <label><input type="radio" id="relacionamento" name="relacionamento" value="S">Soma</label>
+                            
+                                <label><input type="radio" id="relacionamento" name="relacionamento" value="M">Multiplicacao</label>
+                            </div>
+                            
+                            
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-xs-2" style="float: right;" >
+                                <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btn-info buttonExercicio">Finalizar</button></a>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+            </div>
+            
+            
         </div>
     </div>
 </section>
 
-
-<!-- Modal -->
-<div class="modal fade" id="ModalDica" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Dica</h4>
-            </div>
-            <div class="modal-body">
-                <p><?php echo $exercicio['dica'] ?></p>
-            </div>       
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal">Fechar</button>
-        </div>
-    </div>
-</div>
-
-<div id="ModalTutorial" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Tutorial</h3>
-            </div>
-            <div class="modal-body">
-                <h4>Como resolver um exercício?</h4>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="content-section-a">  
-                            <div class="title-tutorial-item"><b>Exercício</b></div>
-                            <div class="col-sm-2 hidden-xs">
-                                <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/lapis.png" alt="">
-                                </div>
-                            </div>
-                            <div class="col-sm-10">
-                                <p>
-                                    Primeiro, analise o exercício. Atente-se ao seu Universo (conjunto de elementos), e que ele está pedindo para ser encontrado.
-                                    Você conseguirá assim pensar quais são as restrições que precisam ser consideradas para chegar ao resultado do exercício.
-                                    Se for necessário, clique em "Ver Universo" para ver todo o conjunto de elementos.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="content-section-b"> 
-                            <div class="title-tutorial-item"><b>Dica</b></div>
-                            <div class="col-sm-10 ">
-                                <p>
-                                    Receba uma pista para resolver o exercício clicando no botão "Dica".
-                                </p>
-                            </div>
-                            <div class="col-sm-2  hidden-xs">
-                                <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/lampada.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="content-section-a"> 
-                            <div class="title-tutorial-item"><b>Estágios</b></div>
-                            <div class="col-sm-2  hidden-xs">
-                                <div class="tutorial-item-image">
-                                    <img class="img-circle img-responsive" src="<?= base_url()?>user_guide/img/tutorial/estagios.png" alt="">
-                                </div>
-                            </div>
-                            <div class="col-sm-10">
-                                <p>
-                                    O iCombH5 aplica a metodologia "dividir para conquistar" para a resolução de exercícios.
-                                    Isso significa que você terá que identificar cada restrição do exercício, e construir um estágio para resolvê-lo.
-                                    No final, você irá ter uma lista de estágios construídos e deverá uni-los para chegar a uma solução final (resposta).
-                                    Mas atenção! Poderá haver exercícios que, com apenas um estágio, chegue-se a solução final.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="content-section-b"> 
-                            <div class="title-tutorial-item"><b>Como criar estágios?</b></div>
-                            <div class="col-sm-10">
-                                <p>
-                                    Clicando em "Novo Estágio". Uma vez clicado, um "formulário" se abrirá, e através dele dele você encontrará
-                                    os elementos que atendem as restrições do exercício. Após preencher o formulário, você precisará validá-lo,
-                                    para certificar-se que o montou corretamente.
-                                    Estando validado, você o verá na "Lista de Estágios", e poderá excluí-lo caso deseje.
-                                    Você conseguirá também visualizar os subconjuntos do Universo, que atendem as restrições de cada estágio.
-                                </p>
-                            </div>
-                            <div class="col-sm-2  hidden-xs">
-                                <div class="tutorial-item-image">
-                                    <img src="<?= base_url()?>user_guide/img/tutorial/interrogacao.png" class="img-responsive img-circle" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="content-section-a"> 
-                            <div class="title-tutorial-item"><b>Terminar o exercício</b></div>
-                            <div class="col-sm-2 hidden-xs">
-                                <div class="tutorial-item-image">
-                                    <img src="<?= base_url()?>user_guide/img/tutorial/exclamacao.png" class="img-responsive img-circle" alt="">
-                                </div>
-                            </div>
-                            <div class="col-sm-10">
-                                <p>
-                                    Tendo construído todos os estágios, você precisa  indicar a maneira como os estágios se relacionam: multiplicando ou somando.
-                                    Feito isso, você deverá clicar em "Terminar" para submeter sua resposta para a correção. Na seguinte tela,
-                                    você verá a resposta do exercício, o registros da sua construção de estágio e o tempo que você levou para realizar a tarefa.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="ModalFormulas" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Fórmulas</h3>
-            </div>
-            <div class="modal-body">
-                <?php foreach ($formula as $row): ?>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="<?= base_url($row['imagem']) ?>" alt="">
-                        </div>
-                        <div class="col-md-1" id="text-formula">
-                            <p><?= $row['expressao'] ?></p>
-                        </div>
-                        <div class="col-md-2" id="text-formula">
-                            <p><?= $row['nome'] ?></p>
-                        </div>
-                        <div class="col-md-5">
-                            <p><?= $row['explicacao'] ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                <?php endforeach; ?>
-            </div>
-            <div class="modal-  ">
-                <button class="btn" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="ModalUniverso" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Universo</h3>
-            </div>
-            <div class="modal-body">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '2s.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '3s.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '4s.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '5s.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '6s.gif' ?>" alt="">        
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7c.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7d.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7h.gif' ?>" alt="">
-                <img src="<?= base_url() . 'user_guide/universo/baralho/original-imagens/' . '7s.gif' ?>" alt="">
-            </div>
-            <div class="modal-  ">
-                <button class="btn" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?php $this->load->view('/exercicio/modais/dica.php'); ?>
+<?php $this->load->view('/exercicio/modais/formula.php'); ?>
+<?php $this->load->view('/exercicio/modais/tutorial.php'); ?>
+<?php $this->load->view('/exercicio/modais/universo.php'); ?>
 
 
 
