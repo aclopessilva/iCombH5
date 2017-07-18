@@ -1,6 +1,5 @@
 <section id="exercicio">
     <div class="container" >
-
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -66,7 +65,6 @@
                     <div>
                         <div class="col-xs-10">
                             <form class="form-horizontal">
-
                                 <label class="col-sm-12 well" >Passo 1: Definir restrição</label>
 
                                 <div class="form-group">
@@ -117,44 +115,54 @@
                                 </div>
 
                                 <hr>
+                            </form>
 
+                            <label class="col-sm-12 well" >Passo 2: Definir formula</label>
+                            <form method="post" action="" id="ajax_form">
+                                <label class="col-sm-2" for="formula">Formula:</label>
 
-                                <label class="col-sm-12 well" >Passo 2: Definir formula</label>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2" for="formula">Formula:</label>
-
-                                    <div class="col-sm-2">
-                                        <select class="form-control" id="formula">
-                                            <option value = '1'>C(n,p)</option>
-                                        </select>
-                                    </div>
-
-
-                                    <label class="col-sm-1" for="n">n:</label>
-
-                                    <div class="col-sm-2">
-                                        <select class="form-control" id="n">
-                                            <option value = '4'>4</option>
-                                        </select>
-                                    </div>
-
-
-                                    <label class="col-sm-1" for="p">p:</label>
-
-                                    <div class="col-sm-2">
-                                        <select class="form-control" id="p">
-                                            <option value = '1'>1</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <button type="submit" class="btn btn-default">Validar formula</button>
-                                    </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="formula" name="formula">
+                                        <option value = '1'>C(n,p)</option>
+                                        <option value = '2'>A(n,p)</option>
+                                        <option value = '3'>p!</option>
+                                    </select>
                                 </div>
 
 
-                                
+                                <label class="col-sm-1" for="n">n:</label>
+
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="n" name="n">
+                                        <option value = '1'>1</option>
+                                        <option value = '2'>2</option>
+                                        <option value = '3'>3</option>
+                                        <option value = '4'>4</option>
+                                        <option value = '5'>5</option>
+                                    </select>
+                                </div>
+
+
+                                <label class="col-sm-1" for="p">p:</label>
+
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="p" name="p">
+                                        <option value = '1'>1</option>
+                                        <option value = '2'>2</option>
+                                        <option value = '3'>3</option>
+                                        <option value = '4'>4</option>
+                                        <option value = '5'>5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="submit" name="enviar" value="Validar formula"  class="btn btn-default"/>
+                                    <!-- <button type="submit" class="btn btn-default">Validar formula</button> -->
+                                </div>
+                            </form>
+
+
+                            <form>    
                                 <div class="form-group col-sm-12 ">
                             
                                 <button type="button" class="btn btn-default bottom-right">Adicionar</button>
@@ -220,5 +228,22 @@
 <?php $this->load->view('/exercicio/modais/tutorial.php'); ?>
 <?php $this->load->view('/exercicio/modais/universo.php'); ?>
 
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#ajax_form').submit(function(){
+            var dados = jQuery( this ).serialize();
 
+            jQuery.ajax({
+                type: "POST",
+                url: "http://localhost:8080/icombh5/exercicio/teste",
+                data: dados,
+                success: function( data )
+                {
+                    alert( data );
+                }
+            });
+            return false;
+        });
+    });
+</script>
 

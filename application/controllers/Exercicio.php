@@ -39,4 +39,18 @@ class Exercicio extends CI_Controller {
 		$this->load->view('/exercicio/indicador.php');
 		$this->load->view('/layout/footer.php');
 	}
+
+	public function teste()
+    {
+        //$teste = ($_POST);
+        // var_dump($teste);
+        // die();
+        $PostP=$_POST['p'];
+        $PostN=$_POST['n'];
+        $PostFormula=$_POST['formula'];
+
+        $formulax = 1;
+        $nx = 4;
+        $px = 1;
+    }
 }
