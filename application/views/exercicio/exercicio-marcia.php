@@ -64,22 +64,24 @@
                 <div class="panel-body">
                     <div>
                         <div class="col-xs-10">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="post" action="" id="form-condicao-ajax" >
                                 <label class="col-sm-12 well" >Passo 1: Definir restrição</label>
 
                                 <div class="form-group">
                                     <label class="col-sm-2" for="num_elementos">Eu quero:</label>
 
                                     <div class="col-sm-1">
-                                        <input type="text" class="form-control" id="num_elementos" />
+                                        <input type="text" class="form-control" name="num_elementos" id="num_elementos" />
                                     </div>
 
                                     <label class="col-sm-4" for="num_propriedades">elemento(s) que verifique(m):</label>
 
 
                                     <div class="col-sm-5">
-                                        <select class="form-control" id="num_propriedades">
+                                        <select class="form-control" name="num_propriedades" id="num_propriedades">
                                             <option value = 1>Uma propriedade</option>
+                                            <option value = 2>Duas propriedade</option>
+                                            <option value = 0>Nenhuma propriedade</option>
                                         </select>
                                     </div>
 
@@ -89,28 +91,37 @@
                                     <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos:</label>
 
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="atributo">
-                                            <option value = 'valor'>Valor</option>
+                                        <select class="form-control" name="atributo" id="atributo">
+                                            <option value = '1'>Valor</option>
                                         </select>
                                     </div>
 
 
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="pertence">
-                                            <option value = 'e'>é</option>
+                                        <select class="form-control" name="pertence" id="pertence">
+                                            <option value = '1'>é</option>
+                                            <option value = '0'>não é</option>
                                         </select>
                                     </div>
 
 
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="caracteristica">
-                                            <option value = 'as'>Às</option>
+                                        <select class="form-control" name="caracteristica" id="caracteristica">
+                                            <option value = '1'>Às</option>
+                                            <option value = '7'>7</option>
+                                            <option value = '8'>8</option>
+                                            <option value = '9'>9</option>
+                                            <option value = '10'>10</option>
+                                            <option value = '11'>Valete</option>
+                                            <option value = '12'>Dama</option>
+                                            <option value = '13'>Rei</option>
                                         </select>
                                     </div>
                                     
                                     <div class="col-sm-12">
                                         <br>
-                                        <button type="button" class="btn btn-default">Validar estagio</button>
+                                       <input id="BtValidaEstagio" type="submit" name="enviarValida" value="Validar Estágio"  class="btn btn-default"/>
+                                        <!-- <button type="submit" class="btn btn-default">Validar estágio</button> -->
                                     </div>
                                 </div>
 
@@ -240,6 +251,29 @@
                 success: function( data )
                 {
                     alert( data );
+                }
+            });
+            return false;
+        });
+    
+        jQuery('#form-condicao-ajax').submit(function(){
+            var dadosCondicao = jQuery( this ).serialize();
+
+            if ($('#BtValidaEstagio').val() == 'Validando...') {
+            return (false);
+            }
+
+            $('#BtValidaEstagio').val('Validando...');
+
+            jQuery.ajax({
+                type: "POST",
+                url: "http://localhost/icombh5/exercicio/ValidaCondicao",
+                dataType:'html',
+                data: dadosCondicao,                
+                success: function( data )
+                {
+                    alert( data );
+                     $('#BtValidaEstagio').val('Validar Estágio');
                 }
             });
             return false;

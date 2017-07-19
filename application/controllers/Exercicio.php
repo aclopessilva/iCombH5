@@ -53,4 +53,35 @@ class Exercicio extends CI_Controller {
         $nx = 4;
         $px = 1;
     }
+
+     public function ValidaCondicao()
+    {
+    	$validaExer = 1;
+		$validaNumElement = 1;
+		$validaNumPropried = 1;
+		$validaAtributo = 1;
+		$validaPertence = 1;
+		$validaCaract = 1;
+
+		$numElementos = $_POST['num_elementos'];
+		$numPropriedades = $_POST['num_propriedades'];
+		$atributo = $_POST['atributo'];
+		$pertence = $_POST['pertence'];
+		$caracteristica = $_POST['caracteristica'];
+		
+			if($numElementos == $validaNumElement){				
+				if ($numPropriedades == $validaNumPropried) {					
+					if ($atributo == $validaAtributo) {					
+						if ($pertence == $validaPertence) {							
+							
+							if ($caracteristica == $validaCaract) {
+								echo "Dados de condição CORRETOS!!! Passe para a Etapa 2"; 
+							}else echo "Valor de elemento incorreto";
+						
+						}else echo "Pertinência(é/não é) incorreto";
+					}else echo "Tipo de atributo incorreto";
+				}else echo "Número de propriedade(s) incorreta(s)";
+			}else echo "Número de elementos incorretos";
+		
+	}
 }
