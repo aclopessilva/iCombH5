@@ -120,8 +120,8 @@
                                     
                                     <div class="col-sm-12">
                                         <br>
-                                       <input id="BtValidaEstagio" type="submit" name="enviarValida" value="Validar Estágio"  class="btn btn-default"/>
-                                        <!-- <button type="submit" class="btn btn-default">Validar estágio</button> -->
+                                       <input id="BtValidaEstagio" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
+                                    
                                     </div>
                                 </div>
 
