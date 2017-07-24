@@ -108,16 +108,55 @@
 
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="num_propriedades" id="num_propriedades">
-                                                    <option value = 1>Uma propriedade</option>
-                                                    <option value = 2>Duas propriedade</option>
                                                     <option value = 0>Nenhuma propriedade</option>
+                                                    <option value = 1>Uma propriedade</option>
+                                                    <option value = 2 selected>Duas propriedade</option>
                                                 </select>
                                             </div>
 
                                         </div>
-                                        <div class="form-group">
+                                        
+                                        <div class="form-group" id="divCondicao">
 
                                             <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos:</label>
+
+                                            <div class="col-sm-4">
+                                                <select class="form-control" name="atributo" id="atributo">
+                                                    <option value = '1'>Valor</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-sm-4">
+                                                <select class="form-control" name="pertence" id="pertence">
+                                                    <option value = '1'>é</option>
+                                                    <option value = '0'>não é</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-sm-4">
+                                                <select class="form-control" name="caracteristica" id="caracteristica">
+                                                    <option value = '1'>Às</option>
+                                                    <option value = '7'>7</option>
+                                                    <option value = '8'>8</option>
+                                                    <option value = '9'>9</option>
+                                                    <option value = '10'>10</option>
+                                                    <option value = '11'>Valete</option>
+                                                    <option value = '12'>Dama</option>
+                                                    <option value = '13'>Rei</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <br>
+                                                <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="divCondicao2">
+
+                                            <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos da segunda condição:</label>
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo" id="atributo">
@@ -302,3 +341,27 @@
     });
 </script>
 
+
+<!--SCRIPT para apresentar campos de condição conforme número de propriedades-->
+
+<script type="text/javascript">
+window.onload = function(){
+   id('num_propriedades').onchange = function(){
+
+       if( this.value==0)
+         id('divCondicao').style.display = 'none';                
+       else
+         id('divCondicao').style.display = 'block';  
+
+       if( this.value==2)
+           id('divCondicao2').style.display = 'block';
+       else
+           id('divCondicao2').style.display = 'none';
+   }
+}
+function id( el ){
+   return document.getElementById( el );
+}
+</script>
+
+<!--//SCRIPT para apresentar campos de condição conforme número de propriedades-->
