@@ -154,19 +154,21 @@
 
                                             </div>
                                         </div>
+                                        <!--/form> 
+                                       <form class="form-horizontal form-condicao2-ajax" method="post" action=""-->
                                         <div class="form-group" id="divCondicao2">
 
                                             <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos da segunda condição:</label>
 
                                             <div class="col-sm-4">
-                                                <select class="form-control" name="atributo" id="atributo">
+                                                <select class="form-control" name="atributo2" id="atributo2">
                                                     <option value = '1'>Valor</option>
                                                 </select>
                                             </div>
 
 
                                             <div class="col-sm-4">
-                                                <select class="form-control" name="pertence" id="pertence">
+                                                <select class="form-control" name="pertence2" id="pertence2">
                                                     <option value = '1'>é</option>
                                                     <option value = '0'>não é</option>
                                                 </select>
@@ -174,7 +176,7 @@
 
 
                                             <div class="col-sm-4">
-                                                <select class="form-control" name="caracteristica" id="caracteristica">
+                                                <select class="form-control" name="caracteristica2" id="caracteristica2">
                                                     <option value = '1'>Às</option>
                                                     <option value = '7'>7</option>
                                                     <option value = '8'>8</option>
@@ -188,7 +190,7 @@
 
                                             <div class="col-sm-12">
                                                 <br>
-                                                <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
+                                                <input id="btn-valida-restricao2" type="submit" name="enviarValida2" value="Validar Restrição"  class="btn btn-default"/>
 
                                             </div>
                                         </div>
@@ -308,6 +310,9 @@
 <?php $this->load->view('/exercicio/modais/tutorial.php'); ?>
 <?php $this->load->view('/exercicio/modais/universo.php'); ?>
 
+
+<!-- JS para validar condição -->
+
 <script type="text/javascript">
     jQuery(document).ready(function () {
 
@@ -339,8 +344,37 @@
             return false;
         });
     });
-</script>
+  /** jQuery(document).ready(function () {
 
+        jQuery(document).find('.form-condicao2-ajax').submit(function () {
+            var dadosCondicao2 = jQuery(this).serialize();
+
+            if ($('#btn-valida-restricao2').val() == 'Validando...') {
+                return (false);
+           }else
+            $('#btn-valida-restricao2').val('Validando...');
+
+            jQuery.ajax({
+                type: "POST",
+                url: "<?= base_url()?>/exercicio/ValidaCondicao2",
+                dataType: 'html',
+                data: dadosCondicao2,
+                success: function (data)
+                {
+                    alert(data);
+                    if (data == "Dados de condição CORRETOS!!! Passe para a Etapa 2") {                        
+                        div_estagio_atual.find(".estagio-passo-2").show();
+                        $('#btn-valida-restricao2').val('Restrição Validada');
+                    } else {
+                        $('#btn-valida-restricao2').val('Validar Restrição');
+                    }
+                }
+            });
+            return false;
+        });
+    });**/
+</script>
+<!-- //JS para validar condição -->
 
 <!--SCRIPT para apresentar campos de condição conforme número de propriedades-->
 
