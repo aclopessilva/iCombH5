@@ -8,7 +8,7 @@
                 <h4 class="modal-title">Dica</h4>
             </div>
             <div class="modal-body">
-                <p><?php echo $exercicio['dica'] ?></p>
+                <p><?php echo $exercicio->dica ?></p>
             </div>       
         </div>
         <div class="modal-footer">

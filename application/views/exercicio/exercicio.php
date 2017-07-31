@@ -3,11 +3,11 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio['id'] ?></h3>
+                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio->id ?></h3>
                 </div>
                 <div class="panel-body">
                     <div class="well col-xs-10">
-                        <h3 class=""><?php echo $exercicio['descricao'] ?></h3>
+                        <h3 class=""><?php echo $exercicio->descricao ?></h3>
                     </div>            
 
                     <div class="col-xs-2" >

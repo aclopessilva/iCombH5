@@ -2,11 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Exercicio extends CI_Controller {
+    
+        public function __construct() {
+            parent::__construct();
+            $this->load->model('Exercicio_model');
+            $this->load->model('Elemento_model');
+            $this->load->model('Formula_model');
+            
+        }
 	public function index()
 	{
 		// Recupera os contatos através do model
 		$exercicio = $this->Exercicio_model->GetAll('exercicio');
-		$this->load->model('Formula_model');
 		$formula = $this->Formula_model->GetAll();
 
 		$arrayExercicio = array('exercicio' => $exercicio, 'formula' => $formula);
@@ -15,7 +22,6 @@ class Exercicio extends CI_Controller {
 
 	public function resolucao($id)
 	{
-		$this->load->model('Formula_model');
 		$formula = $this->Formula_model->GetAll();
 
 		$exercicio = $this->Exercicio_model->GetById($id);
@@ -33,7 +39,6 @@ class Exercicio extends CI_Controller {
 
 	public function indicador()
 	{	
-		$this->load->model('Formula_model');
 		$formula = $this->Formula_model->GetAll();
 		$arrayDadosExercicio = array('formula' => $formula);
 

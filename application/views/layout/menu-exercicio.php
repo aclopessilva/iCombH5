@@ -1,7 +1,7 @@
 <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container">
         <div class="navbar-header page-scroll">
-            <a class="navbar-brand page-scroll" href="../../../icombh5">iCombH5</a>
+            <a class="navbar-brand page-scroll" href="<?=base_url()?>">iCombH5</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -140,16 +140,16 @@
                 <?php foreach ($formula as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="<?= base_url($row['imagem']) ?>" alt="">
+                            <img src="<?= base_url($row->imagem) ?>" alt="">
                         </div>
                         <div class="col-md-1" id="text-formula">
-                            <p><?= $row['expressao'] ?></p>
+                            <p><?= $row->expressao ?></p>
                         </div>
                         <div class="col-md-2" id="text-formula">
-                            <p><?= $row['nome'] ?></p>
+                            <p><?= $row->nome ?></p>
                         </div>
                         <div class="col-md-5">
-                            <p><?= $row['explicacao'] ?></p>
+                            <p><?= $row->explicacao ?></p>
                         </div>
                     </div>
                     <hr>

@@ -13,11 +13,7 @@ class Exercicio_model extends CI_Model {
       return false;
     $this->db->where('id', $id);
     $query = $this->db->get($this->table);
-    if ($query->num_rows() > 0) {
-      return $query->row_array();
-    } else {
-      return null;
-    }
+    return $query->row();
   }
 
 
@@ -25,7 +21,7 @@ class Exercicio_model extends CI_Model {
     $this->load->database();
     $query = $this->db->get($this->table);
     if ($query->num_rows() > 0) {
-      return $query->result_array();
+      return $query->result();
     } else {
       return null;
     }
