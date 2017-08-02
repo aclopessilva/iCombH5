@@ -8,7 +8,9 @@ class Exercicio extends CI_Controller {
             //precarregando models para todos os metdos
             $this->load->model('Exercicio_model');
             $this->load->model('Elemento_model');
-            $this->load->model('Formula_model');            
+            $this->load->model('Formula_model');
+            
+            $this->load->library('IComb', 'icomb');
         }
 	public function index()
 	{
@@ -26,6 +28,12 @@ class Exercicio extends CI_Controller {
 
 		$exercicio = $this->Exercicio_model->GetById($id);
 		
+                $exercicioFull = $this->Exercicio_model->GetWithFullSolution($id);
+                
+                print_r($exercicioFull);
+                $this->icomb->iniciaExercicio($exercicioFull);
+                
+                
 		$idUniverso = $exercicio->universo_id;
 		$elementosUniverso = $this->Elemento_model->GetByUniverse($idUniverso);
 
