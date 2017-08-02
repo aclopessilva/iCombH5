@@ -30,9 +30,7 @@ class Exercicio extends CI_Controller {
 		
                 $exercicioFull = $this->Exercicio_model->GetWithFullSolution($id);
                 
-                print_r($exercicioFull);
-                $this->icomb->iniciaExercicio($exercicioFull);
-                
+                $this->icomb->iniciaDesenvolvimento($exercicioFull);
                 
 		$idUniverso = $exercicio->universo_id;
 		$elementosUniverso = $this->Elemento_model->GetByUniverse($idUniverso);
