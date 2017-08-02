@@ -5,10 +5,10 @@ class Exercicio extends CI_Controller {
     
         public function __construct() {
             parent::__construct();
+            //precarregando models para todos os metdos
             $this->load->model('Exercicio_model');
             $this->load->model('Elemento_model');
-            $this->load->model('Formula_model');
-            
+            $this->load->model('Formula_model');            
         }
 	public function index()
 	{
