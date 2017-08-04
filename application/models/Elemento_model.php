@@ -32,7 +32,11 @@ class Elemento_model extends CI_Model {
         }
         $this->db->where('universo_id', $idUniverse);
         $query = $this->db->get($this->table);
-        return $query->row();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return null;
+        }
     }
 
 }
