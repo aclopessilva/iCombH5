@@ -13,6 +13,16 @@ class Exercicio extends CI_Controller {
 
         $this->load->library('IComb', 'icomb');
     }
+    
+    public function index()
+    {
+            // Recupera os contatos através do model
+            $exercicio = $this->Exercicio_model->GetAll('exercicio');
+            $formula = $this->Formula_model->GetAll();
+
+            $arrayExercicio = array('exercicio' => $exercicio, 'formula' => $formula);
+            $this->load->view('exercicio/get', $arrayExercicio);
+    }
 
     public function resolucao($id) {
         $formula = $this->Formula_model->GetAll();
