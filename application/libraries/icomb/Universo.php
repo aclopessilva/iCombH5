@@ -24,7 +24,11 @@ class Universo extends ICombClass {
         if ($universo->elementos) {
             foreach ($universo->elementos as $elemento) {
                 $elemento = $this->cast('Element', $elemento);
-                $elemento->addAttribute($elemento->id, array($elemento->atributo, $elemento->valor), array($elemento->predicado));
+                $elemento->addAttribute('suit', $elemento->atributo, array($elemento->predicado));
+                $elemento->addAttribute('value', $elemento->valor);
+                //echo "<br><br>";
+                //print_r($elemento);
+                //echo "<br><br>";
                 array_push($novos_elementos, $elemento);
             }
             $universo->elementos = $novos_elementos;

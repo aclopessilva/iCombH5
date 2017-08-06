@@ -11,20 +11,21 @@
  *
  * @author Jane Asher
  */
-class Condicao {
+class Condicao extends ICombClass{
 
     //put your code here
     public $quantidade;
-    public $expressoes = array();
-
-
-    public function addExpressao($expresssao) {
-        array_push($this->expressoes, $expresssao);
-    }
+//    public $expressoes = array();
+//
+//
+//    public function addExpressao($expressao) {
+//        array_push($this->expressoes,$expressao);
+//    }
 
     public function evaluate($element) {
         $result = true;
         foreach ($this->expressoes as $expressao) {
+            //print_r($expressao);
             $result = $result && $expressao->evaluate($element);
             if (!$result) {
                 break;

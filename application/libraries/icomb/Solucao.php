@@ -27,8 +27,11 @@ class Solucao extends ICombClass {
                         $novo_expressao = $this->cast('Expressao', $expressao);
                         array_push($novos_expressoes, $novo_expressao);
                     }
-                    $elemento->expressoes = $novo_expressao;
+                    $elemento->expressoes = $novos_expressoes;
                 }
+                
+                //print_r($elemento);
+                //echo "<br><br>";
                 array_push($novos_condicoes, $elemento);
             }
             unset($classe_solucao->estagios);

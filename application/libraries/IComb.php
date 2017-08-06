@@ -35,9 +35,9 @@ class IComb {
         $solucao = new Solucao();
         $solucao = $solucao->createFromBDObject($exercicio->solucao);
         
-        print_r($solucao);
+        //print_r($solucao);
         //iniciamos o avaliador
-        $avaliador->init($universo, $solucao);
+        //$avaliador->init($universo, $solucao);
         
         //guardamos o estado do avaliador na sessao.
         $desenvolvimento->avaliador = $avaliador;

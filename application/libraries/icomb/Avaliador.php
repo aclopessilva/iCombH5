@@ -33,8 +33,9 @@ class Avaliador {
         
         $estagios = $this->solucao->condicoes; //aqui nos representamos estagios em lugar de condicoes (como o icomb faz)
         
-        foreach ($elementos  as $elemento ){
+        foreach ($this->elementos  as $elemento ){
             foreach ($estagios as $estagio){
+                print_r($estagio);
                 if($estagio->evaluate($elemento)){
                     if ($this->elemParticao[$elemento] != null) {
                         //throw new RuntimeException(I18n.getString("evaluationMessage01"));

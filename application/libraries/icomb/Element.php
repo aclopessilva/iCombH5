@@ -32,7 +32,7 @@ class Element {
         return $this->attributes;
     }
 
-    public function addAttribute($type, $attribute, $arrPred) {
+    public function addAttribute($type, $attribute, $arrPred = null) {
         $this->attributes[$type] = $attribute;
         if ($arrPred != null) {
             $this->predicates[$type] = $arrPred;

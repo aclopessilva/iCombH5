@@ -38,7 +38,7 @@ class Exercicio extends CI_Controller {
 		$elementosUniverso = $this->Elemento_model->GetByUniverse($idUniverso);
 
 		$arrayDadosExercicio = array('exercicio' => $exercicio, 'formula' => $formula, 'elementosUniverso' => $elementosUniverso);
-	
+
 		$this->load->view('/layout/header.php');
 		$this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
 		$this->load->view('exercicio/exercicio', $arrayDadosExercicio);
