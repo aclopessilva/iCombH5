@@ -29,8 +29,10 @@ class Exercicio extends CI_Controller {
 		$exercicio = $this->Exercicio_model->GetById($id);
 		
                 $exercicioFull = $this->Exercicio_model->GetWithFullSolution($id);
+                //print_r($exercicioFull);
                 
                 $this->icomb->iniciaDesenvolvimento($exercicioFull);
+                
                 
 		$idUniverso = $exercicio->universo_id;
 		$elementosUniverso = $this->Elemento_model->GetByUniverse($idUniverso);
@@ -83,6 +85,7 @@ class Exercicio extends CI_Controller {
 		$pertence = $_POST['pertence'];
 		$caracteristica = $_POST['caracteristica'];
 		
+                $this->icomb->validaCondicao($numElementos,$atributo, $pertence, $caracteristica);
 			if($numElementos == $validaNumElement){				
 				if ($numPropriedades == $validaNumPropried) {					
 					if ($atributo == $validaAtributo) {					

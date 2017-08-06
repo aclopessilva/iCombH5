@@ -31,12 +31,15 @@ class Exercicio_model extends CI_Model {
         $this->load->model('Estagio_model');
         $this->load->model('Expressao_model');
         $this->load->model('Caracteristica_model');
+        $this->load->model('Universo_model');
+        $this->load->model('Elemento_model');
         
         
         $this->db->where('id', $id);
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0) {
             $exercicio = $query->row();
+            //carregando a solucao
             if (isset($exercicio->solucao_id)) {
                 $solucao = $this->Solucao_model->GetById($exercicio->solucao_id);                
                 $solucao->estagios = $this->Estagio_model->GetBySolucaoId($exercicio->solucao_id);
@@ -49,8 +52,14 @@ class Exercicio_model extends CI_Model {
                 }
                 //adicionamos a solucao como uma propriedade do objeto exercicio
                 $exercicio->solucao = $solucao;
-                return $exercicio;
             }
+            //carregando o universo e seus elementos
+            if (isset($exercicio->universo_id)) {
+                $universo = $this->Universo_model->GetById($exercicio->universo_id);
+                $universo->elementos = $this->Elemento_model->GetByUniverse($exercicio->universo_id); 
+                $exercicio->universo = $universo; 
+            }
+            return $exercicio;
         } else {
             return null;
         }
