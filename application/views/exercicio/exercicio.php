@@ -22,18 +22,17 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Universo</h3>
+                    <h3 class="panel-title" id="click_advance"><i class="fa fa-sort-up"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
                 </div>
-                <div class="panel-body">
-                    <div class="col-xs-10">
+                <div class="panel-body" >
+                    <div class="col-xs-12" id="display_advance">
                         <?php foreach ($elementosUniverso as $row): ?>
                             <img src="<?= base_url($row->imagem ) ?>" alt="">
                         <?php endforeach; ?>
                     </div>
-
-                    <div class="col-xs-2" >
-                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#ModalUniverso">Universo</button>
-                    </div>
+                    <!-- <div class="col-xs-2" >
+                        <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#demo">Universo</button>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -72,8 +71,10 @@
                     <div class="col-xs-12 text-center" >
                         <button id="btn-adicionar-estagio" type="button"  class="btn btn-info" >Adicionar Estágio</button>
                     </div>
+                    
                     <div class="estagio collapse">
-                        <div class="col-xs-12">                            
+                        <div class="col-xs-12"> 
+                            <br />                           
                             <label class="col-sm-12 well desc-estagio" >Estagio 1</label>
                             <div class="col-xs-10" >
                                 <div class="estagio-passo-1">
@@ -92,8 +93,8 @@
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="num_propriedades" id="num_propriedades">
                                                     <option value = 0>Nenhuma propriedade</option>
-                                                    <option value = 1>Uma propriedade</option>
-                                                    <option value = 2 selected>Duas propriedade</option>
+                                                    <option value = 1 selected>Uma propriedade</option>
+                                                    <option value = 2>Duas propriedade</option>
                                                 </select>
                                             </div>
 
@@ -131,15 +132,15 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-sm-12">
+                                            <!-- <div class="col-sm-12">
                                                 <br>
                                                 <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
 
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <!--/form> 
                                        <form class="form-horizontal form-condicao2-ajax" method="post" action=""-->
-                                        <div class="form-group" id="divCondicao2">
+                                        <div class="form-group" id="divCondicao2" style="display:none;">
 
                                             <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos da segunda condição:</label>
 
@@ -171,11 +172,14 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-sm-12">
+                                            <!-- <div class="col-sm-12">
                                                 <br>
                                                 <input id="btn-valida-restricao2" type="submit" name="enviarValida2" value="Validar Restrição"  class="btn btn-default"/>
 
-                                            </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-sm-12" style="padding-bottom: 10px;">
+                                            <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
                                         </div>
                                     </form>
                                 </div>
@@ -224,12 +228,10 @@
                                         </div>
                                     </form>
                                 </div>
-
+                                <br />
                                 <form>    
                                     <div class="form-group col-sm-12 ">
-
                                         <button type="button" class="btn btn-default bottom-right">Adicionar</button>
-
                                     </div>
                                 </form>
 
@@ -362,23 +364,26 @@
 <!--SCRIPT para apresentar campos de condição conforme número de propriedades-->
 
 <script type="text/javascript">
-window.onload = function(){
-   id('num_propriedades').onchange = function(){
+    window.onload = function(){
+       id('num_propriedades').onchange = function(){
 
-       if( this.value==0)
-         id('divCondicao').style.display = 'none';                
-       else
-         id('divCondicao').style.display = 'block';  
+           if( this.value==0)
+             id('divCondicao').style.display = 'none';                
+           else
+             id('divCondicao').style.display = 'block';  
 
-       if( this.value==2)
-           id('divCondicao2').style.display = 'block';
-       else
-           id('divCondicao2').style.display = 'none';
-   }
-}
-function id( el ){
-   return document.getElementById( el );
-}
+           if( this.value==2)
+               id('divCondicao2').style.display = 'block';
+           else
+               id('divCondicao2').style.display = 'none';
+       }
+    }
+    function id( el ){
+       return document.getElementById( el );
+    }
+
+    $('#click_advance').click(function() {
+        $('#display_advance').toggle('1000');
+        $("i", this).toggleClass("fa fa-sort-desc fa fa-sort-up ");
+    });
 </script>
-
-<!--//SCRIPT para apresentar campos de condição conforme número de propriedades-->

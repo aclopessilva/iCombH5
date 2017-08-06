@@ -61,11 +61,21 @@ class Exercicio extends CI_Controller {
         $condicao = new stdClass();
         $condicao->numElementos = $_POST['num_elementos'];
         $condicao->numPropriedades = $_POST['num_propriedades'];
-        $condicao->atributo = $_POST['atributo'];
-        $condicao->pertence = $_POST['pertence'];
-        $condicao->caracteristica = $_POST['caracteristica'];
-        $msg = $this->icomb->validaCondicao($condicao);
-        //$msg = "OK";
+
+        if($condicao->numPropriedades == 1){
+            $condicao->atributo = $_POST['atributo'];
+            $condicao->pertence = $_POST['pertence'];
+            $condicao->caracteristica = $_POST['caracteristica'];
+        }
+        if($condicao->numPropriedades == 2){
+            $condicao->atributo2 = $_POST['atributo2'];
+            $condicao->pertence2 = $_POST['pertence2'];
+            $condicao->caracteristica2 = $_POST['caracteristica2'];
+        }
+        
+        // $msg = $this->icomb->validaCondicao($condicao);
+        $msg = "OK";
+
         echo $msg;
     }
 
