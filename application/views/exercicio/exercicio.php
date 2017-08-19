@@ -1,17 +1,17 @@
 <section id="exercicio">
     <div class="container" >
         <div class="row">
-            <div class="panel panel-default">
+            <div>
                 <div class="panel-heading">
-                    <h3 class="panel-title">EXERCÍCIO <?php echo $exercicio->id ?></h3>
+                    <h3 class="panel-title textDourado">EXERCÍCIO <?php echo $exercicio->id ?></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="well col-xs-10">
+                    <div class=" col-xs-11">
                         <h3 class=""><?php echo $exercicio->descricao ?></h3>
                     </div>            
 
-                    <div class="col-xs-2" >
-                        <button type="button" class="btn btn-info buttonExercicio" data-toggle="modal" data-target="#ModalDica">Dica</button>
+                    <div class="col-xs-1" >
+                        <button type="button" class="btn btnExercicio" data-toggle="modal" data-target="#ModalDica">Dica</button>
                     </div>
                 </div>
 
@@ -19,10 +19,9 @@
         </div>
 
         <div class="row">
-
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="click_advance"><i class="fa fa-sort-up"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
+                <div class="panel-heading" style="background-color:#222222">
+                    <h3 class="panel-title textExer" id="click_advance"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
                 </div>
                 <div class="panel-body" >
                     <div class="col-xs-12" id="display_advance">
@@ -40,8 +39,8 @@
 
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Construção da solução</h3>
+                <div class="panel-heading"  style="background-color:#222222">
+                    <h3 class="panel-title textExer">Construção da solução</h3>
                 </div>
                 <div class="panel-body">
                     <script>
@@ -69,17 +68,17 @@
                     </script>
 
                     <div class="col-xs-12 text-center" >
-                        <button id="btn-adicionar-estagio" type="button"  class="btn btn-info" >Adicionar Estágio</button>
+                        <button id="btn-adicionar-estagio" type="button" class="btn btnExercicio">Adicionar Estágio</button>
                     </div>
                     
                     <div class="estagio collapse">
                         <div class="col-xs-12"> 
                             <br />                           
-                            <label class="col-sm-12 well desc-estagio" >Estagio 1</label>
+                            <label class="col-sm-12 textDourado desc-estagio" >Estagio 1</label>
                             <div class="col-xs-10" >
                                 <div class="estagio-passo-1">
                                     <form class="form-horizontal form-condicao-ajax" method="post" action="" >
-                                        <label class="col-sm-12 well" >Passo 1: Definir restrição</label>
+                                        <label class="col-sm-12 textPreto" >Passo 1: Definir restrição</label>
                                         <div class="form-group">
                                             <label class="col-sm-2" for="num_elementos">Eu quero:</label>
 
@@ -185,7 +184,7 @@
                                 </div>
                                 <div class="collapse estagio-passo-2">
                                     <hr>
-                                    <label class="col-sm-12 well" >Passo 2: Definir formula</label>
+                                    <label class="col-sm-12 textPreto" >Passo 2: Definir formula</label>
                                     <form method="post" action="" id="ajax_form">
                                         <label class="col-sm-2" for="formula">Formula:</label>
 
@@ -231,14 +230,14 @@
                                 <br />
                                 <form>    
                                     <div class="form-group col-sm-12 ">
-                                        <button type="button" class="btn btn-default bottom-right">Adicionar</button>
+                                        <button type="button" class="btn btnExercicio bottom-right">Adicionar</button>
                                     </div>
                                 </form>
 
                             </div>
                             <div class="col-xs-2">
-                                <button type="button" class="btn btn-default glyphicon glyphicon-plus"></button>
-                                <button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+                                <button type="button" class="btn btnExercicio glyphicon glyphicon-plus"></button>
+                                <button type="button" class="btn btnExercicio glyphicon glyphicon-refresh"></button>
 
                             </div>
 
@@ -251,8 +250,8 @@
 
 
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Lista de estagios</h3>
+                <div class="panel-heading" style="background-color:#222222">
+                    <h3 class="panel-title textExer">Lista de estagios</h3>
                 </div>
                 <div class="panel-body">
                     <div>
@@ -276,7 +275,7 @@
 
                         <div class="row">
                             <div class="col-xs-2" style="float: right;" >
-                                <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btn-info buttonExercicio">Finalizar</button></a>
+                                <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btnExercicio">Finalizar</button></a>
                             </div>
                         </div>
 

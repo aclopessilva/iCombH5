@@ -34,7 +34,7 @@
 	</div>
 	<div class="row">
         <div class="col-xs-2" style="float: right;" >
-            <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info buttonExercicio">Fazer outro exercício</button></a>
+            <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
         </div>
     </div>
 </section>

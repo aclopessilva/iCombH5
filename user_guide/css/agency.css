@@ -503,3 +503,32 @@ body {
 .d2{
   font-size: 18px;
 }
+
+.btnExercicio{
+  color: #222222;
+  background-color:#fed136;
+  border-color: #222222;  
+}
+
+.btnExercicio:hover {
+  color: #fed136;
+  background-color: #222222;
+  border-color: #fed136;
+}
+
+.textDourado{
+  color:#fed136;
+  font-size: 21px;
+}
+
+.textPreto{
+  color: #222222;
+  font-size: 15px;
+  text-decoration: underline;
+}
+.textExer{
+  color:#fed136;
+  font-size: 20px;
+  background-color: #222222;
+  border-color:  #222222;
+}
