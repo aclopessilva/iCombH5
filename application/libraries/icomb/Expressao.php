@@ -14,27 +14,30 @@
 class Expressao extends ICombClass{
 
     //put your code here
-    public $atributos;
+    public $atributo;
     public $pertence = false;
     public $caracteristicas = array();
         
     public function evaluate($element) {
         $ret = false;
-        if (array_search($element->getAttribute($this->atributos), $this->caracteristicas)) {
+        $key =  $element->attributes[$this->atributo];
+        if (array_search($key, $this->elementos)!==false) {
             $ret = true;
         } else {
-            $predicates = $element->getPredicates($this->atributos);
-            if ($predicates != null) {                
+            $predicates = $element->getPredicates($this->atributo);
+            if (isset($predicates)) {
                 foreach ($predicates as $predicate){
-                    if(!array_search($predicate, $this->caracteristicas)){
-                        $ret = true;
-                        break;
+                    if( $predicate != "") {
+                        if(!array_search($predicate, $this->elementos)){
+                            $ret = true;
+                            break;
+                        }
                     }
                 }
             }
         }
 
-        if ($this->belong) {
+        if ($this->pertence) {
             return $ret;
         } else {
             return !$ret;

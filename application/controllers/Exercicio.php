@@ -73,9 +73,16 @@ class Exercicio extends CI_Controller {
             $condicao->caracteristica2 = $_POST['caracteristica2'];
         }
         
-        // $msg = $this->icomb->validaCondicao($condicao);
-        $msg = "OK";
+        $msg = $this->icomb->validaCondicao($condicao);
+        $msg = '{
+                    "status":"OK"
+                }';
 
+        /*$msg = '{
+                    "status":"ERROR",
+                    "message": "Deu ruim aqui"
+                }';
+*/
         echo $msg;
     }
 

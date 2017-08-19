@@ -10,6 +10,7 @@ include_once 'icomb/Element.php';
 include_once 'icomb/Condicao.php';
 include_once 'icomb/Expressao.php';
 include_once 'icomb/Log.php';
+
 class IComb {
 
     protected $CI;
@@ -30,45 +31,27 @@ class IComb {
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
         $universo = $universo->createFromBDObject($exercicio->universo);
-                
+
         //print_r($universo);
         //2. A solucao tem que ter um array da classes de tipo condicao (que representam os estagios).
         $solucao = new Solucao();
         $solucao = $solucao->createFromBDObject($exercicio->solucao);
-        
+
         //print_r($solucao);
         //iniciamos o avaliador
-        //$avaliador->init($universo, $solucao);
-        
+        $avaliador->init($universo, $solucao);
         //guardamos o estado do avaliador na sessao.
         $desenvolvimento->avaliador = $avaliador;
-        
+
         $desenvolvimento->log = new Log();
         $desenvolvimento->log->putLog('Iniciando desenvolvimento');
-        
+
         $this->saveSessao('desenvolvimento', $desenvolvimento);
-        
     }
 
     public function validaCondicao($condicao) {
         //recuperamos o desenvolvimento da sessao
-        $desenvolvimento = $this->getSessao('desenvolvimento');        
-        fixObject($desenvolvimento->log);
-        $array = $desenvolvimento->log->getLogs();
-        foreach($array as $linha){
-            echo $linha->texto;
-        }
-        
-        /*
-        //montando condicao enviado pelo aluno
-        $condicao = new Condicao();
-        $condicao->setQuantidade($numElementos);
-        $expressao = new Expressao();
-        $expressao->init($atributo, $pertence, array($caracteristica));
-        $condicao->addExpressao($expresssao);
-        */
-        //Mandamos para o avaliador.
-        
+        $desenvolvimento = $this->parseDesenvolvimento($this->getSessao('desenvolvimento'));
         
     }
 
@@ -86,12 +69,18 @@ class IComb {
     private function deleteSessao($nome) {
         $this->CI->session->unset_userdata($nome);
     }
-    
-    function fixObject (&$object)
-    {
-      if (!is_object ($object) && gettype ($object) == 'object')
-        return ($object = unserialize (serialize ($object)));
-      return $object;
+
+    private function parseDesenvolvimento($desenvolvimento){
+        $this->fixObject($desenvolvimento->exercicio);
+        $this->fixObject($desenvolvimento->avaliador);
+        $this->fixObject($desenvolvimento->log);
+        return $desenvolvimento;
+     }
+     
+    function fixObject(&$object) {
+        if (!is_object($object) && gettype($object) == 'object')
+            return ($object = unserialize(serialize($object)));
+        return $object;
     }
 
 }

@@ -237,7 +237,11 @@ INSERT INTO `elemento` (`id`, `universo_id`, `imagem`, `predicado`, `atributo`, 
 (151, 4, 'user_guide/img/imagens_Camisa/8MeioCampoVermelho.png', 'vermelho', 'meio-campo', '8'),
 (152, 4, 'user_guide/img/imagens_Camisa/9MeioCampoVermelho.png', 'vermelho', 'meio-campo', '9'),
 (153, 4, 'user_guide/img/imagens_Camisa/10AtacanteVermelho.png', 'vermelho', 'atacante', '10'),
-(154, 4, 'user_guide/img/imagens_Camisa/11AtacanteVermelho.png', 'vermelho', 'atacante', '11');
+(154, 4, 'user_guide/img/imagens_Camisa/11AtacanteVermelho.png', 'vermelho', 'atacante', '11'),
+(155, 2, 'user_guide/img/imagens_Baralho/AsCopas.png', 'vermelho', 'copas', 'as'),
+(156, 2, 'user_guide/img/imagens_Baralho/AsEspadas.png', 'preto', 'espadas', 'as'),
+(157, 2, 'user_guide/img/imagens_Baralho/AsOuros.png', 'vermelho', 'ouros', 'as'),
+(158, 2, 'user_guide/img/imagens_Baralho/AsPaus.png', 'preto', 'paus', 'as');
 
 -- --------------------------------------------------------
 

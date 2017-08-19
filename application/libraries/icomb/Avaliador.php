@@ -19,9 +19,9 @@ class Avaliador {
     
     
     private $elemParticao;
-    private $particoes;
     private $elemResposta;
-    
+    private $particoes;
+
     //put your code here
     public function init($universo, $solucao){
         $this->universo = $universo;
@@ -29,22 +29,33 @@ class Avaliador {
         
         //itera a traves dos elementos do universo e avalia se a solucao consegue identificar algum.
         $this->elementos = $this->universo->elementos;
-        
-        
+
+        // README: Enquanto no java, objetos podem ser usados como indices do array, o php array tem limitacao para aceitar isso
+        // para contornar esse problema sera usada a clase SplObjectStorage como "array" para armazenar os objetos no indice do array.
+        // https://stackoverflow.com/questions/4642980/can-i-use-an-instantiated-object-as-an-array-key?lq=1
+
+        $this->elemParticao =  new SplObjectStorage();
+        $this->elemResposta =  new SplObjectStorage();
+        $this->particoes =  new SplObjectStorage();
+
         $estagios = $this->solucao->condicoes; //aqui nos representamos estagios em lugar de condicoes (como o icomb faz)
         
         foreach ($this->elementos  as $elemento ){
             foreach ($estagios as $estagio){
-                print_r($estagio);
+//                print_r($estagio);
                 if($estagio->evaluate($elemento)){
-                    if ($this->elemParticao[$elemento] != null) {
+                    if (isset($this->elemParticao[$elemento])) {
                         //throw new RuntimeException(I18n.getString("evaluationMessage01"));
                         die('evaluationMessage01');
                     } else {
-                        $this->elemParticao[$elemento]= $estagio;
-                        //T System.out.print(condicoes[j].toString()+" "); //FormatoReduzido()+" ");
+
+                        $this->elemParticao[$elemento] = $estagio;
+
+                        if(!isset($this->particoes[$estagio])){
+                            $this->particoes[$estagio] = new stdClass();
+                        }
                         $part = $this->particoes[$estagio];
-                        $part = array($elemento);
+                        $part->elemento = $elemento;
                         $this->particoes[$estagio] = $part;
                     }
                 }

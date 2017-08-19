@@ -316,13 +316,18 @@
                 data: dadosCondicao,
                 success: function (data)
                 {
-                    alert(data);
-                    if (data == "Dados de condição CORRETOS!!! Passe para a Etapa 2") {                        
+                    var data = JSON.parse(data);
+                    var status = data.status;
+                    var message = data.message;
+
+                    if(status == 'OK'){
                         div_estagio_atual.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao').val('Restrição Validada');
-                    } else {
+                    }else{
+                        alert(message);
                         $('#btn-valida-restricao').val('Validar Restrição');
                     }
+
                 }
             });
             return false;
