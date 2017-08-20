@@ -53,18 +53,21 @@
                                     div_estagio_atual.estado = 'NOVO';
                                     div_estagio_atual.toggle();
                                 } else {
+                                    /*
                                     if(div_estagio_atual.estado == 'NOVO'){
                                         alert("Tem um estagio em andamento")
-                                    }else{
+                                    }else{*/
                                         div_estagio_atual.clone().insertAfter(".estagio:last");
                                         //reassignamos o novo div_estagio_atual
                                         div_estagio_atual = $(".estagio:last");
                                         div_estagio_atual.find(".desc-estagio").text("Estagio " + (i + 1));
-                                    }
+                                    //}
                                 }
                                 i++;
                             });
                         });
+
+
                     </script>
 
                     <div class="col-xs-12 text-center" >
@@ -105,29 +108,29 @@
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo" id="atributo">
-                                                    <option value = '1'>Valor</option>
+                                                    <option value='value' >Valor</option>
                                                 </select>
                                             </div>
 
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="pertence" id="pertence">
-                                                    <option value = '1'>é</option>
-                                                    <option value = '0'>não é</option>
+                                                    <option value='true' >é</option>
+                                                    <option value='false' >não é</option>
                                                 </select>
                                             </div>
 
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica" id="caracteristica">
-                                                    <option value = '1'>Às</option>
+                                                    <option value = 'as'>Às</option>
                                                     <option value = '7'>7</option>
                                                     <option value = '8'>8</option>
                                                     <option value = '9'>9</option>
                                                     <option value = '10'>10</option>
-                                                    <option value = '11'>Valete</option>
-                                                    <option value = '12'>Dama</option>
-                                                    <option value = '13'>Rei</option>
+                                                    <option value = 'valete'>Valete</option>
+                                                    <option value = 'dama'>Dama</option>
+                                                    <option value = 'rei'>Rei</option>
                                                 </select>
                                             </div>
 
@@ -185,14 +188,15 @@
                                 <div class="collapse estagio-passo-2">
                                     <hr>
                                     <label class="col-sm-12 textPreto" >Passo 2: Definir formula</label>
-                                    <form method="post" action="" id="ajax_form">
+                                    <form action="" class="form-formula">
                                         <label class="col-sm-2" for="formula">Formula:</label>
 
                                         <div class="col-sm-2">
                                             <select class="form-control" id="formula" name="formula">
-                                                <option value = '1'>C(n,p)</option>
-                                                <option value = '2'>A(n,p)</option>
-                                                <option value = '3'>p!</option>
+                                                <option value = 'n'>Valor</option>
+                                                <option value = 'C(n,p)'>C(n,p)</option>
+                                                <option value = 'A(n,p)'>A(n,p)</option>
+                                                <option value = 'p!'>p!</option>
                                             </select>
                                         </div>
 
@@ -223,14 +227,15 @@
                                         </div>
 
                                         <div class="col-sm-2">
-                                            <input type="submit" name="enviar" value="Validar formula"  class="btn btn-default"/>
+                                            <input type="button" name="validar" id="validar" value="Validar formula"  class="btn btn-default"/>
+                                            <div class="well" id="formula-definida"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <br />
-                                <form>    
+                                <form class="form-validar-estagio-ajax" method="post" action="">
                                     <div class="form-group col-sm-12 ">
-                                        <button type="button" class="btn btnExercicio bottom-right">Adicionar</button>
+                                        <button type="submit" class="btn btnExercicio bottom-right" id="validar-estagio">Validar estagio</button>
                                     </div>
                                 </form>
 
@@ -331,6 +336,38 @@
                 }
             });
             return false;
+        });
+
+        jQuery(document).find('#validar').click(function () {
+            var n = div_estagio_atual.find(".form-formula").find("#n").val();
+            var p = div_estagio_atual.find(".form-formula").find("#p").val();
+            var formula = div_estagio_atual.find(".form-formula").find("#formula").val();
+            formula = formula.replace("n", n);
+            formula = formula.replace("p", p);
+            div_estagio_atual.find(".form-formula").find("#formula-definida").text(formula);
+
+        });
+
+        jQuery(document).find('.form-validar-estagio-ajax').submit(function () {
+
+            div_estagio_atual.find('#validar-estagio').val('Validando...');
+
+            var dadosCondicao = jQuery(this).serialize();
+            jQuery.ajax({
+                type: "POST",
+                url: "<?= base_url()?>/exercicio/ValidaEstagio",
+                dataType: 'html',
+                data: dadosCondicao,
+                success: function (data)
+                {
+                    var data = JSON.parse(data);
+                    alert( "Ok -> data.num_elementos: " +data.num_elementos);
+
+                }
+            });
+
+            return false;
+
         });
     });
   /** jQuery(document).ready(function () {

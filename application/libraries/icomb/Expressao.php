@@ -16,7 +16,7 @@ class Expressao extends ICombClass{
     //put your code here
     public $atributo;
     public $pertence = false;
-    public $caracteristicas = array();
+    public $elementos = array();
         
     public function evaluate($element) {
         $ret = false;

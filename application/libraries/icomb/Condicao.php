@@ -13,14 +13,12 @@
  */
 class Condicao extends ICombClass{
 
-    //put your code here
     public $quantidade;
-//    public $expressoes = array();
-//
-//
-//    public function addExpressao($expressao) {
-//        array_push($this->expressoes,$expressao);
-//    }
+    public $expressoes = array();
+
+    public function addExpressao($expressao) {
+        array_push($this->expressoes,$expressao);
+    }
 
     public function evaluate($element) {
         $result = true;

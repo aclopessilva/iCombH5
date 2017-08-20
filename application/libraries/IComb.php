@@ -49,10 +49,33 @@ class IComb {
         $this->saveSessao('desenvolvimento', $desenvolvimento);
     }
 
-    public function validaCondicao($condicao) {
+    public function validaCondicao($request) {
+
         //recuperamos o desenvolvimento da sessao
+        $expressao =  new Expressao();
+        $expressao->atributo = $request->atributo;
+        $expressao->pertence = $request->pertence;
+        $expressao->elementos = array();
+        $expressao->elementos[] = $request->caracteristica;
+
+        $condicao = new Condicao();
+        $condicao->quantidade =$request->numElementos;
+        $condicao->addExpressao($expressao);
+
+        return $this->verificaErro($condicao);
+
+
+    }
+
+
+    public function verificaErro($condicao){
+        //TODO: verificar uso de booleano "corrige"
+
         $desenvolvimento = $this->parseDesenvolvimento($this->getSessao('desenvolvimento'));
-        
+        $avaliador = $desenvolvimento->avaliador;
+        $avaliador->reset();
+        return $avaliador->adicionaCondicao($condicao);
+
     }
 
     /**

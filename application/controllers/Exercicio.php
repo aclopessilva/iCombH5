@@ -58,32 +58,53 @@ class Exercicio extends CI_Controller {
     }
 
     public function ValidaCondicao() {
-        $condicao = new stdClass();
-        $condicao->numElementos = $_POST['num_elementos'];
-        $condicao->numPropriedades = $_POST['num_propriedades'];
+        $request = new stdClass();
+        $request->numElementos = $_POST['num_elementos'];
+        $request->numPropriedades = $_POST['num_propriedades'];
 
-        if($condicao->numPropriedades == 1){
-            $condicao->atributo = $_POST['atributo'];
-            $condicao->pertence = $_POST['pertence'];
-            $condicao->caracteristica = $_POST['caracteristica'];
+        if($request->numPropriedades == 1){
+            $request->atributo = $_POST['atributo'];
+            $request->pertence = $_POST['pertence'];
+            $request->caracteristica = $_POST['caracteristica'];
         }
-        if($condicao->numPropriedades == 2){
-            $condicao->atributo2 = $_POST['atributo2'];
-            $condicao->pertence2 = $_POST['pertence2'];
-            $condicao->caracteristica2 = $_POST['caracteristica2'];
+        if($request->numPropriedades == 2){
+            $request->atributo2 = $_POST['atributo2'];
+            $request->pertence2 = $_POST['pertence2'];
+            $request->caracteristica2 = $_POST['caracteristica2'];
         }
         
-        $msg = $this->icomb->validaCondicao($condicao);
-        $msg = '{
+        $retorno = $this->icomb->validaCondicao($request);
+
+        if($retorno!="OK"){
+            $msg = '{
+                    "status":"ERROR",
+                    "message": "'.$retorno.'"
+                }';
+        }else{
+            $msg = '{
                     "status":"OK"
                 }';
+        }
 
-        /*$msg = '{
-                    "status":"ERROR",
-                    "message": "Deu ruim aqui"
-                }';
-*/
         echo $msg;
+    }
+
+    public function ValidaEstagio() {
+
+        $estagio =
+            '{
+                "num_elementos":"1",                
+                "num_propriedades":"1",                
+                "atributo":"valor",
+                "pertence" : "true",
+                "caracteristica" : "as",
+                "formula" : "C(n,p)",
+                "n" : "1",
+                "p" : "4"                
+            }';
+
+
+        echo $estagio;
     }
 
 }
