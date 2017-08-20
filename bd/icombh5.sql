@@ -284,7 +284,7 @@ CREATE TABLE `exercicio` (
 --
 
 INSERT INTO `exercicio` (`id`, `universo_id`, `solucao_id`, `descricao`, `dica`, `tempo_esperado`, `operacao`) VALUES
-(1, 1, 1, 'Quantas possibilidades de 1 carta tipo Ás?', 'Baralho completo, com 52 cartas, 4 de cada.', NULL, NULL),
+(1, 2, 1, 'Quantas possibilidades de 1 carta tipo Ás?', 'Baralho completo, com 32 cartas, 4 de cada.', NULL, NULL),
 (2, 2, 1, 'Com um baralho de 32 cartas, quantas mãos de 2 cartas é possível formar com exatamente uma Dama e um Ás?', 'Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).', NULL, NULL),
 (3, 2, 1, 'Com um baralho de 32 cartas, quantas mãos de 5 cartas é possível formar com exatamente 2 cartas de Copas e exatamente duas cartas de Espadas?', 'Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).', NULL, NULL),
 (4, 2, 1, 'Com um baralho de 32 cartas, quantas mãos de 20 cartas é possível formar com 3 ases, 4 espadas e 16 cartas vermelhas?', 'O conjunto de subconjuntos com 20 elementos tomados em um baralho com 32 cartas. Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que 7 (7,8,9,10, Valete, Dama, Rei e Ás).  ', NULL, NULL),
