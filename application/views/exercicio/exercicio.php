@@ -44,26 +44,33 @@
                 </div>
                 <div class="panel-body">
                     <script>
+                        /**
+                         * representa o div do estagio atual
+                         */
                         var div_estagio_atual;
+
+                        /**
+                         * lista de objetos html que sao os divs que sao os estagios desenvolvidos.
+                         */
+                        var div_estagios = new Array();
+
+                        var numero_estagio_atual = 0;
                         $(function () {
-                            var i = 0;
                             $("#btn-adicionar-estagio").click(function () {
-                                if (i == 0) {                                    
+
+                                if(div_estagio_atual== null){
                                     div_estagio_atual = $(".estagio:last");
                                     div_estagio_atual.estado = 'NOVO';
-                                    div_estagio_atual.toggle();
-                                } else {
-                                    /*
-                                    if(div_estagio_atual.estado == 'NOVO'){
-                                        alert("Tem um estagio em andamento")
-                                    }else{*/
-                                        div_estagio_atual.clone().insertAfter(".estagio:last");
-                                        //reassignamos o novo div_estagio_atual
-                                        div_estagio_atual = $(".estagio:last");
-                                        div_estagio_atual.find(".desc-estagio").text("Estagio " + (i + 1));
-                                    //}
+                                    div_estagio_atual.show();
+                                    //adicionamos o div a lista de estagios
+                                    div_estagios.push(div_estagio_atual);
+
+                                    //        div_estagio_atual.clone().insertAfter(".estagio:last");
+                                    //       div_estagio_atual = $(".estagio:last");
+                                    //        div_estagio_atual.find(".desc-estagio").text("Estagio " + (i + 1));
+                                    $("#btn-adicionar-estagio").text('Iniciar '+(div_estagios.length)+'° Estágio')
+                                    numero_estagio_atual = div_estagios.length;
                                 }
-                                i++;
                             });
                         });
 
@@ -71,18 +78,17 @@
                     </script>
 
                     <div class="col-xs-12 text-center" >
-                        <button id="btn-adicionar-estagio" type="button" class="btn btnExercicio">Adicionar Estágio</button>
+                        <button id="btn-adicionar-estagio" type="button" class="btn btnExercicio">Iniciar 1° Estágio</button>
                     </div>
-                    
+
                     <div class="estagio collapse">
-                        <div class="col-xs-12"> 
-                            <br />                           
-                            <label class="col-sm-12 textDourado desc-estagio" >Estagio 1</label>
-                            <div class="col-xs-10" >
+                        <div class="col-sm-12">
+                            <label class="col-sm-12 textDourado desc-estagio" >Estágio 1</label>
+                            <div class="col-xs-12" >
                                 <div class="estagio-passo-1">
                                     <form class="form-horizontal form-condicao-ajax" method="post" action="" >
                                         <label class="col-sm-12 textPreto" >Passo 1: Definir restrição</label>
-                                        <div class="form-group">
+                                        <div class="col-sm-12  form-group">
                                             <label class="col-sm-2" for="num_elementos">Eu quero:</label>
 
                                             <div class="col-sm-1">
@@ -102,7 +108,7 @@
 
                                         </div>
                                         
-                                        <div class="form-group" id="divCondicao">
+                                        <div class="col-sm-12  form-group" id="divCondicao">
 
                                             <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos:</label>
 
@@ -185,72 +191,67 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="collapse estagio-passo-2">
-                                    <hr>
-                                    <label class="col-sm-12 textPreto" >Passo 2: Definir formula</label>
-                                    <form action="" class="form-formula">
-                                        <label class="col-sm-2" for="formula">Formula:</label>
-
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="formula" name="formula">
-                                                <option value = 'n'>Valor</option>
-                                                <option value = 'C(n,p)'>C(n,p)</option>
-                                                <option value = 'A(n,p)'>A(n,p)</option>
-                                                <option value = 'p!'>p!</option>
-                                            </select>
-                                        </div>
 
 
-                                        <label class="col-sm-1" for="n">n:</label>
+                                <hr>
 
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="n" name="n">
-                                                <option value = '1'>1</option>
-                                                <option value = '2'>2</option>
-                                                <option value = '3'>3</option>
-                                                <option value = '4'>4</option>
-                                                <option value = '5'>5</option>
-                                            </select>
-                                        </div>
-
-
-                                        <label class="col-sm-1" for="p">p:</label>
-
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="p" name="p">
-                                                <option value = '1'>1</option>
-                                                <option value = '2'>2</option>
-                                                <option value = '3'>3</option>
-                                                <option value = '4'>4</option>
-                                                <option value = '5'>5</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <input type="button" name="validar" id="validar" value="Validar formula"  class="btn btn-default"/>
-                                            <div class="well" id="formula-definida"></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <br />
                                 <form class="form-validar-estagio-ajax" method="post" action="">
-                                    <div class="form-group col-sm-12 ">
-                                        <button type="submit" class="btn btnExercicio bottom-right" id="validar-estagio">Validar estagio</button>
+                                    <div class="collapse estagio-passo-2">
+                                        <label class="col-sm-12 textPreto" >Passo 2: Definir formula</label>
+
+                                        <div class="form-horizontal ">
+                                        <div class="col-sm-12  form-group">
+                                            <label class="col-sm-2" for="formula">Formula:</label>
+
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="formula" name="formula">
+                                                    <option value = 'n'>Valor</option>
+                                                    <option value = 'C(n,p)'>C(n,p)</option>
+                                                    <option value = 'A(n,p)'>A(n,p)</option>
+                                                    <option value = 'p!'>p!</option>
+                                                </select>
+                                            </div>
+
+
+                                            <label class="col-sm-1" for="n">n:</label>
+
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="n" name="n">
+                                                    <option value = '1'>1</option>
+                                                    <option value = '2'>2</option>
+                                                    <option value = '3'>3</option>
+                                                    <option value = '4'>4</option>
+                                                    <option value = '5'>5</option>
+                                                </select>
+                                            </div>
+
+
+                                            <label class="col-sm-1" for="p">p:</label>
+
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="p" name="p">
+                                                    <option value = '1'>1</option>
+                                                    <option value = '2'>2</option>
+                                                    <option value = '3'>3</option>
+                                                    <option value = '4'>4</option>
+                                                    <option value = '5'>5</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="well-sm" id="formula-definida"></div>
+                                            </div>
+
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-12 text-center" >
+                                            <button type="submit" class="btn btnExercicio bottom-right" id="validar-estagio">Validar estagio</button>
+                                        </div>
                                     </div>
                                 </form>
-
-                            </div>
-                            <div class="col-xs-2">
-                                <button type="button" class="btn btnExercicio glyphicon glyphicon-plus"></button>
-                                <button type="button" class="btn btnExercicio glyphicon glyphicon-refresh"></button>
-
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
 
@@ -261,8 +262,23 @@
                 <div class="panel-body">
                     <div>
                         <div class="col-xs-9">
+                            <!-- LISTA DE ESTAGOS COMPLETADOS--->
+                            <div id="lista-estagios">
+                                <!-- esta lista sera prenchida com elementos do tipo item-estagio (id=estagio-base) -->
+                            </div>
 
-                            -01 elemeto tais que...
+                            <!-- ITEM ESTAGIO (nao visivel)--->
+                            <div id="estagio-base" class="item-estagio collapse col-sm-12" >
+                                <div class="descricao col-sm-7">
+                                    <!-- conteudo gerado no javascript -->
+                                </div>
+                                <div class="acoes col-sm-5">
+                                    <input type="button" class="estagio-btn-elementos" value="Ver Elementos" />
+                                    <input type="button" class="estagio-btn-deletar" value="Deletar"  />
+                                    <input type="button" class="estagio-btn-ver" value="Consultar" />
+                                </div>
+                            </div>
+
                         </div>
                         <div class="col-xs-3">
 
@@ -298,12 +314,76 @@
 <?php $this->load->view('/exercicio/modais/formula.php'); ?>
 <?php $this->load->view('/exercicio/modais/tutorial.php'); ?>
 <?php $this->load->view('/exercicio/modais/universo.php'); ?>
+<?php $this->load->view('/exercicio/modais/sub-universo.php'); ?>
 
 
 <!-- JS para validar condição -->
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
+
+        var lista_estagios = new Array();
+
+
+        function mostraSubUniverso(elementos, numero){
+            /*
+            var modal_sub_universo = $('#ModalSubUniverso');
+            //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
+            modal_sub_universo.prop('id','estagio-sub-universo-'+ numero);
+
+            var modal_sub_universo_body = modal_sub_universo.find('.modal-body');
+
+            $.each( elementos, function( key, elemento ){
+                modal_sub_universo_body.append('<img src="'+'http://localhost/icombh5/'+elemento.imagem+'" />');
+            });
+
+
+            $('body').append(modal_sub_universo);
+            //mostrando o modal subuniverso
+            modal_sub_universo.toggle();
+            */
+        }
+
+        function adicionaEstagio(data){
+
+            lista_estagios.push(data);
+
+            if(data.estado=='FINALIZADO'){
+                var estagio_base = $('#estagio-base').clone();
+
+                //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
+                estagio_base.prop('id','estagio-'+data.numero);
+
+                var estagio_base_desc = estagio_base.find('.descricao');
+
+
+                estagio_base_desc.append('<p>'+ data.condicao.quantidade + ' elemento(s) que cumpram as seguintes condicoes:</p>');
+
+                if(data.condicao.expressoes!=undefined){
+
+                    if(data.condicao.expressoes.length>0){
+                        estagio_base_desc.append('<ol>');
+                        $.each( data.condicao.expressoes, function( key, expresao ){
+                            estagio_base_desc.append('<li>'+expresao.atributo+' '+ expresao.pertence +' '+ $.each(expresao.elementos, function (elemento) {" "+elemento})+'</li>');
+                        });
+                        estagio_base_desc.append('</ol>');
+                    }else{
+                        estagio_base_desc.append('Nenhuma condicao aplicada.');
+                    }
+
+                }else{
+                    estagio_base_desc.append('Nenhuma condicao aplicada.');
+                }
+
+                $('#lista-estagios').append(estagio_base);
+                //fazemos aparecer
+                estagio_base.toggle();
+
+
+
+            }
+
+        }
 
         jQuery(document).find('.form-condicao-ajax').submit(function () {
             var dadosCondicao = jQuery(this).serialize();
@@ -322,14 +402,14 @@
                 success: function (data)
                 {
                     var data = JSON.parse(data);
-                    var status = data.status;
-                    var message = data.message;
+                    var estado = data.estado;
 
-                    if(status == 'OK'){
+                    if(estado == 'OK'){
                         div_estagio_atual.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao').val('Restrição Validada');
+                        mostraSubUniverso(data.elementos_selecionados, numero_estagio_atual);
                     }else{
-                        alert(message);
+                        alert(data.mensagem);
                         $('#btn-valida-restricao').val('Validar Restrição');
                     }
 
@@ -338,15 +418,27 @@
             return false;
         });
 
-        jQuery(document).find('#validar').click(function () {
-            var n = div_estagio_atual.find(".form-formula").find("#n").val();
-            var p = div_estagio_atual.find(".form-formula").find("#p").val();
-            var formula = div_estagio_atual.find(".form-formula").find("#formula").val();
+        jQuery(document).find('#n').change(function () {
+            trocarValorFormula();
+        });
+
+        jQuery(document).find('#p').change(function () {
+            trocarValorFormula();
+        });
+
+        jQuery(document).find('#formula').change(function () {
+            trocarValorFormula();
+        });
+
+        function trocarValorFormula(){
+            var n = div_estagio_atual.find(".form-validar-estagio-ajax").find("#n").val();
+            var p = div_estagio_atual.find(".form-validar-estagio-ajax").find("#p").val();
+            var formula = div_estagio_atual.find(".form-validar-estagio-ajax").find("#formula").val();
             formula = formula.replace("n", n);
             formula = formula.replace("p", p);
-            div_estagio_atual.find(".form-formula").find("#formula-definida").text(formula);
+            div_estagio_atual.find(".form-validar-estagio-ajax").find("#formula-definida").text(formula);
 
-        });
+        }
 
         jQuery(document).find('.form-validar-estagio-ajax').submit(function () {
 
@@ -361,7 +453,13 @@
                 success: function (data)
                 {
                     var data = JSON.parse(data);
-                    alert( "Ok -> data.num_elementos: " +data.num_elementos);
+                    if(data.estado == 'OK'){
+                        //adicionamos o estagio retornado a lista de estagios finalizados
+                        adicionaEstagio(data.estagio);
+                    }else{
+                        alert( data.mensagem);
+                    }
+
 
                 }
             });
@@ -369,6 +467,7 @@
             return false;
 
         });
+
     });
   /** jQuery(document).ready(function () {
 
@@ -388,7 +487,7 @@
                 success: function (data)
                 {
                     alert(data);
-                    if (data == "Dados de condição CORRETOS!!! Passe para a Etapa 2") {                        
+                    if (data == "Dados de condição CORRETOS!!! Passe para a Etapa 2") {
                         div_estagio_atual.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao2').val('Restrição Validada');
                     } else {

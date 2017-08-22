@@ -81,6 +81,8 @@ class Avaliador {
      */
     public function adicionaCondicao($condicao) {
 
+        $resposta = new RespostaDoAvaliador();
+
         $setElementos = array();
         $setCondicoes = array();
         
@@ -103,11 +105,15 @@ class Avaliador {
             }
         }
         if(sizeof($setElementos) == 0 ){
-            return "Nenhum elemento do conjunto universo atende as restrições informadas. Cada estágio criado deverá selecionar ao menos 1 elemento.";
+            $resposta->estado = "ERRO";
+            $resposta->mensagem = "Nenhum elemento do conjunto universo atende as restrições informadas. Cada estágio criado deverá selecionar ao menos 1 elemento.";
+            return $resposta;
             //die("evaluationMessage02");
         }
         if(sizeof($setCondicoes) == 0 || (sizeof($setCondicoes) == 1 && $setCondicoes[0]==null) ){
-            return "As restrições informadas selecionam elementos (do conjunto universo) que não deveriam ser escolhidos para este exercício.";
+            $resposta->estado="ERRO";
+            $resposta->mensagem =  "As restrições informadas selecionam elementos (do conjunto universo) que não deveriam ser escolhidos para este exercício.";
+            return $resposta;
             //die("evaluationMessage03");
         }
         /*
@@ -117,13 +123,18 @@ class Avaliador {
         */
          
         if($condicao->quantidade != sizeof($setElementos)){
-            
+
+
+            //Esse ponto ainda nao foi testado
             if(sizeof($setCondicoes)>1){
                 foreach($setCondicoes as $cond){
-                    $conjElementos1 = $this->particoes[$cond];
+                    $conjElementos1 = $this->splSearchWithKey($this->particoes, $cond);
                     $e1 = $this->search($setElementos, $conjElementos1);
-                    $e2 = $this->search($setElementos, $conjElementos2);
-                    die("evaluationMessage04".$e1.$e2);
+                    $resposta->estado="ERRO";
+                    $resposta->mensagem =
+                        "Este estágio certamente irá alterar a distribuição desejada dos elementos. 
+                        Ele envolve elementos que deveriam ser selecionados em estágios distintos. 
+                        Por exemplo, os elementos ? e ? devem estar presentes em estágios distintos.";
                 }
             }
             
@@ -133,12 +144,16 @@ class Avaliador {
             
             if($setElementos == $baseElementos){
                 if ($condicao->quantidade != $baseCondicao->quantidade) {
-                    return "A condição selecionada está provavelmente correta, porém o número de elementos está errado.";
+                    $resposta->estado="ERRO";
+                    $resposta->mensagem =  "A condição selecionada está provavelmente correta, porém o número de elementos está errado.";
+                    return $resposta;
                     //die("evaluationMessage05");
                     //throw new RuntimeException(I18n.getString("evaluationMessage05"));
                 }
             }else{
-                return "Esta seleção irá alterar a distribuição esperada de alguns elementos.";
+                $resposta->estado="ERRO";
+                $resposta->mensagem = "Esta seleção irá alterar a distribuição esperada de alguns elementos.";
+                return $resposta;
                 //die("evaluationMessage06");
                 //throw new RuntimeException(I18n.getString("evaluationMessage06"));
             }
@@ -148,7 +163,9 @@ class Avaliador {
             foreach ($setCondicoes as $cond){
                 $baseElementos = $this->particoes[$cond];
                 if($cond->quantidade != sizeof($baseElementos)){
-                    return "Algum elemento estará erroneamente presente em todas combinações.";
+                    $resposta->estado="ERRO";
+                    $resposta->mensagem =  "Algum elemento estará erroneamente presente em todas combinações.";
+                    return $resposta;
                     //die("evaluationMessage07");
                 }
             }
@@ -156,10 +173,45 @@ class Avaliador {
         // Se chegou aqui, condicao individual é ok
         $this->consolida($condicao, $setElementos);
 
-        return "OK";
+
+        $resposta->estado = "OK";
+        $resposta->objeto = $condicao;
+        $resposta->elementos_selecionados = $setElementos;
+
+        return $resposta;
 
     } // void adicionaCondicao(Condicao condicao)
 
+    /**
+     * Verifica se a fórmula do estágio está correta
+     * @param $condicao objeto condicao do estagio que ja foi validada
+     * @param $formularequest contem a formula do estagio a ser validada e os valores que serao validados
+     */
+    public function deteccaoDeErroFormula( $condicao, $formularequest) {
+
+
+        $resposta = new RespostaDoAvaliador();
+        $n = 0;
+        foreach ($this->universo->elementos as $elemento) {
+            if($condicao->evaluate($elemento)){
+                $n++;
+            }
+        }
+
+        $p = intval ($condicao->quantidade);
+        $formula_binomio = new Binomio();
+        $resultado1 = $formula_binomio->calcula($n,$p);
+        $resultado2 = $formularequest->formula->calcula($formularequest->n, $formularequest->p);
+
+        if($resultado1 != $resultado2){
+            $resposta->estado = "ERRO";
+            $resposta->mensagem = "Cálculo Inválido";
+        }else{
+            $resposta->estado = "OK";
+            $resposta->objeto = $formularequest; //retorna o request que tem a formula e os valores
+        }
+        return $resposta;
+    }
 
     private function splSearchWithKey($spl, $search){
 
@@ -203,10 +255,12 @@ class Avaliador {
     }
     
     private function search($setElementos, $conjElementos1){
-        
-        foreach ( $setElementos as $setElemento){
-            if( in_array($setElemento, $conjElementos1)){
-                return $setElemento;
+
+        if($conjElementos1 != null) {
+            foreach ($setElementos as $setElemento) {
+                if (in_array($setElemento, $conjElementos1)) {
+                    return $setElemento;
+                }
             }
         }
     }

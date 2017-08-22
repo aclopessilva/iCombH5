@@ -11,7 +11,8 @@ class Exercicio extends CI_Controller {
         $this->load->model('Elemento_model');
         $this->load->model('Formula_model');
 
-        $this->load->library('IComb', 'icomb');
+        //esta sendo carregado no config/autoload.php
+        //$this->load->library('IComb', 'icomb');
     }
     
     public function index()
@@ -75,36 +76,37 @@ class Exercicio extends CI_Controller {
         
         $retorno = $this->icomb->validaCondicao($request);
 
-        if($retorno!="OK"){
-            $msg = '{
-                    "status":"ERROR",
-                    "message": "'.$retorno.'"
-                }';
-        }else{
-            $msg = '{
-                    "status":"OK"
-                }';
-        }
 
-        echo $msg;
+        //convertemos o objeto em formato json, para entendimento do javascript
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($retorno));
+
+        //echo json_encode($retorno);
+
     }
 
     public function ValidaEstagio() {
 
-        $estagio =
-            '{
-                "num_elementos":"1",                
-                "num_propriedades":"1",                
-                "atributo":"valor",
-                "pertence" : "true",
-                "caracteristica" : "as",
-                "formula" : "C(n,p)",
-                "n" : "1",
-                "p" : "4"                
-            }';
+
+        $formula_request = new stdClass();
+        $formula_request->formula = $_POST['formula'];
+        $formula_request->n = $_POST['n'];
+        $formula_request->p = $_POST['p'];
+
+        $retorno = $this->icomb->validaEstagioAtual($formula_request);
+
+        //convertemos o objeto em formato json, para entendimento do javascript
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($retorno));
+
+        //        echo json_encode($retorno);
 
 
-        echo $estagio;
     }
 
 }
