@@ -511,9 +511,9 @@ body {
 }
 
 .btnExercicio:hover {
-  color: #fed136;
-  background-color: #222222;
-  border-color: #fed136;
+  color: #222222;
+  background-color:#ffe066;
+  border-color: #737373;  
 }
 
 .textDourado{

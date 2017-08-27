@@ -1,4 +1,5 @@
 <section id="exercicio">
+
 	<div class="container">
 		<div class="row titleIndicador">
 			<h3>Parabéns! Sua resposta está correta!</h3>	
@@ -29,7 +30,7 @@
 				Tempo esperado: 05 minutos <br>
 				Tempo levado pelo aluno: 10 minutos <br> 
 				<div class="row" style="padding-top: 100px;">
-					<div id="barchart_material" style="width: 700px; height: 140px;"></div>
+					<div id="barchart_material" style="width: 600px; height: 140px;"></div>
 				</div>			  
 			</div>
 		</div>
@@ -39,17 +40,13 @@
             <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
         </div>
     </div>
+    </br>
     <div class="row">
         <div class="col-xs-2" style="float: right;" >
-            <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer download</button></a>
+            <a href="email"><button type="button" class="btn btn-info btnExercicio">TESTE</button></a>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-2" style="float: right;" >
-            <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
-        </div>
-    </div>
 </section>
  <!--Gráfico Bar Chart-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -102,3 +99,4 @@
         chart.draw(data, options);
       }
     </script>
+
