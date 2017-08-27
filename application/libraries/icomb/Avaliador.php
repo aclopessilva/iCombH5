@@ -170,12 +170,13 @@ class Avaliador {
                 }
             }
         }
+
         // Se chegou aqui, condicao individual é ok
         $this->consolida($condicao, $setElementos);
 
 
         $resposta->estado = "OK";
-        $resposta->objeto = $condicao;
+        $resposta->condicao = $condicao;
         $resposta->elementos_selecionados = $setElementos;
 
         return $resposta;

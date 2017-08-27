@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <!-- conteudo gerado pelo javascript -->
             </div>
-            <div class="modal-  ">
+            <div class="modal-footer">
                 <button class="btn" data-dismiss="modal">Fechar</button>
             </div>
         </div>

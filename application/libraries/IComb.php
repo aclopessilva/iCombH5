@@ -113,12 +113,17 @@ class IComb {
         //O objeto resposta contem o estado, mensagem e opcionalmente um objeto que contem o objeto validado.
         $resposta =  $avaliador->adicionaCondicao($condicao);
         if($resposta->estado == 'OK'){
-            $condicao_validada = $resposta->objeto;
 
             $estagio = new Estagio();
             $estagio->estado = "STEP-1";
             $estagio->numero = sizeof($desenvolvimento->estagios) + 1;
-            $estagio->condicao = $condicao_validada;
+            /**
+             * adicionamos a condicao validada para nosso objeto estagio (que sera armazenado na sessao)
+             */
+            $estagio->condicao = $resposta->condicao;
+            /**
+             * adicionamos os elementos selecionados durante a validacao e adicioamos para nosso objeto estagio
+             */
             $estagio->elementos_selecionados = $resposta->elementos_selecionados;
 
             //armazenamos o estagio na lista de estagios, contendo somente a condicao validada
