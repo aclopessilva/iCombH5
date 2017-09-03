@@ -63,9 +63,14 @@ class IComb {
         $this->saveSessao('desenvolvimento', $desenvolvimento);
     }
 
+    /**
+     * Prepara o objeto condicao com o $request e depois validamos a condicao.
+     *
+     * @param $request Request passado pelo usuario
+     * @return mixed Retorna um objeto contendo o necessario para mostrar na view.
+     */
     public function validaCondicao($request) {
 
-        //recuperamos o desenvolvimento da sessao
         $condicao = new Condicao();
         $condicao->quantidade =$request->numElementos;
 
@@ -96,18 +101,27 @@ class IComb {
             $condicao->addExpressao($expressao2);
         }
 
-
-
+        //aqui sera possivel retornar ou adaptar a resposta da validacao.
+        //por enquanto somente retornamos o que o metodo verificaErro retorna.
         return $this->verificaErro($condicao);
 
 
     }
 
 
+    /**
+     * A validacao de condicao é delegada para a classe avalidador, que possui a logica de validacao no metodo "adicionaCondicao"
+     *
+     * @param $condicao
+     * @return mixed
+     */
     public function verificaErro($condicao){
         //TODO: verificar uso de booleano "corrige"
 
         $desenvolvimento = $this->parseDesenvolvimento($this->getSessao('desenvolvimento'));
+
+        $desenvolvimento->log->putLog('Usuario inicia validacao de condicao ' + serialize($condicao));
+
         $avaliador = $desenvolvimento->avaliador;
         $avaliador->reset();
         //O objeto resposta contem o estado, mensagem e opcionalmente um objeto que contem o objeto validado.
@@ -128,8 +142,14 @@ class IComb {
 
             //armazenamos o estagio na lista de estagios, contendo somente a condicao validada
             $desenvolvimento->estagios[] = $estagio;
+
+            $desenvolvimento->log->putLog('Condicao OK');
+            $this->saveSessao('desenvolvimento', $desenvolvimento);
+        }else{
+            $desenvolvimento->log->putLog('Condicao ERRO mensagem: '+ $resposta->mensagem );
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
+
         return $resposta;
 
     }
