@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `icombh5` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `icombh5`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: icombh5
@@ -60,7 +58,7 @@ CREATE TABLE `caracteristica` (
   PRIMARY KEY (`id`),
   KEY `fk_caracteristica_expressao1_idx` (`expressao_id`),
   CONSTRAINT `fk_caracteristica_expressao1` FOREIGN KEY (`expressao_id`) REFERENCES `expressao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +67,7 @@ CREATE TABLE `caracteristica` (
 
 LOCK TABLES `caracteristica` WRITE;
 /*!40000 ALTER TABLE `caracteristica` DISABLE KEYS */;
-INSERT INTO `caracteristica` VALUES (1,1,'as');
+INSERT INTO `caracteristica` VALUES (1,1,'as'),(2,2,'as'),(3,3,'dama');
 /*!40000 ALTER TABLE `caracteristica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +141,7 @@ CREATE TABLE `estagio` (
   PRIMARY KEY (`id`),
   KEY `fk_estagio_solucao1_idx` (`solucao_id`),
   CONSTRAINT `fk_estagio_solucao1` FOREIGN KEY (`solucao_id`) REFERENCES `solucao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='estagios da solucao de um exercicio\n';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='estagios da solucao de um exercicio\n';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +150,7 @@ CREATE TABLE `estagio` (
 
 LOCK TABLES `estagio` WRITE;
 /*!40000 ALTER TABLE `estagio` DISABLE KEYS */;
-INSERT INTO `estagio` VALUES (1,1,1,1);
+INSERT INTO `estagio` VALUES (1,1,1,1),(2,2,1,1),(3,2,1,1);
 /*!40000 ALTER TABLE `estagio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +183,7 @@ CREATE TABLE `exercicio` (
 
 LOCK TABLES `exercicio` WRITE;
 /*!40000 ALTER TABLE `exercicio` DISABLE KEYS */;
-INSERT INTO `exercicio` VALUES (1,2,1,'Quantas possibilidades de 1 carta tipo Ás?','Baralho completo, com 52 cartas, 4 de cada.',NULL,NULL),(2,2,1,'Com um baralho de 32 cartas, quantas mãos de 2 cartas é possível formar com exatamente uma Dama e um Ás?','Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).',NULL,NULL),(3,2,1,'Com um baralho de 32 cartas, quantas mãos de 5 cartas é possível formar com exatamente 2 cartas de Copas e exatamente duas cartas de Espadas?','Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).',NULL,NULL),(4,2,1,'Com um baralho de 32 cartas, quantas mãos de 20 cartas é possível formar com 3 ases, 4 espadas e 16 cartas vermelhas?','O conjunto de subconjuntos com 20 elementos tomados em um baralho com 32 cartas. Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que 7 (7,8,9,10, Valete, Dama, Rei e Ás).  ',NULL,NULL),(5,4,1,'Quantos times de 13 jogadores podemos formar com exatamente 5 jogadores do time azul e exatamente 5 jogadores do time verde?','O Universo Futebol corresponde a quatro equipe com 11 jogadores. Equipe Azul, Amarelo, Verde e Vermelho. O jogador número 1 sempre será goleiro, de 2 a 4 são todos zagueiros. Meio-campo são de 5 a 9 enquanto 10 e 11 são atacantes.',NULL,NULL),(6,4,1,'Quantos jogadores existem que tenham camisa número 11?','Lembre-se que são 4 times.',NULL,NULL);
+INSERT INTO `exercicio` VALUES (1,2,1,'Quantas possibilidades de 1 carta tipo Ás?','Baralho completo, com 32 cartas, 4 de cada.',NULL,NULL),(2,2,2,'Com um baralho de 32 cartas, quantas mãos de 2 cartas é possível formar com exatamente uma Dama e um Ás?','Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).',NULL,NULL),(3,2,1,'Com um baralho de 32 cartas, quantas mãos de 5 cartas é possível formar com exatamente 2 cartas de Copas e exatamente duas cartas de Espadas?','Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que Sete. Portanto, um baralho de 32 cartas possui 8 cartas de cada naipe (7,8,9,10,Valete, Dama, Rei e Ás).',NULL,NULL),(4,2,1,'Com um baralho de 32 cartas, quantas mãos de 20 cartas é possível formar com 3 ases, 4 espadas e 16 cartas vermelhas?','O conjunto de subconjuntos com 20 elementos tomados em um baralho com 32 cartas. Um baralho de 32 cartas corresponde a um baralho comum sem as cartas cujos valores são menores do que 7 (7,8,9,10, Valete, Dama, Rei e Ás).  ',NULL,NULL),(5,4,1,'Quantos times de 13 jogadores podemos formar com exatamente 5 jogadores do time azul e exatamente 5 jogadores do time verde?','O Universo Futebol corresponde a quatro equipe com 11 jogadores. Equipe Azul, Amarelo, Verde e Vermelho. O jogador número 1 sempre será goleiro, de 2 a 4 são todos zagueiros. Meio-campo são de 5 a 9 enquanto 10 e 11 são atacantes.',NULL,NULL),(6,4,1,'Quantos jogadores existem que tenham camisa número 11?','Lembre-se que são 4 times.',NULL,NULL);
 /*!40000 ALTER TABLE `exercicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +202,7 @@ CREATE TABLE `expressao` (
   PRIMARY KEY (`id`),
   KEY `fk_condicao_estagio1_idx` (`estagio_id`),
   CONSTRAINT `fk_condicao_estagio1` FOREIGN KEY (`estagio_id`) REFERENCES `estagio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +211,7 @@ CREATE TABLE `expressao` (
 
 LOCK TABLES `expressao` WRITE;
 /*!40000 ALTER TABLE `expressao` DISABLE KEYS */;
-INSERT INTO `expressao` VALUES (1,1,'value','t');
+INSERT INTO `expressao` VALUES (1,1,'value','t'),(2,2,'value','t'),(3,3,'value','t');
 /*!40000 ALTER TABLE `expressao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +254,7 @@ CREATE TABLE `solucao` (
   `resultado` int(11) DEFAULT NULL,
   `formato_legado` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +263,7 @@ CREATE TABLE `solucao` (
 
 LOCK TABLES `solucao` WRITE;
 /*!40000 ALTER TABLE `solucao` DISABLE KEYS */;
-INSERT INTO `solucao` VALUES (1,4,'1:value={ace}');
+INSERT INTO `solucao` VALUES (1,4,'1:value={ace}'),(2,16,'1:value={queen};1:value={ace}');
 /*!40000 ALTER TABLE `solucao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-20 22:10:32
+-- Dump completed on 2017-09-03 12:43:45
