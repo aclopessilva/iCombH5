@@ -38,21 +38,23 @@
 
 
         <div class="row">
-            <div class="panel panel-default">
+
+            <!-- CONSTRUTOR DE ESTAGIO -->
+            <div id="construtor-estagio" class="panel panel-default">
                 <div class="panel-heading"  style="background-color:#222222">
                     <h3 class="panel-title textExer">Construção da solução</h3>
                 </div>
                 <div class="panel-body">
 
                     <div class="col-xs-12 text-center" >
-                        <button id="btn-adicionar-estagio" type="button" class="btn btnExercicio">Iniciar 1° Estágio</button>
+                        <button id="btn-iniciar-estagio" type="button" class="btn btnExercicio">Iniciar 1° Estágio</button>
                     </div>
 
-                    <div class="estagio collapse">
+                    <div class="estagio-passo-1 collapse">
                         <div class="col-sm-12">
                             <label class="col-sm-12 textDourado desc-estagio" >Estágio 1</label>
                             <div class="col-xs-12" >
-                                <div class="estagio-passo-1">
+                                <div>
                                     <form class="form-horizontal form-condicao-ajax" method="post" action="" >
                                         <label class="col-sm-12 textPreto" >Passo 1: Definir restrição</label>
                                         <div class="col-sm-12  form-group">
@@ -290,20 +292,12 @@
 <script type="text/javascript">
 
     /**
-     * representa o div do estagio atual
+     * representa o div do construtor do estagio atual
      */
-    var div_estagio_atual;
+    var div_construtor_estagio = $("#construtor-estagio");
+    //adicionamos uma propriedade para indicar que o div esta pronto para iniciar a construcao de estagio
+    div_construtor_estagio.estado = 'PRONTO';
 
-    /**
-     * lista de objetos html que sao os divs que sao os estagios desenvolvidos.
-     */
-    var div_estagios = new Array();
-
-    /**
-     * numero de estagio atual
-     * @type {number}
-     */
-    var numero_estagio_atual = 0;
 
     /**
      * Lista de estagios retornados quando a validacao de estagio esta OK
@@ -318,6 +312,11 @@
     var elementos_do_universo =  new Array();
 
 
+    /**
+     * numero de estagio atual
+     * @type {number}
+     */
+    var numero_estagio_atual = 0;
 
 
     jQuery(document).ready(function () {
@@ -325,64 +324,8 @@
         /**
          * Inicia estagio
          */
-        $("#btn-adicionar-estagio").click(function () {
-
-            if(div_estagio_atual== null){
-                div_estagio_atual = $(".estagio:last");
-                div_estagio_atual.estado = 'NOVO';
-                div_estagio_atual.show();
-                //adicionamos o div a lista de estagios
-                div_estagios.push(div_estagio_atual);
-
-                //        div_estagio_atual.clone().insertAfter(".estagio:last");
-                //       div_estagio_atual = $(".estagio:last");
-                //        div_estagio_atual.find(".desc-estagio").text("Estagio " + (i + 1));
-                $("#btn-adicionar-estagio").text('Iniciar '+(div_estagios.length)+'° Estágio')
-                numero_estagio_atual = div_estagios.length;
-            }
-        });
-
-        /**
-         * Evento click no botao de clase estagio-btn-elementos, mostramos o modal mostrando todos os elemetnos do  universo
-         * e resaltando os elemtnsos que cumprem a condicao selecionada no estagio
-         */
-        jQuery(document).find('.estagio-btn-elementos').click(function () {
-
-
-            /*
-            //recuperamos o estagio-numero que corresponde ao botao selecionado
-            var estagio_numero = $(this).parent().parent().attr("estagio-numero");
-
-            //recuperamos os estagio que contem, entre outras coisas, a lista elementos que cumprem com a restricao
-            var estagio = encontraEstagioPorNumero(estagio_numero);
-            $().each(elementos_do_universo, function(universo_key, universo_value){
-                $().each(estagio.elementos_selecionados, function(estagio_key, estagio_value){
-                    if(universo_value.id == estagio_value.id){
-                        console.log("bate com a condicao o elemento: "+ universo_value.id);
-                    }else{
-                        console.log("nao bate com a restricao: "+ universo_value.id);
-                    }
-                });
-            });
-            */
-
-            /*
-            var modal_sub_universo = $('#ModalSubUniverso');
-            //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
-            modal_sub_universo.prop('id','estagio-sub-universo-'+ numero);
-
-            var modal_sub_universo_body = modal_sub_universo.find('.modal-body');
-
-            $.each( elementos, function( key, elemento ){
-                modal_sub_universo_body.append('<img src="'+'http://localhost/icombh5/'+elemento.imagem+'" />');
-            });
-
-
-            $('body').append(modal_sub_universo);
-            //mostrando o modal subuniverso
-            modal_sub_universo.toggle();
-            */
-
+        $("#btn-iniciar-estagio").click(function () {
+            inicializaConstrutorEstagio();
         });
 
         /**
@@ -408,7 +351,7 @@
                     var estado = data.estado;
 
                     if(estado == 'OK'){
-                        div_estagio_atual.find(".estagio-passo-2").show();
+                        div_construtor_estagio.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao').val('Restrição Validada');
                     }else{
                         alert(data.mensagem);
@@ -425,7 +368,7 @@
         */
         jQuery(document).find('.form-validar-estagio-ajax').submit(function () {
 
-            div_estagio_atual.find('#validar-estagio').val('Validando...');
+            div_construtor_estagio.find('#validar-estagio').val('Validando...');
 
             var dadosCondicao = jQuery(this).serialize();
             jQuery.ajax({
@@ -439,8 +382,9 @@
                     if(data.estado == 'OK'){
                         //adicionamos o estagio retornado a lista de estagios finalizados
                         adicionaEstagio(data.estagio);
+                        novoConstrutorEstagio();
                     }else{
-                        alert( data.mensagem);
+                        alert(data.mensagem);
                     }
 
 
@@ -450,31 +394,6 @@
             return false;
 
         });
-
-
-        /**
-         ***************************** FUNCOES AUXLIARES ***************************
-         */
-
-
-        var encontraEstagioPorNumero = function(estagio_numero) {
-            for (var i = 0, len = lista_estagios.length; i < len; i++) {
-                if (lista_estagios[i].numero === estagio_numero)
-                    return lista_estagios[i]; // Return as soon as the object is found
-            }
-            return null; // The object was not found
-        }
-
-        var consultaGabarito = function(elemento_id, estagio) {
-            var resultado = false;
-            $.each(estagio.elementos_selecionados, function(estagio_key, estagio_value){
-                if(elemento_id == estagio_value.id){
-                    resultado  = true;
-                }
-            });
-            return resultado;
-        }
-
 
         /**
          * Adiciona interacao quando a formula selecionada mostra ou nao "n" ou "p" e tambem modifica o valor final da formula
@@ -497,90 +416,181 @@
             trocarValorFormula();
         });
 
+
+
+        /**
+         ***************************** FUNCOES AUXLIARES ***************************
+         */
+
+        /**
+         * Verifica se a construcao de estagio esta em progresso
+         */
+        function inicializaConstrutorEstagio(){
+            if(div_construtor_estagio.estado == 'PRONTO' ){
+
+                limpaConstrutorEstagio();
+
+                div_construtor_estagio.estado = 'INICIADO';
+                //atualizamos o numero de estagio atual
+                numero_estagio_atual = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
+                div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+numero_estagio_atual+'° Estágio');
+                div_construtor_estagio.find(".desc-estagio").text('Estágio ' + numero_estagio_atual);
+            }else{
+                alert("O estagio "+ numero_estagio_atual+ " nao foi encerrado.");
+            }
+        }
+
+        /**
+         * Quando um estagio é validado pelo icomb, permitimos a construcao de um novo estagio
+         */
+        function novoConstrutorEstagio(){
+
+            div_construtor_estagio.estado = 'PRONTO';
+
+            //Mostrar no botao com o numero da proxima contrucao de estagio
+            var proximo_estagio = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
+            div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proximo_estagio+'° Estágio');
+
+            // ocultamos o passo 1 ate o usuario indicar o inicio do proximo estagio
+            var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
+            div_construtor_estagio_paso1.hide();
+        }
+
+        /**
+         * Limpamos o panel de construcao de estagio para o estado original
+         */
+        function limpaConstrutorEstagio(){
+            //limpamos o passo 1
+            var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
+            div_construtor_estagio_paso1.find("#num_elementos").first().val("");
+            div_construtor_estagio_paso1.find("#num_propriedades").first().val("");
+            div_construtor_estagio_paso1.find("#atributo").first().val("");
+            div_construtor_estagio_paso1.find("#pertence").first().val("");
+            div_construtor_estagio_paso1.find("#caracteristica").first().val("");
+            div_construtor_estagio_paso1.find('#btn-valida-restricao').val('Validar Restrição');
+
+            // mostramos o passo 1
+            div_construtor_estagio_paso1.show();
+
+            //limpamos o passo 2
+            var div_construtor_estagio_paso2= div_construtor_estagio.find(".estagio-passo-2").first();
+            div_construtor_estagio_paso2.find("#formula").first().val("");
+            div_construtor_estagio_paso2.find("#n").first().val("");
+            div_construtor_estagio_paso2.find("#p").first().val("");
+            //ocultamos o passo 2
+            div_construtor_estagio_paso2.hide();
+        }
+
+        /**
+         * busca na lista de estagios pelo numero de estagio e retorna o elemento estagio
+         */
+        function encontraEstagioPorNumero(estagio_numero) {
+            for (var i = 0, len = lista_estagios.length; i < len; i++) {
+                if (lista_estagios[i].numero === estagio_numero)
+                    return lista_estagios[i]; // Return as soon as the object is found
+            }
+            return null; // The object was not found
+        }
+
+        /**
+         * Dentro do estagio temos a lista de elementos que foram selecionados pela condicao.
+         * Com esta funcao vamos procurar nessa lista por um determinado id de elemento.
+         * Se existe retorna true caso contrario false.
+         */
+        function consultaGabarito(elemento_id, estagio) {
+            var resultado = false;
+            $.each(estagio.elementos_selecionados, function(estagio_key, estagio_value){
+                if(elemento_id == estagio_value.id){
+                    resultado  = true;
+                }
+            });
+            return resultado;
+        }
+
         /**
          * Muda o valor final da formula
          */
         function trocarValorFormula(){
-            var n = div_estagio_atual.find(".form-validar-estagio-ajax").find("#n").val();
-            var p = div_estagio_atual.find(".form-validar-estagio-ajax").find("#p").val();
-            var formula = div_estagio_atual.find(".form-validar-estagio-ajax").find("#formula").val();
+            var n = div_construtor_estagio.find(".form-validar-estagio-ajax").find("#n").val();
+            var p = div_construtor_estagio.find(".form-validar-estagio-ajax").find("#p").val();
+            var formula = div_construtor_estagio.find(".form-validar-estagio-ajax").find("#formula").val();
             formula = formula.replace("n", n);
             formula = formula.replace("p", p);
-            div_estagio_atual.find(".form-validar-estagio-ajax").find("#formula-definida").text(formula);
+            div_construtor_estagio.find(".form-validar-estagio-ajax").find("#formula-definida").text(formula);
+        }
+
+        /**
+         * Evento click no botao de clase estagio-btn-elementos, mostramos o modal mostrando todos os elemetnos do  universo
+         * e resaltando os elemtnsos que cumprem a condicao selecionada no estagio
+         */
+        function mostraSubUniverso(){
+
+            //recuperamos o estagio-numero que corresponde ao botao selecionado
+            var estagio_numero = parseInt($(this).parent().parent().attr("estagio-numero"));
+
+            //recuperamos os estagio que contem, entre outras coisas, a lista elementos que cumprem com a restricao
+            var estagio = encontraEstagioPorNumero(estagio_numero);
+
+            var conteudo_do_modal ="";
+
+
+            $.each(elementos_do_universo, function(universo_key, universo_value){
+                /*versao com esurecimento*/
+                /*
+                if(consultaGabarito(universo_value.id, estagio)){
+
+                    conteudo_do_modal += '<div class="pull-left elemento_universo elemento_universo_destacado" ><img class="img-responsive" src="'+'http://localhost/icombh5/'+universo_value.imagem+'" /></div>';
+                }else{
+                    conteudo_do_modal += '<div class="pull-left elemento_universo elemento_universo_escondido" ><img class="img-responsive" src="'+'http://localhost/icombh5/'+universo_value.imagem+'" /></div>';
+                }
+                */
+
+                if(consultaGabarito(universo_value.id, estagio)){
+                    conteudo_do_modal += '<img class="elemento_universo elemento_universo_destacado " src="'+'http://localhost/icombh5/'+universo_value.imagem+'" />';
+                }else{
+                    conteudo_do_modal += '<img class="elemento_universo elemento_universo_ofuscado " src="'+'http://localhost/icombh5/'+universo_value.imagem+'" />';
+                }
+            });
+
+            //chamamos o metodo utlitario que mostra o modal com nosso conteudo dinamico.
+            doModal('sub-universo',conteudo_do_modal);
         }
 
 
-
-        function mostraSubUniverso(elementos, numero){
-            $().each(elementos_do_universo, function(key, value){
-
-            });
-            /*
-            var modal_sub_universo = $('#ModalSubUniverso');
-            //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
-            modal_sub_universo.prop('id','estagio-sub-universo-'+ numero);
-
-            var modal_sub_universo_body = modal_sub_universo.find('.modal-body');
-
-            $.each( elementos, function( key, elemento ){
-                modal_sub_universo_body.append('<img src="'+'http://localhost/icombh5/'+elemento.imagem+'" />');
-            });
-
-
-            $('body').append(modal_sub_universo);
-            //mostrando o modal subuniverso
-            modal_sub_universo.toggle();
-            */
+        function deletarEstagio(){
+            //recuperamos o estagio-numero que corresponde ao botao selecionado
+            var estagio_numero = parseInt($(this).parent().parent().attr("estagio-numero"));
+            alert("deletando estagio..." + estagio_numero);
         }
 
+        /**
+         * Este metodo adiciona estagios "ja validados" pelo iComb a nossa lista de estagios.
+         * cada novo estagio adicionado é mantido dentro do div "lista-estagios" cada um com suas opcoes de
+         */
         function adicionaEstagio(estagio){
+
             if(estagio.estado=='FINALIZADO'){
                 lista_estagios.push(estagio);
+
+                //estagio base => é a base de toda lista de estagios
                 var estagio_div = $('#estagio-base').clone();
 
                 //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
                 estagio_div.prop('id','estagio-'+estagio.numero);
+
                 //adicionamos um atributo html para identificar o estagio facilmente
                 estagio_div.attr('estagio-numero',estagio.numero);
 
-                estagio_div.find(".estagio-btn-elementos").first().click(function(){
-                    //recuperamos o estagio-numero que corresponde ao botao selecionado
-                    var estagio_numero = parseInt($(this).parent().parent().attr("estagio-numero"));
-
-                    //recuperamos os estagio que contem, entre outras coisas, a lista elementos que cumprem com a restricao
-                    var estagio = encontraEstagioPorNumero(estagio_numero);
-
-                    var conteudo_do_modal ="";
+                //adicionamos evento click para o botao "ver elementos" que executa a funcao "mostraSubUniverso"
+                estagio_div.find(".estagio-btn-elementos").first().click(mostraSubUniverso);
 
 
-                    $.each(elementos_do_universo, function(universo_key, universo_value){
-                        /*versao com esurecimento*/
-                        /*
-                        if(consultaGabarito(universo_value.id, estagio)){
+                estagio_div.find(".estagio-btn-deletar").first().click(deletarEstagio);
 
-                            conteudo_do_modal += '<div class="pull-left elemento_universo elemento_universo_destacado" ><img class="img-responsive" src="'+'http://localhost/icombh5/'+universo_value.imagem+'" /></div>';
-                        }else{
-                            conteudo_do_modal += '<div class="pull-left elemento_universo elemento_universo_escondido" ><img class="img-responsive" src="'+'http://localhost/icombh5/'+universo_value.imagem+'" /></div>';
-                        }
-                        */
-
-                        if(consultaGabarito(universo_value.id, estagio)){
-                            conteudo_do_modal += '<img class="elemento_universo elemento_universo_destacado " src="'+'http://localhost/icombh5/'+universo_value.imagem+'" />';
-                        }else{
-                            conteudo_do_modal += '<img class="elemento_universo elemento_universo_ofuscado " src="'+'http://localhost/icombh5/'+universo_value.imagem+'" />';
-                        }
-                    });
-
-                    doModal('sub-universo',conteudo_do_modal);
-
-
-                });
                 var estagio_base_desc = estagio_div.find('.descricao');
-
-
                 estagio_base_desc.append('<p>'+ estagio.condicao.quantidade + ' elemento(s) que cumpram as seguintes condicoes:</p>');
 
-                if(estagio.condicao.expressoes!=undefined){
+                if(estagio.condicao.expressoes != undefined){
 
                     if(estagio.condicao.expressoes.length>0){
                         estagio_base_desc.append('<ol>');
@@ -604,8 +614,11 @@
 
     });
 
+    /**
+     * Metodo que cria um modal temporariamente com o conteudo que for enviado
+     */
     function doModal(heading, formContent) {
-        html =  '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
+        var html =  '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
         html += '<div class="modal-dialog">';
         html += '<div class="modal-content">';
         html += '<div class="modal-header">';
@@ -624,14 +637,13 @@
         $('body').append(html);
         $("#dynamicModal").modal();
         $("#dynamicModal").modal('show');
-
         $('#dynamicModal').on('hidden.bs.modal', function (e) {
             $(this).remove();
         });
 
     }
     /**
-     * adicionamos os elementos para a lista delementos de universo
+     * Adicionamos os elementos para a lista delementos de universo
      */
     <?php foreach ($elementosUniverso as $row): ?>
         elementos_do_universo.push(
