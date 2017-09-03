@@ -69,8 +69,8 @@
 
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="num_propriedades" id="num_propriedades">
-                                                    <option value = 0>Nenhuma propriedade</option>
-                                                    <option value = 1 selected>Uma propriedade</option>
+                                                    <option value = 0 selected>Nenhuma propriedade</option>
+                                                    <option value = 1 >Uma propriedade</option>
                                                     <option value = 2>Duas propriedade</option>
                                                 </select>
                                             </div>
@@ -463,7 +463,7 @@
             //limpamos o passo 1
             var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
             div_construtor_estagio_paso1.find("#num_elementos").first().val("");
-            div_construtor_estagio_paso1.find("#num_propriedades").first().val("");
+            div_construtor_estagio_paso1.find("#num_propriedades").first().val(1).change(); //trocamos para uma propriedade
             div_construtor_estagio_paso1.find("#atributo").first().val("");
             div_construtor_estagio_paso1.find("#pertence").first().val("");
             div_construtor_estagio_paso1.find("#caracteristica").first().val("");
@@ -612,7 +612,41 @@
             }
         }
 
+
+
+
+        /**
+         * Controle de mostrar condicoes
+         */
+
+        //sempre mostramos o primeira condicao
+        $("#divCondicao").show();
+        $("#divCondicao2").hide();
+
+        $('#num_propriedades').change(function() {
+
+            $("#divCondicao").hide();
+            $("#divCondicao2").hide();
+
+            var valor = $(this).val();
+            if (valor == 1){
+                $("#divCondicao").show();
+            }else if (valor == 2){
+                $("#divCondicao").show();
+                $("#divCondicao2").show();
+            }
+        });
+
+        /**
+         * Controle para expandir universo
+         */
+        $('#click_advance').click(function() {
+            $('#display_advance').toggle('1000');
+            $("i", this).toggleClass("fa fa-sort-desc fa fa-sort-up ");
+        });
+
     });
+
 
     /**
      * Metodo que cria um modal temporariamente com o conteudo que for enviado
@@ -659,27 +693,3 @@
 
 <!--SCRIPT para apresentar campos de condição conforme número de propriedades-->
 
-<script type="text/javascript">
-    window.onload = function(){
-       id('num_propriedades').onchange = function(){
-
-           if( this.value==0)
-             id('divCondicao').style.display = 'none';                
-           else
-             id('divCondicao').style.display = 'block';  
-
-           if( this.value==2)
-               id('divCondicao2').style.display = 'block';
-           else
-               id('divCondicao2').style.display = 'none';
-       }
-    }
-    function id( el ){
-       return document.getElementById( el );
-    }
-
-    $('#click_advance').click(function() {
-        $('#display_advance').toggle('1000');
-        $("i", this).toggleClass("fa fa-sort-desc fa fa-sort-up ");
-    });
-</script>
