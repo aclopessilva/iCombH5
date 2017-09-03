@@ -39,7 +39,7 @@
 
         <div class="row">
 
-            <!-- CONSTRUTOR DE ESTAGIO -->
+            <!-- PAINEL DE CONSTRUTOR DE ESTAGIO -->
             <div id="construtor-estagio" class="panel panel-default">
                 <div class="panel-heading"  style="background-color:#222222">
                     <h3 class="panel-title textExer">Construção da solução</h3>
@@ -223,7 +223,10 @@
                 </div>
             </div>
 
+            </div>
 
+            <!-- PAINEL DE LISTA DE ESTAGIOS -->
+            <div>
             <div class="panel panel-default">
                 <div class="panel-heading" style="background-color:#222222">
                     <h3 class="panel-title textExer">Lista de estagios</h3>
