@@ -116,6 +116,14 @@ class Avaliador {
             return $resposta;
             //die("evaluationMessage03");
         }
+
+        //veriricar outros possiveis casos
+        if(sizeof($setCondicoes) == 2 && $setCondicoes[0] == null){
+            $resposta->estado="ERRO";
+            $resposta->mensagem =  "Nenhum elemento do conjunto universo atende as restrições informadas. Cada estágio criado deverá selecionar ao menos 1 elemento.";
+            return $resposta;
+        }
+
         /*
         if (setCondicoes.size() == 0 || setCondicoes.size() == 1 && (setCondicoes.iterator().next() == null)) {
             throw new RuntimeException(I18n.getString("evaluationMessage03"));
