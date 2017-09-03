@@ -18,10 +18,30 @@ class Exercicio extends CI_Controller {
     public function index()
     {
             // Recupera os contatos através do model
-            $exercicio = $this->Exercicio_model->GetAll('exercicio');
+            $exercicios = $this->Exercicio_model->GetAll('exercicio');
+            $universo1 = array();
+            $universo2 = array();
+            $universo3 = array();
+            $universo4 = array();
+            
+            foreach ($exercicios as $exec) {
+                if($exec->universo_id == 1){
+                    array_push($universo1, $exec);
+                }
+                if($exec->universo_id == 2){
+                    array_push($universo2, $exec);
+                }
+                if($exec->universo_id == 3){
+                    array_push($universo3, $exec);
+                }
+                if($exec->universo_id == 4){
+                    array_push($universo4, $exec);
+                }
+
+            }
             $formula = $this->Formula_model->GetAll();
 
-            $arrayExercicio = array('exercicio' => $exercicio, 'formula' => $formula);
+            $arrayExercicio = array('exercicio1' => $universo1, 'exercicio2' => $universo2, 'exercicio3' => $universo3, 'exercicio4' => $universo4, 'formula' => $formula);
             $this->load->view('exercicio/get', $arrayExercicio);
     }
 
