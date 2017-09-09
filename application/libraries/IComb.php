@@ -118,7 +118,9 @@ class IComb {
     public function verificaErro($condicao){
         //TODO: verificar uso de booleano "corrige"
 
-        $desenvolvimento = $this->parseDesenvolvimento($this->getSessao('desenvolvimento'));
+
+        $objeto_de_sessao = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
         $desenvolvimento->log->putLog('Usuario inicia validacao de condicao ' + serialize($condicao));
 
@@ -154,9 +156,38 @@ class IComb {
 
     }
 
+    public function eliminarEstagio($estagio_numero){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $lista_de_estagios = $desenvolvimento->estagios;
+        $resposta = new stdClass();
+
+        foreach ($lista_de_estagios as $estagio){
+            if($estagio->numero == $estagio_numero) {
+                if($estagio->estado == 'DELETADO'){
+                    $resposta->estado = "ERROR";
+                    $resposta->mensagem = "ja foi deletado";
+                }else{
+                    $estagio->estado = 'DELETADO';
+                    $this->saveSessao('desenvolvimento', $desenvolvimento);
+
+                    $resposta->estado = "OK";
+                    $resposta->mensagem = "Estagio deletado!";
+                }
+            }
+        }
+
+        if(!isset($resposta->estado)){
+            $resposta->estado = "ERROR";
+            $resposta->mensagem = "Estagio com numero ".$estagio_numero." não existe";
+        }
+
+        return $resposta;
+    }
+
     public function validaEstagioAtual($request){
 
-        $desenvolvimento = $this->parseDesenvolvimento($this->getSessao('desenvolvimento'));
+        $objeto_de_sessao = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
         //obtemos a formula
         $formulaFactory = new FormulaFactory();

@@ -436,8 +436,9 @@
                 div_construtor_estagio.estado = 'INICIADO';
                 //atualizamos o numero de estagio atual
                 numero_estagio_atual = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
-                div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+numero_estagio_atual+'° Estágio');
-                div_construtor_estagio.find(".desc-estagio").text('Estágio ' + numero_estagio_atual);
+                //div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+numero_estagio_atual+'° Estágio');
+                //div_construtor_estagio.find(".desc-estagio").text('Estágio ' + numero_estagio_atual);
+                atualizar_ordem_estagios();
             }else{
                 alert("O estagio "+ numero_estagio_atual+ " nao foi encerrado.");
             }
@@ -451,8 +452,10 @@
             div_construtor_estagio.estado = 'PRONTO';
 
             //Mostrar no botao com o numero da proxima contrucao de estagio
-            var proximo_estagio = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
-            div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proximo_estagio+'° Estágio');
+            //var proximo_estagio = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
+            //div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proximo_estagio+'° Estágio');
+
+            atualizar_ordem_estagios();
 
             // ocultamos o passo 1 ate o usuario indicar o inicio do proximo estagio
             var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
@@ -562,8 +565,60 @@
 
         function deletarEstagio(){
             //recuperamos o estagio-numero que corresponde ao botao selecionado
-            var estagio_numero = parseInt($(this).parent().parent().attr("estagio-numero"));
-            alert("deletando estagio..." + estagio_numero);
+            var pai = $(this).parent().parent();
+            var estagio_numero = parseInt(pai.attr("estagio-numero"));
+
+            jQuery.ajax({
+                type: "POST",
+                url: "<?= base_url()?>/exercicio/EliminarEstagio",
+                dataType: 'html',
+                data: "estagio_a_deletar="+estagio_numero,
+                success: function (data)
+                {
+                    var data = JSON.parse(data);
+                    if(data.estado == 'OK'){
+                        //esconde o estagio da view
+                        pai.hide();
+
+                        //muda o estado do estagio da lista de estagios do javascript
+                        $.each(lista_estagios, function(estagio_key, estagio_value){
+                            if(estagio_value.numero ==  estagio_numero){
+                                estagio_value.estado = 'DELETADO';
+                            }
+                        });
+
+                        alert(data.mensagem);
+
+                        atualizar_ordem_estagios();
+
+                    }else{
+                        alert(data.mensagem);
+                    }
+
+
+                }
+            });
+        }
+
+        /**
+         * Ao validar ou deletar um estagio essa funcao modifica o texto do botao iniciar estagio, para manter
+         * a coorencia para o usuario
+         */
+        function atualizar_ordem_estagios(){
+            var contador_estagios_visiveis = 0;
+            $.each(lista_estagios, function(estagio_key, estagio_value){
+                if(estagio_value.estado ==  "DELETADO"){
+                    console.log("estagio "+estagio_value.numero+" deletado")
+                }else{
+                    contador_estagios_visiveis++;
+                }
+            });
+
+            var proxima_ordem_estagio = contador_estagios_visiveis + 1;
+
+            div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proxima_ordem_estagio+'° Estágio');
+            div_construtor_estagio.find(".desc-estagio").text('Estágio ' + proxima_ordem_estagio);
+
         }
 
         /**
