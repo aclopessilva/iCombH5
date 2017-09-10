@@ -139,7 +139,7 @@ class IComb {
         $objeto_de_sessao = $this->getSessao('desenvolvimento');
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
-        $desenvolvimento->log->putLog('Usuario inicia validacao de condicao '. serialize($condicao));
+        $desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
 
         $avaliador = $desenvolvimento->avaliador;
         //$avaliador->reset();
@@ -162,15 +162,20 @@ class IComb {
             //armazenamos o estagio na lista de estagios, contendo somente a condicao validada
             $desenvolvimento->estagios[] = $estagio;
 
-            $desenvolvimento->log->putLog('Condicao OK');
+            $desenvolvimento->log->putEntry('Condicao OK');
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }else{
-            $desenvolvimento->log->putLog('Condicao ERRO mensagem: '+ $resposta->mensagem );
+            $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '+ $resposta->mensagem );
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
 
         return $resposta;
 
+    }
+
+    public function getLogs(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        return $desenvolvimento->log->entries;
     }
 
     public function eliminarEstagio($estagio_numero){
