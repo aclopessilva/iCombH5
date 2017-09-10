@@ -652,8 +652,8 @@
 
                     if(estagio.condicao.expressoes.length>0){
                         estagio_base_desc.append('<ol>');
-                        $.each( estagio.condicao.expressoes, function( key, expresao ){
-                            estagio_base_desc.append('<li>'+expresao.atributo+' '+ expresao.pertence +' '+ $.each(expresao.elementos, function (elemento) {" "+elemento})+'</li>');
+                        $.each( estagio.condicao.expressoes, function( key, expressao ){
+                            estagio_base_desc.append('<li>'+expressao.texto+'</li>');
                         });
                         estagio_base_desc.append('</ol>');
                     }else{

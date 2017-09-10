@@ -98,7 +98,7 @@ class IComb {
             $expressao->pertence = $request->pertence;
             $expressao->elementos = array();
             $expressao->elementos[] = $request->caracteristica;
-            $expressao->texto = "O valor";
+
             $condicao->addExpressao($expressao);
 
         }elseif ($request->numPropriedades == 2){
