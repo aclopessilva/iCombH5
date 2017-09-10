@@ -34,5 +34,15 @@ class Atributos_model extends CI_Model {
         $query = $this->db->get($this->table);
         return $query->result();
     }
-
+    
+    function GetByChaveChaveDesc($idUniverso){
+        
+        if (is_null($idUniverso))
+            return false;
+        $sql = "SELECT DISTINCT chave, chave_desc FROM `atributos` WHERE universo_id = ?";
+        $query = $this->db->query($sql, $idUniverso);
+        //$query = $this->db->get($this->table);
+        return $query->result();
+        
+    }
 }

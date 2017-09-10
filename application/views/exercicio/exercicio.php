@@ -83,7 +83,10 @@
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo" id="atributo">
-                                                    <option value='value' >Valor</option>
+                                                    <?php foreach ($chaves as $row): ?>
+                                                        <option value='value' ><?php echo ($row->chave_desc) ?></option>
+                                                    <?php endforeach; ?>
+                                                    
                                                 </select>
                                             </div>
 
@@ -92,12 +95,18 @@
                                                 <select class="form-control" name="pertence" id="pertence">
                                                     <option value='true' >é</option>
                                                     <option value='false' >não é</option>
+                                                    <option value='true' >está</option>
+                                                    <option value='false' >não está</option>
                                                 </select>
                                             </div>
 
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica" id="caracteristica">
+                                                    <?php foreach ($chaves as $row): ?>
+                                                        <option value='value' ><?php echo ($row->chave_desc) ?></option>
+                                                    <?php endforeach; ?>
+                                                    
                                                     <option value = 'as'>Às</option>
                                                     <option value = '7'>7</option>
                                                     <option value = '8'>8</option>
