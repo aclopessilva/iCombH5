@@ -180,13 +180,18 @@ class Avaliador {
         }
 
         // Se chegou aqui, condicao individual é ok
-        $this->consolida($condicao, $setElementos);
+        try {
 
+            $this->consolida($condicao, $setElementos);
+            $resposta->estado = "OK";
+            $resposta->condicao = $condicao;
+            $resposta->elementos_selecionados = $setElementos;
 
-        $resposta->estado = "OK";
-        $resposta->condicao = $condicao;
-        $resposta->elementos_selecionados = $setElementos;
-
+        } catch (Exception $e) {
+            // a consolidacao deu uma excecao
+            $resposta->estado = "ERROR";
+            $resposta->mensagem = $e->getMessage();
+        }
         return $resposta;
 
     } // void adicionaCondicao(Condicao condicao)
@@ -253,7 +258,7 @@ class Avaliador {
         foreach ($setElementos as $e){
             $c = $this->splSearchWithKey($this->elemResposta,$e);
             if ($c != null) {
-                die("evaluationMessage08");
+                throw new Exception("Mais do que um estágio seleciona um elemento.");
             }
         }
         

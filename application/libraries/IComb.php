@@ -36,8 +36,6 @@ class IComb {
         $desenvolvimento->incio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
 
-        //iniciando avaliador
-        $avaliador = new Avaliador();
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
         $universo = $universo->createFromBDObject($exercicio->universo);
@@ -47,9 +45,10 @@ class IComb {
         $solucao = new Solucao();
         $solucao = $solucao->createFromBDObject($exercicio->solucao);
 
-        //print_r($solucao);
         //iniciamos o avaliador
+        $avaliador = new Avaliador();
         $avaliador->init($universo, $solucao);
+
         //guardamos o estado do avaliador na sessao.
         $desenvolvimento->avaliador = $avaliador;
 
@@ -143,7 +142,7 @@ class IComb {
         $desenvolvimento->log->putLog('Usuario inicia validacao de condicao ' + serialize($condicao));
 
         $avaliador = $desenvolvimento->avaliador;
-        $avaliador->reset();
+        //$avaliador->reset();
         //O objeto resposta contem o estado, mensagem e opcionalmente um objeto que contem o objeto validado.
         $resposta =  $avaliador->adicionaCondicao($condicao);
         if($resposta->estado == 'OK'){
