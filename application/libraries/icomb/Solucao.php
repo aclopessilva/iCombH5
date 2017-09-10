@@ -13,38 +13,42 @@
  */
 class Solucao extends ICombClass {
 
-    public function createFromBDObject($solucao) {
-        $classe_solucao = $this->cast('Solucao', $solucao);
+    public $resultado;
+    public $formato_legado;
+    public $condicoes = array();
 
-        if ($solucao->estagios) {
-            $novos_condicoes = array();
-            foreach ($solucao->estagios as $estagio) {
-                $condicao = $this->cast('Condicao', $estagio);
+    public function createFromBDObject($db_solucao) {
 
-                if ($condicao->expressoes) {
-                    $novos_expressoes = array();
-                    foreach ($condicao->expressoes as $expressao) {
-                        $novo_expressao = $this->cast('Expressao', $expressao);
-                        $array_elemento = $novo_expressao->caracteristicas;
-                        if($array_elemento != null){
-                            $novo_expressao->elementos = array();
-                            foreach ($array_elemento as $elemento){
-                                array_push($novo_expressao->elementos, $elemento->valor);
+        $solucao = new Solucao();
+        $solucao->resultado = $db_solucao->resultado;
+        $solucao->formato_legado = $db_solucao->formato_legado;
+
+        $condicoes = array();
+        if (isset($db_solucao->estagios)) {
+            foreach ($db_solucao->estagios as $estagio) {
+                $condicao = new Condicao();
+                $condicao->quantidade = $estagio->quantidade;
+
+                //$condicao = $this->cast('Condicao', $estagio);
+
+                if ($estagio->expressoes) {
+                    foreach ($estagio->expressoes as $db_expressao) {
+                        $expressao = new Expressao();
+                        $expressao->atributo = $db_expressao->atributo;
+                        $expressao->pertence = $db_expressao->pertence;
+                        if(isset($db_expressao->caracteristicas)){
+                            foreach ($db_expressao->caracteristicas as $db_caracteristica){
+                                array_push($expressao->elementos, $db_caracteristica->valor);
                             }
                         }
-                        array_push($novos_expressoes, $novo_expressao);
+                        array_push($condicao->expressoes, $expressao);
                     }
-                    $condicao->expressoes = $novos_expressoes;
                 }
-                
-                //print_r($elemento);
-                //echo "<br><br>";
-                array_push($novos_condicoes, $condicao);
+                array_push($condicoes, $condicao);
             }
-            unset($classe_solucao->estagios);
-            $classe_solucao->condicoes = $novos_condicoes;
+            $solucao->condicoes = $condicoes;
         }
-        return $classe_solucao;
+        return $solucao;
     }
 
 }

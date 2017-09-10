@@ -12,23 +12,29 @@
  * @author Jane Asher
  */
 class Universo extends ICombClass {
-    /* Nao precisa definir propriedades, ainda, pois estamos usando os campos do bd, ao fazer o cast esse propriedades serao copiadas aqui. */
-    /* public $tipo;
-      public $quantidade;
-      public $elementos = array();
-     */
 
-    public function createFromBDObject($universo) {
-        $universo = $this->cast('Universo', $universo);
-        $novos_elementos = array();
-        if ($universo->elementos) {
-            foreach ($universo->elementos as $elemento) {
-                $elemento = $this->cast('Element', $elemento);
-                $elemento->addAttribute('suit', $elemento->atributo, array($elemento->predicado));
-                $elemento->addAttribute('value', $elemento->valor, array(''));
-                array_push($novos_elementos, $elemento);
+    public $tipo;
+    public $quantidade;
+    public $elementos = array();
+
+    public function createFromBDObject($db_universo) {
+
+        $universo = new Universo();
+        $universo->quantidade = $db_universo->quantidade;
+        $universo->tipo = $db_universo->tipo;
+
+        if (isset($db_universo->elementos)) {
+            foreach ($db_universo->elementos as $db_elemento) {
+                $elemento = new Element();
+                $elemento->id = $db_elemento->id;
+                $elemento->name = $db_elemento->id;
+                $elemento->imagem = $db_elemento->imagem;
+
+                foreach ($db_elemento->atributos as $atributo){
+                    $elemento->addAttribute($atributo->chave, $atributo->valor, array($atributo->predicado));
+                }
+                array_push($universo->elementos, $elemento);
             }
-            $universo->elementos = $novos_elementos;
         }
         return $universo;
     }

@@ -15,6 +15,7 @@ class Element {
 
     //put your code here
 
+    public $id;
     public $name;
     public $attributes; //array de strings
     public $predicates; //array de strings

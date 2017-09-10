@@ -33,7 +33,7 @@ class Exercicio_model extends CI_Model {
         $this->load->model('Caracteristica_model');
         $this->load->model('Universo_model');
         $this->load->model('Elemento_model');
-        
+        $this->load->model('Atributos_model');
         
         $this->db->where('id', $id);
         $query = $this->db->get($this->table);
@@ -56,7 +56,11 @@ class Exercicio_model extends CI_Model {
             //carregando o universo e seus elementos
             if (isset($exercicio->universo_id)) {
                 $universo = $this->Universo_model->GetById($exercicio->universo_id);
-                $universo->elementos = $this->Elemento_model->GetByUniverse($exercicio->universo_id); 
+                $universo->elementos = $this->Elemento_model->GetByUniverse($exercicio->universo_id);
+                //procuramos pelos atributos do elemento e adicionamos ao atributo "atributos"
+                foreach ($universo->elementos as $elemento){
+                    $elemento->atributos = $this->Atributos_model->GetByElemento($elemento->id);
+                }
                 $exercicio->universo = $universo; 
             }
             return $exercicio;

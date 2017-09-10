@@ -70,7 +70,24 @@ class IComb {
      * @return mixed Retorna um objeto contendo o necessario para mostrar na view.
      */
     public function validaCondicao($request) {
+/*
 
+        "condicao": {
+            "quantidade": "1",
+			"expressoes": [
+                    {
+                        "atributo": "value",
+                        "pertence": "true",
+                        "elementos": ["as"]
+                    },
+                    {
+                        "atributo": "value",
+                        "pertence": "true",
+                        "elementos": ["as"]
+                    }
+        ]
+		},
+        */
         $condicao = new Condicao();
         $condicao->quantidade =$request->numElementos;
 
@@ -81,6 +98,7 @@ class IComb {
             $expressao->pertence = $request->pertence;
             $expressao->elementos = array();
             $expressao->elementos[] = $request->caracteristica;
+            $expressao->texto = "O valor";
             $condicao->addExpressao($expressao);
 
         }elseif ($request->numPropriedades == 2){
