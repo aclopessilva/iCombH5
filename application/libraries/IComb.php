@@ -53,7 +53,7 @@ class IComb {
         $desenvolvimento->avaliador = $avaliador;
 
         $desenvolvimento->log = new Log();
-        $desenvolvimento->log->putLog('Iniciando desenvolvimento');
+        $desenvolvimento->log->putEntry('Iniciando desenvolvimento do exercicio '.$exercicio->id);
 
         //Iniciamos uma lista de estagios.
         //Essa lista vai conter os estagios que o usuario esta montando e foram validados ou em processo de validacao.
@@ -267,7 +267,7 @@ class IComb {
         }
         return $desenvolvimento;
      }
-     
+
     function fixObject(&$object) {
         if (!is_object($object) && gettype($object) == 'object')
             return ($object = unserialize(serialize($object)));
