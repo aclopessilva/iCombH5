@@ -140,7 +140,7 @@ class IComb {
         $objeto_de_sessao = $this->getSessao('desenvolvimento');
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
-        $desenvolvimento->log->putLog('Usuario inicia validacao de condicao ' + serialize($condicao));
+        $desenvolvimento->log->putLog('Usuario inicia validacao de condicao '. serialize($condicao));
 
         $avaliador = $desenvolvimento->avaliador;
         $avaliador->reset();
