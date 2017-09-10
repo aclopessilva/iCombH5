@@ -179,17 +179,19 @@ class IComb {
         $lista_de_estagios = $desenvolvimento->estagios;
         $resposta = new stdClass();
 
-        foreach ($lista_de_estagios as $estagio){
-            if($estagio->numero == $estagio_numero) {
-                if($estagio->estado == 'DELETADO'){
-                    $resposta->estado = "ERROR";
-                    $resposta->mensagem = "ja foi deletado";
-                }else{
-                    $estagio->estado = 'DELETADO';
-                    $this->saveSessao('desenvolvimento', $desenvolvimento);
+        if(isset($lista_de_estagios) && sizeof($lista_de_estagios) > 0){
+            foreach ($lista_de_estagios as $estagio){
+                if($estagio->numero == $estagio_numero) {
+                    if($estagio->estado == 'DELETADO'){
+                        $resposta->estado = "ERROR";
+                        $resposta->mensagem = "ja foi deletado";
+                    }else{
+                        $estagio->estado = 'DELETADO';
+                        $this->saveSessao('desenvolvimento', $desenvolvimento);
 
-                    $resposta->estado = "OK";
-                    $resposta->mensagem = "Estagio deletado!";
+                        $resposta->estado = "OK";
+                        $resposta->mensagem = "Estagio deletado!";
+                    }
                 }
             }
         }
