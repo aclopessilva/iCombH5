@@ -12,16 +12,12 @@
  * @author Jane Asher
  */
 class Log {    
-    public $logs = array();
+    public $entries = array();
     
-    public function putLog($valor){
+    public function putEntry($valor){
         $log = new stdClass();
         $log->texto = $valor;
         $log->data = new DateTime();
-        array_push($this->logs, $log);
-    }
-    
-    public function getLogs(){
-        return $this->logs;
+        array_push($this->entries, $log);
     }
 }
