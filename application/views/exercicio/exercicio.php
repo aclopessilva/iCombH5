@@ -84,7 +84,7 @@
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo" id="atributo">
                                                     <?php foreach ($chaves as $row): ?>
-                                                        <option value='value' ><?php echo ($row->chave_desc) ?></option>
+                                                        <option value='<?php echo ($row->chave) ?>' ><?php echo ($row->chave_desc) ?></option>
                                                     <?php endforeach; ?>
                                                     
                                                 </select>
@@ -103,18 +103,9 @@
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica" id="caracteristica">
-                                                    <?php foreach ($chaves as $row): ?>
-                                                        <option value='value' ><?php echo ($row->chave_desc) ?></option>
+                                                    <?php foreach ($valorPredicado as $row): ?>
+                                                        <option value='<?php echo ($row->valor) ?>' ><?php echo ($row->valor) ?></option>
                                                     <?php endforeach; ?>
-                                                    
-                                                    <option value = 'as'>Às</option>
-                                                    <option value = '7'>7</option>
-                                                    <option value = '8'>8</option>
-                                                    <option value = '9'>9</option>
-                                                    <option value = '10'>10</option>
-                                                    <option value = 'valete'>Valete</option>
-                                                    <option value = 'dama'>Dama</option>
-                                                    <option value = 'rei'>Rei</option>
                                                 </select>
                                             </div>
 
@@ -132,7 +123,9 @@
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo2" id="atributo2">
-                                                    <option value = '1'>Valor</option>
+                                                    <?php foreach ($chaves as $row): ?>
+                                                        <option value='<?php echo ($row->chave) ?>' ><?php echo ($row->chave_desc) ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
 
@@ -141,20 +134,17 @@
                                                 <select class="form-control" name="pertence2" id="pertence2">
                                                     <option value = '1'>é</option>
                                                     <option value = '0'>não é</option>
+                                                    <option value='true' >está</option>
+                                                    <option value='false' >não está</option>
                                                 </select>
                                             </div>
 
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica2" id="caracteristica2">
-                                                    <option value = '1'>Às</option>
-                                                    <option value = '7'>7</option>
-                                                    <option value = '8'>8</option>
-                                                    <option value = '9'>9</option>
-                                                    <option value = '10'>10</option>
-                                                    <option value = '11'>Valete</option>
-                                                    <option value = '12'>Dama</option>
-                                                    <option value = '13'>Rei</option>
+                                                    <?php foreach ($valorPredicado as $row): ?>
+                                                        <option value='<?php echo ($row->valor) ?>' ><?php echo ($row->valor) ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
 
@@ -339,6 +329,37 @@
         $("#btn-iniciar-estagio").click(function () {
             inicializaConstrutorEstagio();
         });
+        
+        /**
+         * Troca dinamicamente os valores e predicados a serem exibidos, de acordo
+         * com a opção selecionada pelo usuário 
+        */
+        jQuery(document).find('#atributo').change(function () {
+            trocaCaracteristica($(this).val(),"#caracteristica");
+         });
+         
+        jQuery(document).find('#atributo2').change(function () {            
+            trocaCaracteristica($(this).val(),"#caracteristica2");
+        });
+         
+        function trocaCaracteristica(valor,nomedoselectparatrocar){
+           jQuery.ajax({
+               type: "POST",
+               url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
+               success: function (data)
+               {
+
+                   var select_caracteristica = jQuery(document).find(nomedoselectparatrocar);
+                   select_caracteristica.empty();
+                   $.each(data, function(data_key, data_value){
+                       select_caracteristica.append($('<option>', { 
+                       value: data_value.valor,
+                       text : data_value.valor 
+                    }));
+                   });
+               }
+           });
+        }
 
         /**
          * valida restricao

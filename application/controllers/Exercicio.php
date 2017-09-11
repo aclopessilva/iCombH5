@@ -45,6 +45,19 @@ class Exercicio extends CI_Controller {
             $this->load->view('exercicio/get', $arrayExercicio);
     }
 
+    public function trocaChaves($idUniverso, $idChave){
+        
+        $this->load->model('Atributos_model');
+        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $idChave);
+//        print_r ($idChave);
+//        print_r ($valorPredicado);
+        
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($valorPredicado));
+    }
+            
     public function resolucao($id) {
         $formula = $this->Formula_model->GetAll();
 
@@ -56,13 +69,15 @@ class Exercicio extends CI_Controller {
        
         $this->load->model('Atributos_model');
         $chaves = $this->Atributos_model->GetByChaveChaveDesc($idUniverso);
+        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $chaves[0]->chave);
         
         $arrayDadosExercicio = 
                 array(
                     'exercicio' => $exercicio, 
                     'formula' => $formula, 
                     'chaves' => $chaves, 
-                    'elementosUniverso' => $elementosUniverso
+                    'elementosUniverso' => $elementosUniverso,
+                    'valorPredicado' => $valorPredicado
                 );
 
          
@@ -99,6 +114,10 @@ class Exercicio extends CI_Controller {
             $request->caracteristica = $_POST['caracteristica'];
         }
         if($request->numPropriedades == 2){
+            $request->atributo = $_POST['atributo'];
+            $request->pertence = $_POST['pertence'];
+            $request->caracteristica = $_POST['caracteristica'];
+            
             $request->atributo2 = $_POST['atributo2'];
             $request->pertence2 = $_POST['pertence2'];
             $request->caracteristica2 = $_POST['caracteristica2'];
