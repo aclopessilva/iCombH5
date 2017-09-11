@@ -35,9 +35,11 @@ $this->email->initialize($config);
 	$this->email->subject("Assunto do e-mail");
 	$this->email->to("destinatario@mail.com"); 
 	$this->email->message("Aqui vai a mensagem ao seu destinatário");
+	$this->email->attach('c:/xampp/htdocs/icombh5/user_guide/teste.pdf');
 	$this->email->send();
 
 	echo $this->email->print_debugger();
+	redirect('exercicios');
 	}
 
 

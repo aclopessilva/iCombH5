@@ -43,7 +43,7 @@
     </br>
     <div class="row">
         <div class="col-xs-2" style="float: right;" >
-            <a href="email"><button type="button" class="btn btn-info btnExercicio">TESTE</button></a>
+            <a href="email"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
         </div>
     </div>
 

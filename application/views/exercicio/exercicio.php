@@ -52,7 +52,11 @@
 
                     <div class="estagio-passo-1 collapse">
                         <div class="col-sm-12">
-                            <label class="col-sm-12 textDourado desc-estagio" >Estágio 1</label>
+                            <label class="col-sm-10 textDourado desc-estagio" >Estágio 1</label>
+                            <div class="col-sm-2 text-center" >
+                                <button type="button" class="btn btnExercicio bottom-right" id="limpar-estagio" > 
+                                <span class="glyphicon glyphicon-refresh"></span></button>
+                            </div> 
                             <div class="col-xs-12" >
                                 <div>
                                     <form class="form-horizontal form-condicao-ajax" method="post" action="" >
@@ -386,6 +390,7 @@
                     if(estado == 'OK'){
                         div_construtor_estagio.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao').val('Restrição Validada');
+                         document.getElementById("btn-valida-restricao").disabled = true;
                     }else{
                         alert(data.mensagem);
                         $('#btn-valida-restricao').val('Validar Restrição');
@@ -426,6 +431,14 @@
 
             return false;
 
+        });
+
+        /*
+        *Limpa campos preenchidos na construção do exercício 
+         */
+        jQuery(document).find('#limpar-estagio').click(function () {
+            limpaConstrutorEstagio();
+             document.getElementById("btn-valida-restricao").disabled = false;
         });
 
         /**
