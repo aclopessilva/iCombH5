@@ -44,7 +44,9 @@ class Avaliador {
             foreach ($estagios as $estagio){
 //                print_r($estagio);
                 if($estagio->evaluate($elemento)){
-                    if (isset($this->elemParticao[$elemento])) {
+
+                    $valor = $this->splSearchWithKey($this->elemParticao, $elemento);
+                    if (isset($valor)) {
                         //throw new RuntimeException(I18n.getString("evaluationMessage01"));
                         die('evaluationMessage01');
                     } else {

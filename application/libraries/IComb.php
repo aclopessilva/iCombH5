@@ -142,7 +142,21 @@ class IComb {
         $desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
 
         $avaliador = $desenvolvimento->avaliador;
-        //$avaliador->reset();
+        $avaliador->reset();
+        //procuramos pelos estagios ja registrados e adicionamos ao avaliador;
+
+        foreach($desenvolvimento->estagios as $estagio){
+            if($estagio->estado != 'DELETADO'){
+                $resposta_estagio = $avaliador->adicionaCondicao($estagio->condicao);
+                if($resposta_estagio == 'ERROR'){
+                    $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '+ $resposta_estagio->mensagem );
+                    $this->saveSessao('desenvolvimento', $desenvolvimento);
+                    return $resposta_estagio;
+                }
+            }
+        }
+
+
         //O objeto resposta contem o estado, mensagem e opcionalmente um objeto que contem o objeto validado.
         $resposta =  $avaliador->adicionaCondicao($condicao);
         if($resposta->estado == 'OK'){
