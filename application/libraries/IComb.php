@@ -139,7 +139,8 @@ class IComb {
         $objeto_de_sessao = $this->getSessao('desenvolvimento');
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
-        $desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
+        //$desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
+        $desenvolvimento->log->putEntry('Foi iniciada uma validação da condição');
 
         $avaliador = $desenvolvimento->avaliador;
         $avaliador->reset();
@@ -176,10 +177,12 @@ class IComb {
             //armazenamos o estagio na lista de estagios, contendo somente a condicao validada
             $desenvolvimento->estagios[] = $estagio;
 
-            $desenvolvimento->log->putEntry('Condicao OK');
+            $desenvolvimento->log->putEntry('Condicao Validada sem erros');
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }else{
-            $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '+ $resposta->mensagem );
+            // date_default_timezone_get('Brazil/Brazilian');
+            // $date = date('dd/MM/YYYY HH:ii', time());
+            $desenvolvimento->log->putEntry('Condicao adicionada com ERRO mensagem: '+ $resposta->mensagem );
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
 
@@ -209,6 +212,7 @@ class IComb {
 
                         $resposta->estado = "OK";
                         $resposta->mensagem = "Estagio deletado!";
+                        $desenvolvimento->log->putEntry('Deletou um estagio já validado! Estagio: '+ $estagio_numero );
                     }
                 }
             }
@@ -253,6 +257,8 @@ class IComb {
             //armazenamos o estagio na lista de estagios, incluindo a formula validada.
             $desenvolvimento->estagios[sizeof($desenvolvimento->estagios) - 1] = $estagio;
             $this->saveSessao('desenvolvimento', $desenvolvimento);
+
+            $desenvolvimento->log->putEntry('Finalizou um estágio corretamente');
 
             //para uma resposta mas clara, retiramos a resposta do avaliador e colocamos o estagio.
             unset($resposta->objeto);
