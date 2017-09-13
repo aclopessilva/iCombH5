@@ -35,7 +35,13 @@ class Solucao extends ICombClass {
                     foreach ($estagio->expressoes as $db_expressao) {
                         $expressao = new Expressao();
                         $expressao->atributo = $db_expressao->atributo;
-                        $expressao->pertence = $db_expressao->pertence;
+                        //no mysql o booleano é armazenado como char(1)
+                        //considerando isso, vamos usar uma validacao para colocar um boolean real no pertence
+                        if ($db_expressao->pertence == 't') {//true
+                            $expressao->pertence = true;
+                        }else{ //qualquer outra coisa que estiver na tabela
+                            $expressao->pertence = false;
+                        }
                         if(isset($db_expressao->caracteristicas)){
                             foreach ($db_expressao->caracteristicas as $db_caracteristica){
                                 array_push($expressao->elementos, $db_caracteristica->valor);
