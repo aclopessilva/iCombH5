@@ -95,7 +95,14 @@ class Exercicio extends CI_Controller {
 
     public function indicador() {
         $formula = $this->Formula_model->GetAll();
-        $arrayDadosExercicio = array('formula' => $formula);
+        
+        $retorno = $this->icomb->getLogs();
+
+        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno);
+
+        //convertemos o objeto em formato json, para entendimento do javascript
+        // var_dump($retorno);
+        // die();
 
         $this->load->view('/layout/header.php');
         $this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
