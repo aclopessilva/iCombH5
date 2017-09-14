@@ -438,7 +438,7 @@
          */
         jQuery(document).find('#limpar-estagio').click(function () {
             limpaConstrutorEstagio();
-             document.getElementById("btn-valida-restricao").disabled = false;
+             
         });
 
         /**
@@ -528,6 +528,8 @@
             div_construtor_estagio_paso2.find("#p").first().val("");
             //ocultamos o passo 2
             div_construtor_estagio_paso2.hide();
+            
+            document.getElementById("btn-valida-restricao").disabled = false;
         }
 
         /**
