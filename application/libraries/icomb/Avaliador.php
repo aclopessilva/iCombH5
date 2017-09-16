@@ -100,10 +100,13 @@ class Avaliador {
 
                 //So adicionamos no SET se nao existir o valor previamente
                 $valor = $this->splSearchWithKey($this->elemParticao, $elemento);
-                if(!in_array($valor , $setCondicoes)){
-                    $setCondicoes[] = $valor;
-                }
+                if($valor == null){
 
+                }else{
+                    if(!in_array($valor , $setCondicoes)){
+                        $setCondicoes[] = $valor;
+                    }
+                }
             }
         }
         if(sizeof($setElementos) == 0 ){

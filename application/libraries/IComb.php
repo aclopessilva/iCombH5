@@ -94,7 +94,14 @@ class IComb {
 
             $expressao =  new Expressao();
             $expressao->atributo = $request->atributo;
-            $expressao->pertence = $request->pertence;
+            // o $request->pertence pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence == "true"){
+                $expressao->pertence = true;
+            }else{
+                $expressao->pertence = false;
+            }
+
             $expressao->elementos = array();
             $expressao->elementos[] = $request->caracteristica;
 
@@ -104,7 +111,13 @@ class IComb {
 
             $expressao =  new Expressao();
             $expressao->atributo = $request->atributo;
-            $expressao->pertence = $request->pertence;
+            // o $request->pertence pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence == "true"){
+                $expressao->pertence = true;
+            }else{
+                $expressao->pertence = false;
+            }
             $expressao->elementos = array();
             $expressao->elementos[] = $request->caracteristica;
             $condicao->addExpressao($expressao);
@@ -112,7 +125,13 @@ class IComb {
 
             $expressao2 =  new Expressao();
             $expressao2->atributo = $request->atributo2;
-            $expressao2->pertence = $request->pertence2;
+            // o $request->pertence2 pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence2 == "true"){
+                $expressao2->pertence = true;
+            }else{
+                $expressao2->pertence = false;
+            }
             $expressao2->elementos = array();
             $expressao2->elementos[] = $request->caracteristica2;
             $condicao->addExpressao($expressao2);
@@ -143,11 +162,18 @@ class IComb {
         $desenvolvimento->log->putEntry('Foi iniciada uma validação da condição');
 
         $avaliador = $desenvolvimento->avaliador;
+
+        //limpamos os estagios que o avalidaor possa ter guardado
         $avaliador->reset();
         //procuramos pelos estagios ja registrados e adicionamos ao avaliador;
 
+        // esse bloco avalia um estagio criado comparando-o coma lista de estagios
+        // existentes para determinar se eh valido (que nao seja repetido) ou nao
         foreach($desenvolvimento->estagios as $estagio){
-            if($estagio->estado != 'DELETADO'){
+            //NAO CONSIDERAMOS ESTAGIOS DELETADOS OU ESTAGIOS EM ESTADO RESTRICAO VALIDADA
+            if($estagio->estado == 'DELETADO' || $estagio->estado == 'RESTRICAO_VALIDADA'){
+                //  nao validamos de novo
+            }else{
                 $resposta_estagio = $avaliador->adicionaCondicao($estagio->condicao);
                 if($resposta_estagio == 'ERROR'){
                     $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '+ $resposta_estagio->mensagem );
@@ -163,7 +189,7 @@ class IComb {
         if($resposta->estado == 'OK'){
 
             $estagio = new Estagio();
-            $estagio->estado = "STEP-1";
+            $estagio->estado = 'RESTRICAO_VALIDADA';
             $estagio->numero = sizeof($desenvolvimento->estagios) + 1;
             /**
              * adicionamos a condicao validada para nosso objeto estagio (que sera armazenado na sessao)

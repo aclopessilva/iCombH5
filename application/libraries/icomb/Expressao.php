@@ -20,15 +20,7 @@ class Expressao extends ICombClass{
         
     public function evaluate($element) {
         $ret = false;
-        //print_r($element);
-        //echo "\n\n";
-        //echo "this->elementos";
-        //print_r($this->elementos);
-        //echo "\n\n";
         $key =  $element->attributes[$this->atributo];
-        //echo "key";
-        //print_r($key);
-        //echo "\n\n";
         if (array_search($key, $this->elementos)!==false) {
             $ret = true;
         } else {
