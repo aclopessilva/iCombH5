@@ -27,7 +27,7 @@ class Condicao extends ICombClass{
             $texto_pertence = "não é";
         }
 
-        $texto_chave_desc = ""; //$this->getChaveDesc($expressao->atributo);
+        $texto_chave_desc = $this->getChaveDesc($expressao->atributo);
         $texto_elemento = $expressao->elementos[0];
         $expressao->texto = "O " . $texto_chave_desc . " ".$texto_pertence." ". $texto_elemento;
 

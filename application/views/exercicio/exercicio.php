@@ -215,23 +215,25 @@
                     <h3 class="panel-title textExer">Lista de estagios</h3>
                 </div>
                 <div class="panel-body">
+
                     <div>
                         <div class="col-xs-9">
-                            <!-- LISTA DE ESTAGOS COMPLETADOS--->
+                            <!-- LISTA DE ESTAGOS COMPLETADOS-->
                             <div id="lista-estagios">
                                 <!-- esta lista sera prenchida com elementos do tipo item-estagio (id=estagio-base) -->
                             </div>
 
-                            <!-- ITEM ESTAGIO (nao visivel)--->
+                            <!-- ITEM ESTAGIO (nao visivel)-->
                             <div id="estagio-base" class="item-estagio collapse col-sm-12" >
                                 <div class="descricao col-sm-7">
                                     <!-- conteudo gerado no javascript -->
                                 </div>
                                 <div class="acoes col-sm-5">
-                                    <input type="button" class="estagio-btn-elementos" value="Ver Elementos" />
-                                    <input type="button" class="estagio-btn-deletar" value="Deletar"  />
-                                    <input type="button" class="estagio-btn-ver" value="Consultar" />
+                                    <input type="button" class="estagio-btn-elementos btn btn-default" value="Ver Elementos" />
+                                    <input type="button" class="estagio-btn-deletar btn btn-default" value="Deletar"  />
+                                    <input type="button" class="estagio-btn-ver btn " value="Consultar" />
                                 </div>
+                                <br/>
                             </div>
 
                         </div>
@@ -676,7 +678,7 @@
                 estagio_div.find(".estagio-btn-deletar").first().click(deletarEstagio);
 
                 var estagio_base_desc = estagio_div.find('.descricao');
-                estagio_base_desc.append('<p>'+ estagio.condicao.quantidade + ' elemento(s) que cumpram as seguintes condicoes:</p>');
+                estagio_base_desc.append(estagio.numero+'º Estágio:'+'<p>'+ estagio.elementos_selecionados.length+' elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):</p>');
 
                 if(estagio.condicao.expressoes != undefined){
 
