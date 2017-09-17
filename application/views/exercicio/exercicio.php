@@ -231,7 +231,7 @@
                                 <div class="acoes col-sm-5">
                                     <input type="button" class="estagio-btn-elementos btn btn-default" value="Ver Elementos" />
                                     <input type="button" class="estagio-btn-deletar btn btn-default" value="Deletar"  />
-                                    <input type="button" class="estagio-btn-ver btn " value="Consultar" />
+                                    <input type="button" class="estagio-btn-ver btn btn-default" value="Consultar" />
                                 </div>
                                 <br/>
                             </div>
@@ -327,6 +327,84 @@
         jQuery(document).find('#atributo2').change(function () {            
             trocaCaracteristica($(this).val(),"#caracteristica2");
         });
+         
+        function trocaCaracteristica(valor,nomedoselectparatrocar){
+
+            var select_caracteristica = jQuery(document).find(nomedoselectparatrocar);
+            //sempre limpamos em caso que tenha selecionado o valor vazio o conteudo do selec atributos vai sumir
+            select_caracteristica.empty();
+            if(valor !=  ""){
+                //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
+                    success: function (data)
+                    {
+                        $.each(data, function(data_key, data_value){
+                            select_caracteristica.append($('<option>', {
+                                value: data_value.valor,
+                                text : data_value.valor
+                            }));
+                        });
+                    }
+                });
+            }
+        }
+
+        function alertaCampoComErro(elemento){
+            elemento.animate({backgroundColor:'rgba(239, 92, 92, 0.77)'},200).delay(1000).animate({backgroundColor:''},200);
+        }
+
+        /**
+         * retorna true se a validacao estiver OK
+         */
+        function validaFormularioCondicao(){
+
+            if ($('#num_elementos').val() == '') {
+                alertaCampoComErro($('#num_elementos'));
+                return (false);
+            }
+
+            if($("#num_propriedades").val()==1){
+
+                if ($('#atributo').val() == '') {
+                    alertaCampoComErro($('#atributo'));
+                    return (false);
+                }
+
+                if ($('#caracteristica').val() == '') {
+                    alertaCampoComErro($('#caracteristica'));
+                    return (false);
+                }
+            }
+
+            if($("#num_propriedades").val()==2){
+
+                if ($('#atributo').val() == '') {
+                    alertaCampoComErro($('#atributo'));
+                    return (false);
+                }
+
+                if ($('#caracteristica').val() == '') {
+                    alertaCampoComErro($('#caracteristica'));
+                    return (false);
+                }
+
+                if ($('#atributo2').val() == '') {
+                    alertaCampoComErro($('#atributo2'));
+                    return (false);
+                }
+
+                if ($('#caracteristica2').val() == '') {
+                    alertaCampoComErro($('#caracteristica2'));
+                    return (false);
+                }
+            }
+
+            //nao deu erro retornamos true
+            return true;
+
+        }
 
         /**
          * valida restricao
@@ -340,7 +418,7 @@
 
             //se nao for valido nao enviamos o ajax
             if(!validaFormularioCondicao()){
-                return (false);
+                return false;
             }
 
             $('#btn-valida-restricao').val('Validando...');
@@ -358,7 +436,7 @@
                     if(estado == 'OK'){
                         div_construtor_estagio.find(".estagio-passo-2").show();
                         $('#btn-valida-restricao').val('Restrição Validada');
-                        desativaFormularioRestricao();
+                         document.getElementById("btn-valida-restricao").disabled = true;
                     }else{
                         alert(data.mensagem);
                         $('#btn-valida-restricao').val('Validar Restrição');
@@ -452,8 +530,7 @@
                 //desativa o botao de criacao de estagio
                 div_construtor_estagio.find("#btn-iniciar-estagio").first().prop("disabled",true);
 
-                atualizar_ordem_estagios(true);
-
+                atualizar_ordem_estagios();
             }else{
                 alert("O estagio "+ numero_estagio_atual+ " nao foi encerrado.");
             }
@@ -480,35 +557,29 @@
          */
         function limpaConstrutorEstagio(){
             //limpamos o passo 1
-            var div_construtor_estagio_passo1= div_construtor_estagio.find(".estagio-passo-1");
-            div_construtor_estagio_passo1.find("#num_elementos").val("");
-            div_construtor_estagio_passo1.find("#num_propriedades").val(1).change(); //trocamos para uma propriedade
-            div_construtor_estagio_passo1.find("#atributo").val("");
+            var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
+            div_construtor_estagio_paso1.find("#num_elementos").first().val("");
+            div_construtor_estagio_paso1.find("#num_propriedades").first().val(1).change(); //trocamos para uma propriedade
+            div_construtor_estagio_paso1.find("#atributo").first().val("");
+            div_construtor_estagio_paso1.find("#pertence").first().val("");
+            div_construtor_estagio_paso1.find("#caracteristica").first().val("");
+            div_construtor_estagio_paso1.find('#btn-valida-restricao').val('Validar Restrição');
 
-            div_construtor_estagio_passo1.find("#pertence").val("");
             //tiramos a selecao de caracteristicas, forzando o usuario selecionar primeiro a chave
-            div_construtor_estagio_passo1.find("#caracteristica").empty();
-
-            div_construtor_estagio_passo1.find('#btn-valida-restricao').val('Validar Restrição');
-
-
-            div_construtor_estagio_passo1.find("#atributo2").val("");
-            div_construtor_estagio_passo1.find("#pertence2").val("");
-            //tiramos a selecao de caracteristicas, forzando o usuario selecionar primeiro a chave
-            div_construtor_estagio_passo1.find("#caracteristica2").empty();
+            div_construtor_estagio_paso1.find("#caracteristica").first().empty();
 
             // mostramos o passo 1
-            div_construtor_estagio_passo1.show();
+            div_construtor_estagio_paso1.show();
 
             //limpamos o passo 2
-            var div_construtor_estagio_passo2= div_construtor_estagio.find(".estagio-passo-2");
-            div_construtor_estagio_passo2.find("#formula").val("");
-            div_construtor_estagio_passo2.find("#n").val("");
-            div_construtor_estagio_passo2.find("#p").val("");
+            var div_construtor_estagio_paso2= div_construtor_estagio.find(".estagio-passo-2").first();
+            div_construtor_estagio_paso2.find("#formula").first().val("");
+            div_construtor_estagio_paso2.find("#n").first().val("");
+            div_construtor_estagio_paso2.find("#p").first().val("");
             //ocultamos o passo 2
-            div_construtor_estagio_passo2.hide();
-
-            ativaFormularioRestricao();
+            div_construtor_estagio_paso2.hide();
+            
+            document.getElementById("btn-valida-restricao").disabled = false;
         }
 
         /**
@@ -629,10 +700,8 @@
         /**
          * Ao validar ou deletar um estagio essa funcao modifica o texto do botao iniciar estagio, para manter
          * a coorencia para o usuario
-         *
-         * se passado mudartexto = true ele vai colocar o texto como em contrucao
          */
-        function atualizar_ordem_estagios(mudartexto){
+        function atualizar_ordem_estagios(){
             var contador_estagios_visiveis = 0;
             $.each(lista_estagios, function(estagio_key, estagio_value){
                 if(estagio_value.estado ==  "DELETADO"){
@@ -645,10 +714,6 @@
             var proxima_ordem_estagio = contador_estagios_visiveis + 1;
 
             div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proxima_ordem_estagio+'° Estágio');
-            if(mudartexto){
-                div_construtor_estagio.find("#btn-iniciar-estagio").first().text(' Estágio '+proxima_ordem_estagio+'° em construcao');
-            }
-
             div_construtor_estagio.find(".desc-estagio").text('Estágio ' + proxima_ordem_estagio);
 
         }
@@ -777,122 +842,6 @@
                 }
         );
     <?php endforeach; ?>
-
-
-
-
-    function trocaCaracteristica(valor,nomedoselectparatrocar){
-
-        var select_caracteristica = jQuery(document).find(nomedoselectparatrocar);
-        //sempre limpamos em caso que tenha selecionado o valor vazio o conteudo do selec atributos vai sumir
-        select_caracteristica.empty();
-        if(valor !=  ""){
-            //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
-            jQuery.ajax({
-                type: "POST",
-                url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
-                beforeSend : mostraCarregandoModal,
-                complete: escondeCarregandoModal,
-                success: function (data)
-                {
-                    $.each(data, function(data_key, data_value){
-                        select_caracteristica.append($('<option>', {
-                            value: data_value.valor,
-                            text : data_value.valor
-                        }));
-                    });
-                }
-            });
-        }
-    }
-
-    function alertaCampoComErro(elemento){
-        elemento.animate({backgroundColor:'rgba(239, 92, 92, 0.77)'},200).delay(1000).animate({backgroundColor:''},200);
-    }
-
-    /**
-     * retorna true se a validacao estiver OK
-     */
-    function validaFormularioCondicao(){
-
-        if ($('#num_elementos').val() == '') {
-            alertaCampoComErro($('#num_elementos'));
-            return (false);
-        }
-
-        if($("#num_propriedades").val()==1){
-
-            if ($('#atributo').val() == '') {
-                alertaCampoComErro($('#atributo'));
-                return (false);
-            }
-
-            if ($('#caracteristica').val() == '') {
-                alertaCampoComErro($('#caracteristica'));
-                return (false);
-            }
-        }
-
-        if($("#num_propriedades").val()==2){
-
-            if ($('#atributo').val() == '') {
-                alertaCampoComErro($('#atributo'));
-                return (false);
-            }
-
-            if ($('#caracteristica').val() == '') {
-                alertaCampoComErro($('#caracteristica'));
-                return (false);
-            }
-
-            if ($('#atributo2').val() == '') {
-                alertaCampoComErro($('#atributo2'));
-                return (false);
-            }
-
-            if ($('#caracteristica2').val() == '') {
-                alertaCampoComErro($('#caracteristica2'));
-                return (false);
-            }
-        }
-
-        //nao deu erro retornamos true
-        return true;
-
-    }
-
-    function desativaFormularioRestricao(){
-        $("#num_elementos").prop("disabled", true);
-        $("#num_propriedades").prop("disabled", true);
-        $("#atributo").prop("disabled", true);
-        $("#caracteristica").prop("disabled", true);
-        $("#pertence").prop("disabled", true);
-        $("#atributo2").prop("disabled", true);
-        $("#caracteristica2").prop("disabled", true);
-        $("#pertence2").prop("disabled", true);
-        $("#btn-valida-restricao").prop("disabled", true);
-    }
-
-    function ativaFormularioRestricao(){
-        $("#num_elementos").prop("disabled", false);
-        $("#num_propriedades").prop("disabled", false);
-        $("#atributo").prop("disabled", false);
-        $("#caracteristica").prop("disabled", false);
-        $("#pertence").prop("disabled", false);
-        $("#atributo2").prop("disabled", false);
-        $("#caracteristica2").prop("disabled", false);
-        $("#pertence2").prop("disabled", false);
-        $("#btn-valida-restricao").prop("disabled", false);
-    }
-
-
-
-    function mostraCarregandoModal(){
-        //carregandoModal.show('Custom message', {dialogSize: 'sm', progressType: 'warning'});
-    }
-    function escondeCarregandoModal(){
-        //carregandoModal.hide();
-    }
 
 </script>
 <!-- //JS para validar condição -->
