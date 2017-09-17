@@ -87,13 +87,13 @@
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo" id="atributo">
+                                                    <option value='' > - Selecione - </option>
                                                     <?php foreach ($chaves as $row): ?>
                                                         <option value='<?php echo ($row->chave) ?>' ><?php echo ($row->chave_desc) ?></option>
                                                     <?php endforeach; ?>
                                                     
                                                 </select>
                                             </div>
-
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="pertence" id="pertence">
@@ -104,59 +104,39 @@
                                                 </select>
                                             </div>
 
-
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica" id="caracteristica">
-                                                    <?php foreach ($valorPredicado as $row): ?>
-                                                        <option value='<?php echo ($row->valor) ?>' ><?php echo ($row->valor) ?></option>
-                                                    <?php endforeach; ?>
+                                                    <!-- o conteudo de esse select eh gerado dinamicamente  -->
                                                 </select>
                                             </div>
-
-                                            <!-- <div class="col-sm-12">
-                                                <br>
-                                                <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
-
-                                            </div> -->
                                         </div>
-                                        <!--/form> 
-                                       <form class="form-horizontal form-condicao2-ajax" method="post" action=""-->
-                                        <div class="form-group" id="divCondicao2" style="display:none;">
+                                        <div class="col-sm-12 form-group" id="divCondicao2" style="display:none;">
 
                                             <label class="col-sm-12" for="num_elementos">Escolha as configurações que definem os elementos da segunda condição:</label>
 
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="atributo2" id="atributo2">
+                                                    <option value='' > - Selecione - </option>
                                                     <?php foreach ($chaves as $row): ?>
                                                         <option value='<?php echo ($row->chave) ?>' ><?php echo ($row->chave_desc) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
 
-
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="pertence2" id="pertence2">
-                                                    <option value = '1'>é</option>
-                                                    <option value = '0'>não é</option>
+                                                    <option value='true' >é</option>
+                                                    <option value='false' >não é</option>
                                                     <option value='true' >está</option>
                                                     <option value='false' >não está</option>
                                                 </select>
                                             </div>
 
-
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="caracteristica2" id="caracteristica2">
-                                                    <?php foreach ($valorPredicado as $row): ?>
-                                                        <option value='<?php echo ($row->valor) ?>' ><?php echo ($row->valor) ?></option>
-                                                    <?php endforeach; ?>
+                                                    <!-- o conteudo de esse select eh gerado dinamicamente  -->
                                                 </select>
                                             </div>
-
-                                            <!-- <div class="col-sm-12">
-                                                <br>
-                                                <input id="btn-valida-restricao2" type="submit" name="enviarValida2" value="Validar Restrição"  class="btn btn-default"/>
-
-                                            </div> -->
                                         </div>
                                         <div class="col-sm-12" style="padding-bottom: 10px;">
                                             <input id="btn-valida-restricao" type="submit" name="enviarValida" value="Validar Restrição"  class="btn btn-default"/>
@@ -347,22 +327,81 @@
         });
          
         function trocaCaracteristica(valor,nomedoselectparatrocar){
-           jQuery.ajax({
-               type: "POST",
-               url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
-               success: function (data)
-               {
 
-                   var select_caracteristica = jQuery(document).find(nomedoselectparatrocar);
-                   select_caracteristica.empty();
-                   $.each(data, function(data_key, data_value){
-                       select_caracteristica.append($('<option>', { 
-                       value: data_value.valor,
-                       text : data_value.valor 
-                    }));
-                   });
-               }
-           });
+            var select_caracteristica = jQuery(document).find(nomedoselectparatrocar);
+            //sempre limpamos em caso que tenha selecionado o valor vazio o conteudo do selec atributos vai sumir
+            select_caracteristica.empty();
+            if(valor !=  ""){
+                //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
+                    success: function (data)
+                    {
+                        $.each(data, function(data_key, data_value){
+                            select_caracteristica.append($('<option>', {
+                                value: data_value.valor,
+                                text : data_value.valor
+                            }));
+                        });
+                    }
+                });
+            }
+        }
+
+        function alertaCampoComErro(elemento){
+            elemento.animate({backgroundColor:'rgba(239, 92, 92, 0.77)'},200).delay(1000).animate({backgroundColor:''},200);
+        }
+
+        /**
+         * retorna true se a validacao estiver OK
+         */
+        function validaFormularioCondicao(){
+
+            if ($('#num_elementos').val() == '') {
+                alertaCampoComErro($('#num_elementos'));
+                return (false);
+            }
+
+            if($("#num_propriedades").val()==1){
+
+                if ($('#atributo').val() == '') {
+                    alertaCampoComErro($('#atributo'));
+                    return (false);
+                }
+
+                if ($('#caracteristica').val() == '') {
+                    alertaCampoComErro($('#caracteristica'));
+                    return (false);
+                }
+            }
+
+            if($("#num_propriedades").val()==2){
+
+                if ($('#atributo').val() == '') {
+                    alertaCampoComErro($('#atributo'));
+                    return (false);
+                }
+
+                if ($('#caracteristica').val() == '') {
+                    alertaCampoComErro($('#caracteristica'));
+                    return (false);
+                }
+
+                if ($('#atributo2').val() == '') {
+                    alertaCampoComErro($('#atributo2'));
+                    return (false);
+                }
+
+                if ($('#caracteristica2').val() == '') {
+                    alertaCampoComErro($('#caracteristica2'));
+                    return (false);
+                }
+            }
+
+            //nao deu erro retornamos true
+            return true;
+
         }
 
         /**
@@ -373,6 +412,11 @@
 
             if ($('#btn-valida-restricao').val() == 'Validando...') {
                 return (false);
+            }
+
+            //se nao for valido nao enviamos o ajax
+            if(!validaFormularioCondicao()){
+                return false;
             }
 
             $('#btn-valida-restricao').val('Validando...');
@@ -479,8 +523,11 @@
                 div_construtor_estagio.estado = 'INICIADO';
                 //atualizamos o numero de estagio atual
                 numero_estagio_atual = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
-                //div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+numero_estagio_atual+'° Estágio');
-                //div_construtor_estagio.find(".desc-estagio").text('Estágio ' + numero_estagio_atual);
+
+
+                //desativa o botao de criacao de estagio
+                div_construtor_estagio.find("#btn-iniciar-estagio").first().prop("disabled",true);
+
                 atualizar_ordem_estagios();
             }else{
                 alert("O estagio "+ numero_estagio_atual+ " nao foi encerrado.");
@@ -491,12 +538,10 @@
          * Quando um estagio é validado pelo icomb, permitimos a construcao de um novo estagio
          */
         function novoConstrutorEstagio(){
-
             div_construtor_estagio.estado = 'PRONTO';
 
-            //Mostrar no botao com o numero da proxima contrucao de estagio
-            //var proximo_estagio = lista_estagios.length + 1; //Se lista de estagios estiver vazia, sera 0 + 1
-            //div_construtor_estagio.find("#btn-iniciar-estagio").text('Iniciar '+proximo_estagio+'° Estágio');
+            //ativa novamente o botao de criacao de estagio
+            div_construtor_estagio.find("#btn-iniciar-estagio").first().prop("disabled",false);
 
             atualizar_ordem_estagios();
 
@@ -517,6 +562,9 @@
             div_construtor_estagio_paso1.find("#pertence").first().val("");
             div_construtor_estagio_paso1.find("#caracteristica").first().val("");
             div_construtor_estagio_paso1.find('#btn-valida-restricao').val('Validar Restrição');
+
+            //tiramos a selecao de caracteristicas, forzando o usuario selecionar primeiro a chave
+            div_construtor_estagio_paso1.find("#caracteristica").first().empty();
 
             // mostramos o passo 1
             div_construtor_estagio_paso1.show();
@@ -569,6 +617,8 @@
             formula = formula.replace("p", p);
             div_construtor_estagio.find(".form-validar-estagio-ajax").find("#formula-definida").text(formula);
         }
+
+        trocarValorFormula();
 
         /**
          * Evento click no botao de clase estagio-btn-elementos, mostramos o modal mostrando todos os elemetnos do  universo
