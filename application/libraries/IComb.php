@@ -238,7 +238,7 @@ class IComb {
 
                         $resposta->estado = "OK";
                         $resposta->mensagem = "Estagio deletado!";
-                        $desenvolvimento->log->putEntry('Deletou um estagio já validado! Estagio: '+ $estagio_numero );
+                        $desenvolvimento->log->putEntry('Deletou um estagio já validado! Estagio: '. $estagio_numero );
                     }
                 }
             }
