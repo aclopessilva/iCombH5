@@ -425,11 +425,9 @@ ul.social-buttons li a:active {
 
 ::-moz-selection {
   text-shadow: none;
-  background: #fed136;
 }
 ::selection {
   text-shadow: none;
-  background: #fed136;
 }
 img::selection {
   background: transparent;
@@ -438,9 +436,17 @@ img::-moz-selection {
   background: transparent;
 }
 body {
-  webkit-tap-highlight-color: #fed136;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+  background-color: #FFFFFF !important;
+  color: #555 !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #555555 !important;
+}
 
 /*MODAL EXERCICIOS-->TUTORIAL*/
 .content-section-a {
