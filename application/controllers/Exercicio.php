@@ -129,8 +129,13 @@ class Exercicio extends CI_Controller {
             $request->pertence2 = $_POST['pertence2'];
             $request->caracteristica2 = $_POST['caracteristica2'];
         }
-        
-        $retorno = $this->icomb->validaCondicao($request);
+
+
+        $this->load->model('Atributos_model');
+        $idUniverso = $_POST['universo_id'];
+        $chaves = $this->Atributos_model->GetByChaveChaveDesc($idUniverso);
+        //retorna lista de registros com propriedades "chave" e "chave_desc"
+        $retorno = $this->icomb->validaCondicao($request, $chaves);
 
 
         //convertemos o objeto em formato json, para entendimento do javascript

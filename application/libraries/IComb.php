@@ -66,9 +66,10 @@ class IComb {
      * Prepara o objeto condicao com o $request e depois validamos a condicao.
      *
      * @param $request Request passado pelo usuario
+     * @param array $chaves os registros que contem as chaves e a descricao das chaves
      * @return mixed Retorna um objeto contendo o necessario para mostrar na view.
      */
-    public function validaCondicao($request) {
+    public function validaCondicao($request, $chaves = array()) {
 /*
 
         "condicao": {
@@ -89,6 +90,7 @@ class IComb {
         */
         $condicao = new Condicao();
         $condicao->quantidade =$request->numElementos;
+        $condicao->chaves = $chaves;
 
         if($request->numPropriedades == 1){
 

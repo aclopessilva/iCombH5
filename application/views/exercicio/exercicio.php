@@ -60,6 +60,9 @@
                             <div class="col-xs-12" >
                                 <div>
                                     <form class="form-horizontal form-condicao-ajax" method="post" action="" >
+
+                                        <input type="hidden" name="universo_id" value="<?php echo $exercicio->universo_id ?>" />
+
                                         <label class="col-sm-12 textPreto" >Passo 1: Definir restrição</label>
                                         <div class="col-sm-12  form-group">
                                             <label class="col-sm-2" for="num_elementos">Eu quero:</label>

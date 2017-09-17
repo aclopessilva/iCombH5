@@ -15,6 +15,7 @@ class Condicao extends ICombClass{
 
     public $quantidade;
     public $expressoes = array();
+    public $chaves = array();
 
 
 
@@ -34,18 +35,11 @@ class Condicao extends ICombClass{
         array_push($this->expressoes,$expressao);
     }
 
-    function getChaveDesc($chave){
+    function getChaveDesc($chave_id){
 
-        //PEGAR DA BD
-        $depara = array();
-        $chave1 = array("value" => "Valor");
-        $chave2 = array("suit" => "Naipe");
-        array_push($depara, $chave1);
-        array_push($depara, $chave2);
-
-        foreach ($depara as $deparakey => $deparavalue){
-            if($deparakey == $chave){
-                return $deparavalue[$chave];
+        foreach ($this->chaves as $chave){
+            if($chave->chave == $chave_id){
+                return $chave->chave_desc;
             }
         }
         return null;
