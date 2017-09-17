@@ -231,7 +231,7 @@
                                 <div class="acoes col-sm-5">
                                     <input type="button" class="estagio-btn-elementos btn btn-default" value="Ver Elementos" />
                                     <input type="button" class="estagio-btn-deletar btn btn-default" value="Deletar"  />
-                                    <input type="button" class="estagio-btn-ver btn " value="Consultar" />
+                                    <input type="button" class="estagio-btn-ver btn btn-default" value="Consultar" />
                                 </div>
                                 <br/>
                             </div>
@@ -310,7 +310,7 @@
 
 
     jQuery(document).ready(function () {
-0
+
         /**
          * Inicia estagio
          */
@@ -324,7 +324,7 @@
         jQuery(document).find('#finalizar').click(function () {
             finaliza();
         });
-        
+
         /**
          * Troca dinamicamente os valores e predicados a serem exibidos, de acordo
          * com a opção selecionada pelo usuário 
@@ -336,7 +336,6 @@
         jQuery(document).find('#atributo2').change(function () {            
             trocaCaracteristica($(this).val(),"#caracteristica2");
         });
-
 
         /**
          * valida restricao
