@@ -237,6 +237,7 @@
                         </div>
                         <div class="col-xs-3">
 
+                            <div class="row">
                             <label class="col-sm-12" for="relacionamento">Relacione estágios:</label>
 
                             <div class="col-sm-12">
@@ -246,15 +247,16 @@
                                 <label><input type="radio" id="relacionamento" name="relacionamento" value="M">Multiplicacao</label>
                             </div>
 
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-2" style="float: right;" >
-                                <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btnExercicio">Finalizar</button></a>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-sm-12" >
+                                    <button type="button" class="btn btnExercicio" id="finalizar">Finalizar</button>
+                                    <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btnExercicio" >Indicador</button></a>
+                                </div>
 
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
@@ -306,12 +308,19 @@
 
 
     jQuery(document).ready(function () {
-
+0
         /**
          * Inicia estagio
          */
         $("#btn-iniciar-estagio").click(function () {
             inicializaConstrutorEstagio();
+        });
+
+        /**
+         * Finalizar exercicio
+         */
+        jQuery(document).find('#finalizar').click(function () {
+            finaliza();
         });
         
         /**
@@ -325,6 +334,7 @@
         jQuery(document).find('#atributo2').change(function () {            
             trocaCaracteristica($(this).val(),"#caracteristica2");
         });
+
 
         /**
          * valida restricao
@@ -891,7 +901,28 @@
     function escondeCarregandoModal(){
         //carregandoModal.hide();
     }
+    function finaliza(){
+        var relacionamento = $('#relacionamento').val();
+        if(relacionamento==''){
+            alert("selecione a relacao entre estagios");
+            return false;
+        }
 
+        //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
+        jQuery.ajax({
+            type: "POST",
+            url: "<?= base_url()?>/exercicio/Finaliza",
+            data: "relacionamento="+relacionamento,
+            success: function(data){
+                if(data.estado == 'OK'){
+                    alert("Sucesso mano!");
+
+                }else{
+                    alert(data.mensagem);
+                }
+            }
+        });
+    }
 </script>
 <!-- //JS para validar condição -->
 

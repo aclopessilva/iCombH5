@@ -194,4 +194,20 @@ class Exercicio extends CI_Controller {
 
     }
 
+    public function Finaliza() {
+
+        $relacionamento =  $_POST['relacionamento'];
+        $retorno = $this->icomb->finalizaExercicio($relacionamento);
+
+        //convertemos o objeto em formato json, para entendimento do javascript
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($retorno));
+
+        //        echo json_encode($retorno);
+
+
+    }
+
 }

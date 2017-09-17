@@ -325,4 +325,44 @@ class IComb {
         return $object;
     }
 
+    function finalizaExercicio($relacionamento){
+
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+
+        //calculamos o resultado do usuario
+        $estagios = $desenvolvimento->estagios;
+        $resultado_usuario = 0;
+        foreach ($estagios as $estagio){
+            $resultado_estagio = $estagio->formula->formula->calcula($estagio->formula->n, $estagio->formula->p);
+            if($relacionamento == "S"){
+                $resultado_usuario +=  $resultado_estagio;
+            }else if($relacionamento == "M"){
+                $resultado_usuario *=  $resultado_estagio;
+            }
+        }
+
+
+        //pegamos resultado do exercicio
+        $exercicio_solucao = $desenvolvimento->exercicio->solucao;
+        $exercicio_solucao_exercicio = $exercicio_solucao->resultado;
+
+        //comparamos os resultados
+        if($exercicio_solucao_exercicio == $resultado_usuario){
+            $resposta = new stdClass();
+            $resposta->estado = "OK";
+            $resposta->resultado = $resultado_usuario;
+            return $resposta;
+        }else{
+            $resposta = new stdClass();
+            $resposta->estado = "ERROR";
+            $resposta->mensagem = "Resultado Inocrreto!";
+            return $resposta;
+        }
+
+
+
+
+
+        return $resposta;
+    }
 }
