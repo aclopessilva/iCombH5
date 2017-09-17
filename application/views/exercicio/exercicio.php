@@ -904,7 +904,7 @@
         //carregandoModal.hide();
     }
     function finaliza(){
-        var relacionamento = $('#relacionamento').val();
+        var relacionamento = $('input[name=relacionamento]:checked').val();
         if(relacionamento==''){
             alert("selecione a relacao entre estagios");
             return false;

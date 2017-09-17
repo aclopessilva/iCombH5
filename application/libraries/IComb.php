@@ -331,13 +331,21 @@ class IComb {
 
         //calculamos o resultado do usuario
         $estagios = $desenvolvimento->estagios;
+
+
         $resultado_usuario = 0;
+        if($relacionamento == "M"){
+            $resultado_usuario = 1;
+        }
+
         foreach ($estagios as $estagio){
-            $resultado_estagio = $estagio->formula->formula->calcula($estagio->formula->n, $estagio->formula->p);
-            if($relacionamento == "S"){
-                $resultado_usuario +=  $resultado_estagio;
-            }else if($relacionamento == "M"){
-                $resultado_usuario *=  $resultado_estagio;
+            if($estagio->estado == "FINALIZADO") {
+                $resultado_estagio = $estagio->formula->formula->calcula($estagio->formula->n, $estagio->formula->p);
+                if ($relacionamento == "S") {
+                    $resultado_usuario += $resultado_estagio;
+                } else if ($relacionamento == "M") {
+                    $resultado_usuario *= $resultado_estagio;
+                }
             }
         }
 
