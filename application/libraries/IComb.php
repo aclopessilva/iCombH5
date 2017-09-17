@@ -176,7 +176,7 @@ class IComb {
             }else{
                 $resposta_estagio = $avaliador->adicionaCondicao($estagio->condicao);
                 if($resposta_estagio == 'ERROR'){
-                    $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '+ $resposta_estagio->mensagem );
+                    $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '. $resposta_estagio->mensagem );
                     $this->saveSessao('desenvolvimento', $desenvolvimento);
                     return $resposta_estagio;
                 }
@@ -208,7 +208,7 @@ class IComb {
         }else{
             // date_default_timezone_get('Brazil/Brazilian');
             // $date = date('dd/MM/YYYY HH:ii', time());
-            $desenvolvimento->log->putEntry('Condicao adicionada com ERRO mensagem: '+ $resposta->mensagem );
+            $desenvolvimento->log->putEntry('Condicao adicionada com ERRO mensagem: '. $resposta->mensagem );
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
 
