@@ -225,13 +225,13 @@
 
                             <!-- ITEM ESTAGIO (nao visivel)-->
                             <div id="estagio-base" class="item-estagio collapse col-sm-12" >
-                                <div class="descricao col-sm-7">
+                                <div class="descricao col-sm-8">
                                     <!-- conteudo gerado no javascript -->
                                 </div>
-                                <div class="acoes col-sm-5">
+                                <div class="acoes col-sm-4">
                                     <input type="button" class="estagio-btn-elementos btn btn-default" value="Ver Elementos" />
-                                    <input type="button" class="estagio-btn-deletar btn btn-default" value="Deletar"  />
-                                    <input type="button" class="estagio-btn-ver btn btn-default" value="Consultar" />
+                                    <input type="button" class="estagio-btn-deletar btn btn-default" value="Deletar" />
+<!--                                    <input type="button" class="estagio-btn-ver btn btn-default" value="Consultar" />-->
                                 </div>
                                 <br/>
                             </div>
@@ -398,6 +398,7 @@
                         //adicionamos o estagio retornado a lista de estagios finalizados
                         adicionaEstagio(data.estagio);
                         novoConstrutorEstagio();
+                        listaEstagios();
                     }else{
                         alert(data.mensagem);
                     }
@@ -461,8 +462,7 @@
                 //desativa o botao de criacao de estagio
                 div_construtor_estagio.find("#btn-iniciar-estagio").first().prop("disabled",true);
 
-                atualizar_ordem_estagios(true);
-
+                atualizarOrdemEstagios(true);
             }else{
                 alert("O estagio "+ numero_estagio_atual+ " nao foi encerrado.");
             }
@@ -477,7 +477,7 @@
             //ativa novamente o botao de criacao de estagio
             div_construtor_estagio.find("#btn-iniciar-estagio").first().prop("disabled",false);
 
-            atualizar_ordem_estagios();
+            atualizarOrdemEstagios();
 
             // ocultamos o passo 1 ate o usuario indicar o inicio do proximo estagio
             var div_construtor_estagio_paso1= div_construtor_estagio.find(".estagio-passo-1").first();
@@ -624,7 +624,9 @@
 
                         alert(data.mensagem);
 
-                        atualizar_ordem_estagios();
+                        atualizarOrdemEstagios();
+
+                        listaEstagios();
 
                     }else{
                         alert(data.mensagem);
@@ -641,13 +643,14 @@
          *
          * se passado mudartexto = true ele vai colocar o texto como em contrucao
          */
-        function atualizar_ordem_estagios(mudartexto){
+        function atualizarOrdemEstagios(mudartexto){
             var contador_estagios_visiveis = 0;
             $.each(lista_estagios, function(estagio_key, estagio_value){
                 if(estagio_value.estado ==  "DELETADO"){
                     console.log("estagio "+estagio_value.numero+" deletado")
                 }else{
                     contador_estagios_visiveis++;
+                    estagio_value.ordem = contador_estagios_visiveis;
                 }
             });
 
@@ -670,45 +673,60 @@
 
             if(estagio.estado=='FINALIZADO'){
                 lista_estagios.push(estagio);
+            }
+        }
 
-                //estagio base => é a base de toda lista de estagios
-                var estagio_div = $('#estagio-base').clone();
+        /**
+         * Lista os estagios finalizados
+         */
+        function listaEstagios(){
 
-                //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
-                estagio_div.prop('id','estagio-'+estagio.numero);
+            //limpamos o conteudo da lista de estagios
+            $('#lista-estagios').empty();
 
-                //adicionamos um atributo html para identificar o estagio facilmente
-                estagio_div.attr('estagio-numero',estagio.numero);
+            //atualiza lista de estagios com os estagios em estado finalizado (vai ignorar os deletados)
+            $.each(lista_estagios, function(estagio_key, estagio){
 
-                //adicionamos evento click para o botao "ver elementos" que executa a funcao "mostraSubUniverso"
-                estagio_div.find(".estagio-btn-elementos").first().click(mostraSubUniverso);
+                if(estagio.estado == 'FINALIZADO'){
+                    //estagio base => é a base de toda lista de estagios
+                    var estagio_div = $('#estagio-base').clone();
+
+                    //substituimos o id do div por um novo chamado estagio-1 para o primeiro e assim por diante.
+                    estagio_div.prop('id','estagio-'+estagio.numero);
+
+                    //adicionamos um atributo html para identificar o estagio facilmente
+                    estagio_div.attr('estagio-numero',estagio.numero);
+
+                    //adicionamos evento click para o botao "ver elementos" que executa a funcao "mostraSubUniverso"
+                    estagio_div.find(".estagio-btn-elementos").first().click(mostraSubUniverso);
 
 
-                estagio_div.find(".estagio-btn-deletar").first().click(deletarEstagio);
+                    estagio_div.find(".estagio-btn-deletar").first().click(deletarEstagio);
 
-                var estagio_base_desc = estagio_div.find('.descricao');
-                estagio_base_desc.append(estagio.numero+'º Estágio:'+'<p>'+ estagio.elementos_selecionados.length+' elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):</p>');
+                    var estagio_base_desc = estagio_div.find('.descricao');
+                    estagio_base_desc.append(estagio.ordem+'º Estágio:'+'<p>'+ estagio.elementos_selecionados.length+' elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):</p>');
 
-                if(estagio.condicao.expressoes != undefined){
+                    if(estagio.condicao.expressoes != undefined){
 
-                    if(estagio.condicao.expressoes.length>0){
-                        estagio_base_desc.append('<ol>');
-                        $.each( estagio.condicao.expressoes, function( key, expressao ){
-                            estagio_base_desc.append('<li>'+expressao.texto+'</li>');
-                        });
-                        estagio_base_desc.append('</ol>');
+                        if(estagio.condicao.expressoes.length>0){
+                            estagio_base_desc.append('<ol>');
+                            $.each( estagio.condicao.expressoes, function( key, expressao ){
+                                estagio_base_desc.append('<li>'+expressao.texto+'</li>');
+                            });
+                            estagio_base_desc.append('</ol>');
+                        }else{
+                            estagio_base_desc.append('Nenhuma condicao aplicada.');
+                        }
+
                     }else{
                         estagio_base_desc.append('Nenhuma condicao aplicada.');
                     }
 
-                }else{
-                    estagio_base_desc.append('Nenhuma condicao aplicada.');
+                    $('#lista-estagios').append(estagio_div);
+                    //fazemos aparecer
+                    estagio_div.toggle();
                 }
-
-                $('#lista-estagios').append(estagio_div);
-                //fazemos aparecer
-                estagio_div.toggle();
-            }
+            });
         }
 
 
@@ -905,7 +923,7 @@
     function finaliza(){
         var relacionamento = $('input[name=relacionamento]:checked').val();
         if(relacionamento == undefined || relacionamento==''){
-            alert("Selecione a relacao entre estagios");
+            alert("Selecione a operação entre estagios");
             return (false);
         }
 
