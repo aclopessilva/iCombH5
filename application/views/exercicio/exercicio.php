@@ -904,9 +904,9 @@
     }
     function finaliza(){
         var relacionamento = $('input[name=relacionamento]:checked').val();
-        if(relacionamento==''){
-            alert("selecione a relacao entre estagios");
-            return false;
+        if(relacionamento == undefined || relacionamento==''){
+            alert("Selecione a relacao entre estagios");
+            return (false);
         }
 
         //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
@@ -916,7 +916,7 @@
             data: "relacionamento="+relacionamento,
             success: function(data){
                 if(data.estado == 'OK'){
-                    alert("Sucesso mano!");
+                    alert("Parabens resposta correta!");
 
                 }else{
                     alert(data.mensagem);

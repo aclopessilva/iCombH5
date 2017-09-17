@@ -363,7 +363,7 @@ class IComb {
         }else{
             $resposta = new stdClass();
             $resposta->estado = "ERROR";
-            $resposta->mensagem = "Resultado Inocrreto!";
+            $resposta->mensagem = "Resultado Incorreto!";
             return $resposta;
         }
 
