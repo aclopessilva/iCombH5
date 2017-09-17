@@ -566,3 +566,8 @@ input:-webkit-autofill:focus {
 #btnLogs {
   float: left;
 }
+
+.item-estagio{
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f9eeee;
+}
