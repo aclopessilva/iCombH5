@@ -12,7 +12,7 @@
         <?php else: ?>
             <?php if($exercicio1 != false) : ?>
                 <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h3 class="panel-title textExer" id="click_advance1"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
+                    <h4 class="panel-title textExer" id="click_advance1"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
                 </div>
                 <div class="row" id="display_advance"1>
                     <?php foreach ($exercicio1 as $row): ?>  
@@ -30,7 +30,7 @@
 
             <?php if($exercicio2 != false) : ?>
                 <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h3 class="panel-title textExer" id="click_advance2"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
+                    <h4 class="panel-title textExer" id="click_advance2"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
                 </div>
                 <div class="row" id="display_advance2">
                     <?php foreach ($exercicio2 as $row): ?>  
@@ -48,7 +48,7 @@
 
             <?php if($exercicio3 != false) : ?>
                 <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h3 class="panel-title textExer" id="click_advance3"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
+                    <h4 class="panel-title textExer" id="click_advance3"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Bolas</h4>
                 </div>
                 <div class="row" id="display_advance3">
                     <?php foreach ($exercicio3 as $row): ?>  
@@ -66,7 +66,7 @@
             
             <?php if($exercicio4 != false) : ?>
                 <div class="panel-heading" style="background-color:#222222; padding-top:5px;" >
-                    <h3 class="panel-title textExer" id="click_advance4"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo</h3>
+                    <h4 class="panel-title textExer" id="click_advance4"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Camisas de futebol</h4>
                 </div>
                 <div class="row" id="display_advance4">
                     <?php foreach ($exercicio4 as $row): ?>  
