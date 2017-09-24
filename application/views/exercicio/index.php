@@ -11,74 +11,82 @@
                     <h2>Nenhum exercicio encontrado</h2>
         <?php else: ?>
             <?php if($exercicio1 != false) : ?>
-                <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h4 class="panel-title textExer" id="click_advance1"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
-                </div>
-                <div class="row" id="display_advance"1>
-                    <?php foreach ($exercicio1 as $row): ?>  
-                        <div class="col-md-4">
-                            <span class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
-                            <p class="text-muted"><?= $row->descricao ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
+                        <h4 class="panel-title textExer" id="click_advance1"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
+                    </div>
+                    <div class="row" id="display_advance"1>
+                        <?php foreach ($exercicio1 as $row): ?>  
+                            <div class="col-md-4">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
+                                <p class="text-muted"><?= $row->descricao ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endif; ?>
 
             <?php if($exercicio2 != false) : ?>
-                <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h4 class="panel-title textExer" id="click_advance2"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
-                </div>
-                <div class="row" id="display_advance2">
-                    <?php foreach ($exercicio2 as $row): ?>  
-                        <div class="col-md-4">
-                            <span class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
-                            <p class="text-muted"><?= $row->descricao ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
+                        <h4 class="panel-title textExer" id="click_advance2"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Cartas</h4>
+                    </div>
+                    <div class="row" id="display_advance2">
+                        <?php foreach ($exercicio2 as $row): ?>  
+                            <div class="col-md-4">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
+                                <p class="text-muted"><?= $row->descricao ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endif; ?>
 
             <?php if($exercicio3 != false) : ?>
-                <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
-                    <h4 class="panel-title textExer" id="click_advance3"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Bolas</h4>
-                </div>
-                <div class="row" id="display_advance3">
-                    <?php foreach ($exercicio3 as $row): ?>  
-                        <div class="col-md-4">
-                            <span class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
-                            <p class="text-muted"><?= $row->descricao ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="panel-heading" style="background-color:#222222; padding-top:5px;">
+                        <h4 class="panel-title textExer" id="click_advance3"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Bolas</h4>
+                    </div>
+                    <div class="row" id="display_advance3">
+                        <?php foreach ($exercicio3 as $row): ?>  
+                            <div class="col-md-4">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
+                                <p class="text-muted"><?= $row->descricao ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endif; ?>
             
             <?php if($exercicio4 != false) : ?>
-                <div class="panel-heading" style="background-color:#222222; padding-top:5px;" >
-                    <h4 class="panel-title textExer" id="click_advance4"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Camisas de futebol</h4>
-                </div>
-                <div class="row" id="display_advance4">
-                    <?php foreach ($exercicio4 as $row): ?>  
-                        <div class="col-md-4">
-                            <span class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
-                            <p class="text-muted"><?= $row->descricao ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="panel-heading" style="background-color:#222222; padding-top:5px;" >
+                        <h4 class="panel-title textExer" id="click_advance4"><i class="fa fa-sort-up textPgExercicio"></i>&nbsp;&nbsp;&nbsp;Universo de Camisas de futebol</h4>
+                    </div>
+                    <div class="row" id="display_advance4">
+                        <?php foreach ($exercicio4 as $row): ?>  
+                            <div class="col-md-4">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <a href="<?php echo site_url('exercicio/resolucao/'.$row->id)?>" id="title-exercicio"><h4 class="service-heading">Exercício <?= $row->id ?></h4></a>
+                                <p class="text-muted"><?= $row->descricao ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endif; ?>
          </div>
