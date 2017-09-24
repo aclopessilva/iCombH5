@@ -379,6 +379,8 @@
                 url: "<?= base_url()?>/exercicio/ValidaCondicao",
                 dataType: 'html',
                 data: dadosCondicao,
+                beforeSend: mostraEspera,
+                complete: escondeEspera,
                 success: function (data)
                 {
                     var data = JSON.parse(data);
@@ -411,6 +413,8 @@
                 url: "<?= base_url()?>/exercicio/ValidaEstagio",
                 dataType: 'html',
                 data: dadosCondicao,
+                beforeSend: mostraEspera,
+                complete: escondeEspera,
                 success: function (data)
                 {
                     var data = JSON.parse(data);
@@ -654,6 +658,8 @@
                 url: "<?= base_url()?>/exercicio/EliminarEstagio",
                 dataType: 'html',
                 data: "estagio_a_deletar="+estagio_numero,
+                beforeSend: mostraEspera,
+                complete: escondeEspera,
                 success: function (data)
                 {
                     var data = JSON.parse(data);
@@ -811,6 +817,16 @@
     });
 
 
+
+    function mostraEspera(){
+        waitingDialog.show('Carregando ...');
+
+    }
+
+    function escondeEspera(){
+        waitingDialog.hide();
+    }
+
     /**
      * Metodo que cria um modal temporariamente com o conteudo que for enviado
      */
@@ -866,6 +882,8 @@
                 url: "<?= base_url()?>/exercicio/trocaChaves/<?php echo $exercicio->universo_id ?>/"+valor,
                 beforeSend : mostraCarregandoModal,
                 complete: escondeCarregandoModal,
+                beforeSend: mostraEspera,
+                complete: escondeEspera,
                 success: function (data)
                 {
                     $.each(data, function(data_key, data_value){
@@ -978,6 +996,8 @@
             type: "POST",
             url: "<?= base_url()?>/exercicio/Finaliza",
             data: "relacionamento="+relacionamento,
+            beforeSend: mostraEspera,
+            complete: escondeEspera,
             success: function(data){
                 if(data.estado == 'OK'){
                     alert("Parabens resposta correta!");
