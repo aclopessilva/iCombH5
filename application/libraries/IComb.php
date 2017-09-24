@@ -35,7 +35,7 @@ class IComb {
         $desenvolvimento->exercicio = $exercicio;
         $desenvolvimento->incio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
-
+        $time = date('d/m h:i A');
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
         $universo = $universo->createFromBDObject($exercicio->universo);
@@ -53,7 +53,7 @@ class IComb {
         $desenvolvimento->avaliador = $avaliador;
 
         $desenvolvimento->log = new Log();
-        $desenvolvimento->log->putEntry('Iniciando desenvolvimento do exercicio '.$exercicio->id);
+        $desenvolvimento->log->putEntry($time.' - Iniciando desenvolvimento do exercicio '.$exercicio->id);
 
         //Iniciamos uma lista de estagios.
         //Essa lista vai conter os estagios que o usuario esta montando e foram validados ou em processo de validacao.
@@ -155,13 +155,13 @@ class IComb {
      */
     public function verificaErro($condicao){
         //TODO: verificar uso de booleano "corrige"
-
+        $time = $time = date('d/m h:i A');
 
         $objeto_de_sessao = $this->getSessao('desenvolvimento');
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
         //$desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
-        $desenvolvimento->log->putEntry('Foi iniciada uma validação da condição');
+        $desenvolvimento->log->putEntry($time.' - Foi iniciada uma validação da condição');
 
         $avaliador = $desenvolvimento->avaliador;
 
@@ -178,7 +178,7 @@ class IComb {
             }else{
                 $resposta_estagio = $avaliador->adicionaCondicao($estagio->condicao);
                 if($resposta_estagio == 'ERROR'){
-                    $desenvolvimento->log->putEntry('Condicao com ERRO mensagem: '. $resposta_estagio->mensagem );
+                    $desenvolvimento->log->putEntry($time.' - Condicao com ERRO mensagem: '. $resposta_estagio->mensagem );
                     $this->saveSessao('desenvolvimento', $desenvolvimento);
                     return $resposta_estagio;
                 }
@@ -205,12 +205,12 @@ class IComb {
             //armazenamos o estagio na lista de estagios, contendo somente a condicao validada
             $desenvolvimento->estagios[] = $estagio;
 
-            $desenvolvimento->log->putEntry('Condicao Validada sem erros');
+            $desenvolvimento->log->putEntry($time.' - Condicao Validada sem erros');
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }else{
             // date_default_timezone_get('Brazil/Brazilian');
             // $date = date('dd/MM/YYYY HH:ii', time());
-            $desenvolvimento->log->putEntry('Condicao adicionada com ERRO mensagem: '. $resposta->mensagem );
+            $desenvolvimento->log->putEntry($time.' - Condicao adicionada com ERRO mensagem: '. $resposta->mensagem );
             $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
 
@@ -224,6 +224,7 @@ class IComb {
     }
 
     public function eliminarEstagio($estagio_numero){
+        $time = $time = date('d/m h:i A');
         $desenvolvimento = $this->getSessao('desenvolvimento');
         $lista_de_estagios = $desenvolvimento->estagios;
         $resposta = new stdClass();
@@ -240,7 +241,7 @@ class IComb {
 
                         $resposta->estado = "OK";
                         $resposta->mensagem = "Estagio deletado!";
-                        $desenvolvimento->log->putEntry('Deletou um estagio já validado! Estagio: '. $estagio_numero );
+                        $desenvolvimento->log->putEntry($time.' - Deletou um estagio já validado! Estagio: '. $estagio_numero );
                     }
                 }
             }
@@ -255,7 +256,7 @@ class IComb {
     }
 
     public function validaEstagioAtual($request){
-
+        $time = $time = date('d/m h:i A');
         $objeto_de_sessao = $this->getSessao('desenvolvimento');
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
@@ -286,7 +287,7 @@ class IComb {
             $desenvolvimento->estagios[sizeof($desenvolvimento->estagios) - 1] = $estagio;
             $this->saveSessao('desenvolvimento', $desenvolvimento);
 
-            $desenvolvimento->log->putEntry('Finalizou um estágio corretamente');
+            $desenvolvimento->log->putEntry($time.' - Finalizou um estágio corretamente');
 
             //para uma resposta mas clara, retiramos a resposta do avaliador e colocamos o estagio.
             unset($resposta->objeto);
