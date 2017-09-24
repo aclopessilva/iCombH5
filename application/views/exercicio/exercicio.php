@@ -168,7 +168,7 @@
                                             </div>
 
 
-                                            <label class="col-sm-1" for="n">n:</label>
+                                            <label class="col-sm-1" for="n" id="label_n" >n:</label>
 
                                             <div class="col-sm-2">
                                                 <select class="form-control" id="n" name="n">
@@ -198,7 +198,7 @@
                                             </div>
 
 
-                                            <label class="col-sm-1" for="p">p:</label>
+                                            <label class="col-sm-1" for="p" id="label_p">p:</label>
 
                                             <div class="col-sm-2">
                                                 <select class="form-control" id="p" name="p">
@@ -443,6 +443,7 @@
          * Adiciona interacao quando a formula selecionada mostra ou nao "n" ou "p" e tambem modifica o valor final da formula
          */
         jQuery(document).find('#formula').change(function () {
+            trocaFormula($(this).val());
             trocarValorFormula();
         });
 
@@ -534,10 +535,35 @@
             div_construtor_estagio_passo2.find("#formula").val("");
             div_construtor_estagio_passo2.find("#n").val("");
             div_construtor_estagio_passo2.find("#p").val("");
+            //mostrando n ou p para formula default
+            trocaFormula('n'); // identificador da formula valor
+
             //ocultamos o passo 2
             div_construtor_estagio_passo2.hide();
 
             ativaFormularioRestricao();
+        }
+
+        /**
+         * mostra ou oculta os selects para n ou p, dependendo da formula
+         */
+        function trocaFormula(formula) {
+            //limitamos a busca de id dentro do div "estagio-passo-2"
+            var div_construtor_estagio_passo2= div_construtor_estagio.find(".estagio-passo-2");
+            if(formula == 'n' || formula == 'p!'){
+                //mostramos somente n
+                div_construtor_estagio_passo2.find("#n").show();
+                div_construtor_estagio_passo2.find("#label_n").show();
+                div_construtor_estagio_passo2.find("#p").hide();
+                div_construtor_estagio_passo2.find("#label_p").hide();
+            }else{
+                //mostramos n e p
+                div_construtor_estagio_passo2.find("#n").show();
+                div_construtor_estagio_passo2.find("#label_n").show();
+                div_construtor_estagio_passo2.find("#p").show();
+                div_construtor_estagio_passo2.find("#label_p").show();
+            }
+
         }
 
         /**
