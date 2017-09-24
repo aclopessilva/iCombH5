@@ -33,8 +33,9 @@ class IComb {
     public function iniciaDesenvolvimento($exercicio) {
         $desenvolvimento = new stdClass();  //classe generica, ainda nao definida.
         $desenvolvimento->exercicio = $exercicio;
-        $desenvolvimento->incio = new DateTime();
+        $desenvolvimento->inicio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
+        $desenvolvimento->erros_formula = 0;
         $time = date('d/m h:i A');
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
@@ -289,9 +290,12 @@ class IComb {
 
             $desenvolvimento->log->putEntry($time.' - Finalizou um estágio corretamente');
 
-            //para uma resposta mas clara, retiramos a resposta do avaliador e colocamos o estagio.
+            //para uma resposta mais clara, retiramos a resposta do avaliador e colocamos o estagio.
             unset($resposta->objeto);
             $resposta->estagio = $estagio;
+        }else{
+            $desenvolvimento->erros_formula++;
+            $this->saveSessao('desenvolvimento', $desenvolvimento);
         }
 
         return $resposta;
@@ -362,18 +366,36 @@ class IComb {
             $resposta = new stdClass();
             $resposta->estado = "OK";
             $resposta->resultado = $resultado_usuario;
-            return $resposta;
+
         }else{
             $resposta = new stdClass();
             $resposta->estado = "ERROR";
             $resposta->mensagem = "Resultado Incorreto!";
-            return $resposta;
         }
 
 
-
-
+        $desenvolvimento->estado = 'FINALIZADO';
+        $desenvolvimento->fim = new DateTime();
+        $this->saveSessao('desenvolvimento', $desenvolvimento);
 
         return $resposta;
     }
+
+    public function getDuracaoExercicio(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        if($desenvolvimento->estado == 'FINALIZADO'){
+            $datetime1 = $desenvolvimento->inicio;
+            $datetime2 = $desenvolvimento->fim;
+            $interval = date_diff($datetime1, $datetime2);
+            return $interval->format('%s');
+        }else{
+            return 0;
+        }
+    }
+
+    public function getQuantidadeErroEstagio(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        return $desenvolvimento->erros_formula;
+    }
+
 }

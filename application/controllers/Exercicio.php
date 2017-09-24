@@ -159,6 +159,13 @@ class Exercicio extends CI_Controller {
 
     }
 
+    public function testevaloresdeerro() {
+
+        echo "getDuracaoExercicio:".$this->icomb->getDuracaoExercicio()."<br>";
+        echo "getQuantidadeErroEstagio:".$this->icomb->getQuantidadeErroEstagio()."<br>";
+
+    }
+
     public function ValidaEstagio() {
 
 
