@@ -338,6 +338,12 @@
             inicializaConstrutorEstagio();
         });
 
+
+        jQuery(document).find('#num_propriedades').change(function() {
+            var valor = $(this).val();
+            trocaPropriedade(valor);
+        });
+
         /**
          * Finalizar exercicio
          */
@@ -516,11 +522,14 @@
             //limpamos o passo 1
             var div_construtor_estagio_passo1= div_construtor_estagio.find(".estagio-passo-1");
             div_construtor_estagio_passo1.find("#num_elementos").val("");
-            div_construtor_estagio_passo1.find("#num_propriedades").val(1).change(); //trocamos para uma propriedade
+
+            div_construtor_estagio_passo1.find("#num_propriedades").val(1); //trocamos para uma propriedade
+            trocaPropriedade(1);
+
             div_construtor_estagio_passo1.find("#atributo").val("");
 
             div_construtor_estagio_passo1.find("#pertence").val("");
-            //tiramos a selecao de caracteristicas, forzando o usuario selecionar primeiro a chave
+            //tiramos a selecao de caracteristicas, forcando o usuario selecionar primeiro a chave
             div_construtor_estagio_passo1.find("#caracteristica").empty();
 
             div_construtor_estagio_passo1.find('#btn-valida-restricao').val('Validar Restrição');
@@ -528,7 +537,7 @@
 
             div_construtor_estagio_passo1.find("#atributo2").val("");
             div_construtor_estagio_passo1.find("#pertence2").val("");
-            //tiramos a selecao de caracteristicas, forzando o usuario selecionar primeiro a chave
+            //tiramos a selecao de caracteristicas, forcando o usuario selecionar primeiro a chave
             div_construtor_estagio_passo1.find("#caracteristica2").empty();
 
             // mostramos o passo 1
@@ -783,28 +792,23 @@
 
 
 
-
         /**
-         * Controle de mostrar condicoes
+         * Controle de mostrar as propriedades
          */
-
-        //sempre mostramos o primeira condicao
-        $("#divCondicao").show();
-        $("#divCondicao2").hide();
-
-        $('#num_propriedades').change(function() {
-
+        function trocaPropriedade(valor){
             $("#divCondicao").hide();
             $("#divCondicao2").hide();
-
-            var valor = $(this).val();
             if (valor == 1){
                 $("#divCondicao").show();
             }else if (valor == 2){
                 $("#divCondicao").show();
                 $("#divCondicao2").show();
             }
-        });
+        }
+
+        //sempre mostramos o primeira condicao
+        $("#divCondicao").show();
+        $("#divCondicao2").hide();
 
         /**
          * Controle para expandir universo
