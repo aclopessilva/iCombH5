@@ -49,7 +49,13 @@
   </br>
   <div class="row">
       <div class="col-xs-2" style="float: right;" >
-          <a href="<?php echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
+          <a href="<?php echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Baixar PDF</button></a>
+      </div>
+  </div>
+  <br>
+   <div class="row">
+      <div class="col-xs-2" style="float: right;" >     
+           <a href="email"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
       </div>
   </div>
 </section>
