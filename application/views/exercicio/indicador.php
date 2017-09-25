@@ -2,8 +2,8 @@
 
 	<div class="container">
     <div class="row">
-      <div class="col-xs-1" id="btnLogs">
-          <button type="button" class="btn btnLog" data-toggle="modal" data-target="#ModalLogs">Logs</button>
+      <div class="col-xs-2" style="float: right;" >
+         <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalLogs">Logs</button>
       </div>
     </div>
 		<div class="row titleIndicador">
@@ -27,13 +27,14 @@
 		<br>
 		<div class="row">
 			<div class="col-xs-6">
-				Acertos: 01 <br>
-				Erros: 02 <br> <br>
+				Acertos: <?php echo $quantidadeAcertos; ?> <br>
+				Erros: <?php echo $quantidadeErros; ?> <br> <br>
 				<div id="donutchart" style="width: 700px; height: 350px;"></div>
 			</div>
 			<div class="col-xs-6">
-				Tempo esperado: 05 minutos <br>
-				Tempo levado pelo aluno: 10 minutos <br> 
+				Tempo esperado: <?php echo $tempoEsperado ?><br>
+				Tempo levado pelo aluno: <?php echo $tempoDemorado ?><br> 
+        <?php echo $diffPositivaouNegativa ?><br> 
 				<div class="row" style="padding-top: 100px;">
 					<div id="barchart_material" style="width: 600px; height: 140px;"></div>
 				</div>			  
@@ -63,12 +64,12 @@
             </div>
             <div class="modal-body">
                 <?php foreach ($retorno as $row): ?>
-                  <div class="row">
+                  <div class="row" style="padding-left: 5px;">
                      <p><?= $row->texto ?></p> 
                   </div>
                 <?php endforeach; ?>
             </div>
-            <div class="modal-  ">
+            <div class="modal-footer">
                 <button class="btn" data-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -81,10 +82,10 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-  	$tEsperado = 5;
-  	$tLevado = 10;
+  	$tEsperado = <?php echo $tempoEsperadoS; ?>;
+  	$tLevado = <?php echo $tempoDemoradoS; ?>;
     var data = google.visualization.arrayToDataTable([
-      ['Tempo', 'Esperado', 'Levado'],
+      ['Tempo', 'Esperado em S', 'Levado em S'],
       ['Duração', $tEsperado, $tLevado]
       
     ]);
@@ -106,8 +107,8 @@
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
-  	$acertos=1;
-  	$erros=2;
+  	$acertos= <?php echo $quantidadeAcertos; ?>;
+  	$erros= <?php echo $quantidadeErros; ?>;
     var data = google.visualization.arrayToDataTable([
       ['esperado', 'levado'],
       ['Acertos', $acertos],         

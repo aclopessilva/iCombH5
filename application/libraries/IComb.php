@@ -36,6 +36,7 @@ class IComb {
         $desenvolvimento->inicio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
         $desenvolvimento->erros_formula = 0;
+        $desenvolvimento->acertos_formula = 0;
         $time = date('d/m h:i A');
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
@@ -242,6 +243,7 @@ class IComb {
 
                         $resposta->estado = "OK";
                         $resposta->mensagem = "Estagio deletado!";
+                        $desenvolvimento->acertos_formula--;
                         $desenvolvimento->log->putEntry($time.' - Deletou um estagio já validado! Estagio: '. $estagio_numero );
                     }
                 }
@@ -288,6 +290,7 @@ class IComb {
             $desenvolvimento->estagios[sizeof($desenvolvimento->estagios) - 1] = $estagio;
             $this->saveSessao('desenvolvimento', $desenvolvimento);
 
+            $desenvolvimento->acertos_formula++;
             $desenvolvimento->log->putEntry($time.' - Finalizou um estágio corretamente');
 
             //para uma resposta mais clara, retiramos a resposta do avaliador e colocamos o estagio.
@@ -387,7 +390,11 @@ class IComb {
             $datetime1 = $desenvolvimento->inicio;
             $datetime2 = $desenvolvimento->fim;
             $interval = date_diff($datetime1, $datetime2);
-            return $interval->format('%s');
+
+            $total = ((($interval->y * 365.25 + $interval->m * 30 + $interval->d) * 24 + $interval->h) * 60 + $interval->i)*60 + $interval->s;
+
+           return $interval;
+            //return $interval->format('%h:%i:%s');
         }else{
             return 0;
         }
@@ -396,6 +403,11 @@ class IComb {
     public function getQuantidadeErroEstagio(){
         $desenvolvimento = $this->getSessao('desenvolvimento');
         return $desenvolvimento->erros_formula;
+    }
+
+    public function getQuantidadeAcertosEstagio(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        return $desenvolvimento->acertos_formula;
     }
 
 }

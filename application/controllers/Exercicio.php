@@ -8,6 +8,7 @@ class Exercicio extends CI_Controller {
         parent::__construct();
         //precarregando models para todos os metdos
         $this->load->model('Exercicio_model');
+
         $this->load->model('Elemento_model');
         $this->load->model('Formula_model');
 
@@ -95,14 +96,42 @@ class Exercicio extends CI_Controller {
 
     public function indicador() {
         $formula = $this->Formula_model->GetAll();
+        //precisa pegar o id do exercicio, deixei fixo por enquanto (veronica)
+        $exercicio = $this->Exercicio_model->GetById(2);
+
+        //removendo .000000 que o MYSQL coloca em time()
+        $tempoEsperadoTratamento = explode('.', $exercicio->tempo_esperado);
+        $tempoEsperado = $tempoEsperadoTratamento[0];
+
+        $tempoEsperadoExercicio = explode(':', $tempoEsperado);
+        $tempoEsperadoS = (($tempoEsperadoExercicio[0]) * 60 + $tempoEsperadoExercicio[1])*60 + $tempoEsperadoExercicio[2];
         
         $retorno = $this->icomb->getLogs();
 
-        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno);
+        $tempoDemorado = $this->icomb->getDuracaoExercicio();
+        $tempoDemoradoS = ((($tempoDemorado->y * 365.25 + $tempoDemorado->m * 30 + $tempoDemorado->d) * 24 + $tempoDemorado->h) * 60 + $tempoDemorado->i)*60 + $tempoDemorado->s;
+        $convertTempoDemorado = $tempoDemorado->format('%H:%I:%S');
 
-        //convertemos o objeto em formato json, para entendimento do javascript
-        // var_dump($retorno);
-        // die();
+        $diff = (strtotime($exercicio->tempo_esperado) - strtotime($convertTempoDemorado));
+        $diffPositivaouNegativa = '';
+        if($diff > 0){
+            $diffPositivaouNegativa = 'Tempo levado pelo aluno foi menor que o tempo esperado ';
+        }else if($diff < 0){
+            $diffPositivaouNegativa = 'Tempo levado pelo aluno foi maior que o tempo esperado ';
+        }else{
+            $diffPositivaouNegativa = 'Tempo levado pelo aluno foi igual ao tempo esperado ';
+        }
+        //convert SEGUNDOS PARA HH:MM:SS -  $diff (diferença de tempo esperado e tempo realizado) 
+        $horasDiferença = floor($diff / 3600);
+        $minutosDiferença = floor(($diff - ($horasDiferença * 3600)) / 60);
+        $segundosDiferença = floor($diff % 60);
+        $convertTempoDiferença = $horasDiferença . ":" . $minutosDiferença . ":" . $segundosDiferença;
+
+
+        $quantidadeErros = $this->icomb->getQuantidadeErroEstagio();
+        $quantidadeAcertos = $this->icomb->getQuantidadeAcertosEstagio();
+
+        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno, 'tempoEsperado' => $tempoEsperado, 'tempoDemorado' => $convertTempoDemorado, 'tempoEsperadoS' => $tempoEsperadoS, 'tempoDemoradoS' => $tempoDemoradoS, 'diffPositivaouNegativa' => $diffPositivaouNegativa,'quantidadeErros' => $quantidadeErros, 'quantidadeAcertos' => $quantidadeAcertos);
 
         $this->load->view('/layout/header.php');
         $this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
