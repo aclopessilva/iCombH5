@@ -8,3 +8,4 @@ $route['indicador'] = "Exercicio/indicador";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['email'] = "Home/email_controller";
+$route['pdf'] = "Exercicio/geraPDF";

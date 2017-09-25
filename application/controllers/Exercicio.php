@@ -2,6 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//de repente mudar o caminho, para nao precisar citar por completo (veronica)
+require_once("C:/xampp/htdocs/icombh5/application/libraries/fpdf/fpdf.php");
+
 class Exercicio extends CI_Controller {
 
     public function __construct() {
@@ -249,6 +252,89 @@ class Exercicio extends CI_Controller {
         //        echo json_encode($retorno);
 
 
+    }
+
+    public function geraPDF(){    
+        $date = new DateTime();
+        $timestamp = $date->getTimestamp();
+
+        $nome = "icombh5";
+        $email = "anaerikaveronica@gmail.com";
+        $endereco = "Rua do Andradas 9999 nº 12";
+        $cep = "99999-999";
+        $cidade = "Guarulhos";
+        $estado = "RS";
+        $telefone= "9999-9999";
+        $observacoes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis";
+
+        $pdf= new FPDF("P","pt","A4");
+        $pdf= new FPDF("P","pt","A4");
+        $pdf->AddPage();
+         
+        $pdf->SetFont('arial','B',18);
+        $pdf->Cell(0,5,"Relatório",0,1,'C');
+        $pdf->Cell(0,5,"","B",1,'C');
+        $pdf->Ln(50);
+
+        //nome
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"Nome:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(0,20,$nome,0,1,'L');
+         
+        //email
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"E-mail:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(70,20,$email,0,1,'L');
+         
+        //Endereço
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"Endereço:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(70,20,$endereco,0,1,'L');
+         
+        //cep
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"CEP:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(70,20,$cep,0,1,'L');
+         
+        //cidade
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"Cidade:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(70,20,$cidade,0,1,'L');
+         
+        //Estado
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"Estado:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(70,20,$estado,0,1,'L');
+         
+        $pdf->ln(10);
+        //Observações
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"Observações:",0,1,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->MultiCell(0,20,$observacoes,0,'J');
+         
+        //cabeçalho da tabela 
+        $pdf->SetFont('arial','B',14);
+        $pdf->Cell(130,20,'Coluna 1',1,0,"L");
+        $pdf->Cell(140,20,'Coluna 2',1,0,"L");
+        $pdf->Cell(130,20,'Coluna 3',1,0,"L");
+        $pdf->Cell(160,20,'Coluna 4',1,1,"L");
+         
+        //linhas da tabela
+        $pdf->SetFont('arial','',12);
+        for($i= 1; $i <10;$i++){
+            $pdf->Cell(130,20,"Linha ".$i,1,0,"L");
+            $pdf->Cell(140,20,rand(),1,0,"L");
+            $pdf->Cell(130,20,rand(),1,0,"L");
+            $pdf->Cell(160,20,rand(),1,1,"L");
+        }
+        $pdf->Output("icombh5_".$timestamp.".pdf","D");
     }
 
 }
