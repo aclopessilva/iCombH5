@@ -364,21 +364,35 @@ class IComb {
         $exercicio_solucao = $desenvolvimento->exercicio->solucao;
         $exercicio_solucao_exercicio = $exercicio_solucao->resultado;
 
-        //comparamos os resultados
-        if($exercicio_solucao_exercicio == $resultado_usuario){
-            $resposta = new stdClass();
-            $resposta->estado = "OK";
-            $resposta->resultado = $resultado_usuario;
-
-        }else{
-            $resposta = new stdClass();
-            $resposta->estado = "ERROR";
-            $resposta->mensagem = "Resultado Incorreto!";
+        //motando objeto de resposta
+        $resposta = new stdClass();
+        if($relacionamento == 'S'){
+            $resposta->relacionamento = "Soma";
+        } else{
+            $resposta->relacionamento = "Multiplicação";
         }
 
+        $resposta->resultado = $resultado_usuario;
 
-        $desenvolvimento->estado = 'FINALIZADO';
-        $desenvolvimento->fim = new DateTime();
+        //comparamos os resultados
+        if($exercicio_solucao_exercicio == $resultado_usuario){
+            $resposta->estado = "OK";
+
+            $desenvolvimento->fim = new DateTime();
+            $desenvolvimento->estado = 'FINALIZADO';
+
+            $time = $time = date('d/m h:i A');
+            $desenvolvimento->log->putEntry($time.' - Finalizou exercicio com sucesso');
+
+        }else{
+            $resposta->estado = "ERROR";
+            $resposta->mensagem = "Resultado Incorreto!";
+
+            $time = $time = date('d/m h:i A');
+            $desenvolvimento->log->putEntry($time.' - Finalizou exercicio com erro');
+        }
+
+        $desenvolvimento->resposta = $resposta;
         $this->saveSessao('desenvolvimento', $desenvolvimento);
 
         return $resposta;
@@ -400,6 +414,12 @@ class IComb {
         }
     }
 
+    
+    /*************************************
+     * METODOS PARA GERAR A TELA DE INDICADORES
+     **************************************/
+    
+    
     public function getQuantidadeErroEstagio(){
         $desenvolvimento = $this->getSessao('desenvolvimento');
         return $desenvolvimento->erros_formula;
@@ -424,9 +444,19 @@ class IComb {
     }
     
     public function coletaResultadoFinal(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        return $desenvolvimento->resposta->resultado;
+    }
+    
+    public function relacionamentoResultadoFinal(){
         $desenvolvimento = $this->getSessao('desenvolvimento');        
-        $exercicio_solucao = $desenvolvimento->exercicio->solucao;
-        return $exercicio_solucao->resultado;
+        return $desenvolvimento->resposta->relacionamento;
+        
+    }
+
+    public function obtemExercicioResolvido(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');        
+        return $desenvolvimento->exercicio;
     }
 
 }

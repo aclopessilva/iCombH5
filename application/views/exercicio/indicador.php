@@ -13,7 +13,7 @@
         </div>
         <div class="row d1">
             <div class="col-xs-12">
-                <p>Detalhes da resposta:</p>
+                <p>Reveja o sumário da sua resolução:</p>
                 <div class="container" >
                 <!-- interando os estagios corretos -ana -->
                 <?php 
@@ -35,7 +35,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="row d2">
+                        <div class="row d2 item-estagio">
                             <div class="col-xs-12">
                             <?php 
                             $n = $estagioCorreto->formula->n;
@@ -43,7 +43,7 @@
                             $textoFormula = str_replace("n", $n ,$estagioCorreto->formula->formula->notacao);
                             $textoFormula = str_replace("p", $p ,$textoFormula );
                             ?>
-                            <p>Número de possibilidades: Fórmula utlizada <b><?=$estagioCorreto->formula->formula->nome?></b> <?=$textoFormula?> = <?=$estagioCorreto->formula->resultado?></p>
+                                <p>Fórmula utilizada <b><?=$estagioCorreto->formula->formula->nome?></b>: <?=$textoFormula?>. Resultado: <b><?=$estagioCorreto->formula->resultado?></b> possibilidade(s).</p>
                             </div>
                         </div>
                 <?php }?>
@@ -51,7 +51,12 @@
             </div>
         </div> 
         <div class="row ">
-            <div class="col-xs-12 text-center"><p>Resultado: <?=$resultadoFinal?></p></div>
+
+
+            <div class="col-xs-12 text-center">
+                <p>O(s) estagio(s) se relaciona(m) por meio de <b><?=$relacionamentoFinal?></b></p>
+                <p>Resultado final: <b><?=$resultadoFinal?></b> possibilidade(s) em total.</p>
+            </div>
         </div>
              
         <div class="row">

@@ -100,7 +100,7 @@ class Exercicio extends CI_Controller {
     public function indicador() {
         $formula = $this->Formula_model->GetAll();
         //precisa pegar o id do exercicio, deixei fixo por enquanto (veronica)
-        $exercicio = $this->Exercicio_model->GetById(2);
+        $exercicio = $this->icomb->obtemExercicioResolvido();
 
         //removendo .000000 que o MYSQL coloca em time()
         $tempoEsperadoTratamento = explode('.', $exercicio->tempo_esperado);
@@ -138,7 +138,21 @@ class Exercicio extends CI_Controller {
         
         $estagiosCorretos = $this->icomb->coletaEstagiosCorretos();
         $resultadoFinal = $this->icomb->coletaResultadoFinal();
-        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno, 'tempoEsperado' => $tempoEsperado, 'tempoDemorado' => $convertTempoDemorado, 'tempoEsperadoS' => $tempoEsperadoS, 'tempoDemoradoS' => $tempoDemoradoS, 'diffPositivaouNegativa' => $diffPositivaouNegativa,'quantidadeErros' => $quantidadeErros, 'quantidadeAcertos' => $quantidadeAcertos, 'estagiosCorretos' =>$estagiosCorretos, 'resultadoFinal' => $resultadoFinal);
+        $relacionamentoFinal = $this->icomb->relacionamentoResultadoFinal();
+        $arrayDadosExercicio = array(
+            'formula' => $formula, 
+            'retorno' => $retorno, 
+            'tempoEsperado' => $tempoEsperado, 
+            'tempoDemorado' => $convertTempoDemorado, 
+            'tempoEsperadoS' => $tempoEsperadoS, 
+            'tempoDemoradoS' => $tempoDemoradoS, 
+            'diffPositivaouNegativa' => $diffPositivaouNegativa,
+            'quantidadeErros' => $quantidadeErros, 
+            'quantidadeAcertos' => $quantidadeAcertos, 
+            'estagiosCorretos' =>$estagiosCorretos, 
+            'resultadoFinal' => $resultadoFinal,
+            'relacionamentoFinal' => $relacionamentoFinal
+        );
 
         $this->load->view('/layout/header.php');
         $this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);
