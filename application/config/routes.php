@@ -7,5 +7,5 @@ $route['indicador'] = "Exercicio/indicador";
 //$route['resolver'] = "Exercicio/resolucao";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['email'] = "Home/email_controller";
+$route['email'] = "Email/email_controller";
 $route['pdf'] = "Exercicio/geraPDF";

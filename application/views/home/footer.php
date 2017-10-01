@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <span class="copyright">Copyright &copy; iCombH5-2017</span>
+                    <span class="copyright">Copyright &copy; E.V.A-iCombH5-2017</span>
                 </div>
                 <!--div class="col-md-4">
                     <ul class="list-inline social-buttons">

@@ -89,12 +89,12 @@
         <br>
         <div class="row">
       <div class="col-xs-2" style="float: right;" >     
-                <a href="email"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
-           </div>
-        </div>
+        <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalEmail">Enviar</button>
+      </div>
+  </div>
 </section>
 
-<!-- Modal -->
+<!-- ModalLOG -->
 <div class="modal fade" id="ModalLogs" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -115,6 +115,46 @@
         </div>
     </div>
 </div>
+
+<!--
+*
+* Modal formulário de envio de Email
+* 
+-->
+<div class="modal" id="ModalEmail" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Enviar Relatório</h3>
+            </div>
+            <div class="modal-body" style="padding-bottom: 140px;">
+                <form action="email" method="post">
+                    <label class="col-sm-4" for="nomeUsuario">Seu nome:</label>
+
+                      <div class="col-sm-8" style="padding-bottom: 10px;">
+                        <input type="text" class="form-control" name="nomeUsuario" id="nomeUsuario" />
+                      </div>
+
+                    <label class="col-sm-4" for="emailDestino">Email do destinatário:</label>
+
+                      <div class="col-sm-8" style="padding-bottom: 15px;">
+                        <input type="text" class="form-control" name="emailDestino" id="emailDestino" />
+                      </div>
+            
+                      <div class="col-sm-12">
+                         <input type="submit" value="Enviar Relatório"class="btn btnExercicio"/>
+                      </div>                        
+                  </form> 
+
+            </div>  
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Gráfico Bar Chart-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">

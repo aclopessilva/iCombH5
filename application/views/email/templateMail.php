@@ -566,7 +566,7 @@
                             <td class="mcnImageContent" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                 
                                     
-                                        <img align="center" alt="" src="https://gallery.mailchimp.com/47a666295122faa686bf3b52d/images/a1a0d0bc-7df7-446d-bf45-8df389d3c542.jpg" width="200" style="max-width: 200px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
+                                        <img align="center" alt="" src="https://gallery.mailchimp.com/47a666295122faa686bf3b52d/images/4cb349b0-f352-4722-87ff-1ca8fbfa6b95.png" width="200" style="max-width: 200px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
                                     
                                 
                             </td>
@@ -593,29 +593,22 @@
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
                         
-                        <td valign="top" class="mcnTextContent" style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;font-style: normal;font-weight: normal;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
                         
-                            <h3 class="null" style="text-align: center;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 20px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;"><span style="font-size:15px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br>
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br>
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br>
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse<br>
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br>
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br>
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br>
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br>
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse<br>
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br>
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br>
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br>
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br>
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse<br>
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br>
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br>
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br>
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br>
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse<br>
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br>
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></h3>
+                            <span style="font-size:14px"><strong>Nome: <?php echo $nUsuario; ?><br>
+                            	<br><i>O relatório sobre o exercício realizado encontra-se anexada neste email!</i><br>
+						</strong>
+&nbsp;&nbsp;<br>
+O iCombH5 é um sistema interativo gratuito na web, que fortalece o aprendizado do aluno na resolução de problemas de Análise Combinatória por meio de exercícios de correção automática.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Para resolver o que é pedido em um determinado exercício, o aluno deve dividir o problema em subproblemas&nbsp;-- aplicar a estratégia “dividir para conquistar”.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; Cada subproblema é considerado um estágio, onde deve-se seguir passos que envolvem raciocínio, ações e modelagem para descobrir a quantidade de elementos que são solicitados.</span>
+
+<div style="text-align: right;"><span style="font-size:15px">Recomende o iCombH5 para o exercício de Análise Combinatória.<br>
+Acesso nosso site e conheça mais.</span></div>
+
+<h2 class="null" style="text-align: justify;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;"><span style="font-size:14px">Agradecemo-lhes pela preferência.</span></h2>
+
+<h2 class="null" style="text-align: right;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;">&nbsp;</h2>
 
                         </td>
                     </tr>
@@ -634,39 +627,39 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><
 </table></td>
                             </tr>
                             <tr>
-                                <td valign="top" id="templateBody" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;background-image: none;background-repeat: no-repeat;background-position: center;background-size: cover;border-top: 0;border-bottom: 2px solid #EAEAEA;padding-top: 0;padding-bottom: 9px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageGroupBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-    <tbody class="mcnImageGroupBlockOuter">
-        
-            <tr>
-                <td valign="top" style="padding: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnImageGroupBlockInner">
-                    
-                    <table align="left" width="273" border="0" cellpadding="0" cellspacing="0" class="mcnImageGroupContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                            <tbody><tr>
-                                <td class="mcnImageGroupContent" valign="top" style="padding-left: 9px;padding-top: 0;padding-bottom: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                
-                                    
-                                        <img alt="" src="https://gallery.mailchimp.com/47a666295122faa686bf3b52d/images/447e4dec-7c49-434d-a816-c81c0bc7f09a.png" width="66" style="max-width: 66px;padding-bottom: 0;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
-                                    
-                                
-                                </td>
-                            </tr>
-                        </tbody></table>
-                    
-                    <table align="right" width="273" border="0" cellpadding="0" cellspacing="0" class="mcnImageGroupContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                            <tbody><tr>
-                                <td class="mcnImageGroupContent" valign="top" style="padding-right: 9px;padding-top: 0;padding-bottom: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                
-                                    
-                                        <img alt="" src="https://gallery.mailchimp.com/47a666295122faa686bf3b52d/images/68802ad2-c267-4774-9122-86a59fc45a7c.png" width="66" style="max-width: 66px;padding-bottom: 0;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
-                                    
-                                
-                                </td>
-                            </tr>
-                        </tbody></table>
-                    
-                </td>
-            </tr>
-        
+                                <td valign="top" id="templateBody" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;background-image: none;background-repeat: no-repeat;background-position: center;background-size: cover;border-top: 0;border-bottom: 2px solid #EAEAEA;padding-top: 0;padding-bottom: 9px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;table-layout: fixed !important;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%;padding: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #EAEAEA;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnButtonBlockOuter">
+        <tr>
+            <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" valign="top" align="center" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border: 1px double #222222;border-radius: 10px;background-color: #FFD249;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody>
+                        <tr>
+                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial, &quot;helvetica neue&quot: ;, helvetica, sans-serif: ;font-size: 16px;padding: 15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <a class="mcnButton " title="Visite o iCombH5" href="http://www.google.com.br" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #000;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">Visite o iCombH5</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
     </tbody>
 </table></td>
                             </tr>
