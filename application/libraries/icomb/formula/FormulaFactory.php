@@ -12,7 +12,7 @@ class FormulaFactory
         }elseif ($nome == 'n^p'){
             return new Potencia();
         }elseif ($nome == 'p!'){
-            return new Factorial();
+            return new Fatorial();
         }elseif ($nome == 'n'){
             return new Value();
         }

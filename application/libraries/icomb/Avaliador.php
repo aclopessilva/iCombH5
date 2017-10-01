@@ -208,8 +208,7 @@ class Avaliador {
      */
     public function deteccaoDeErroFormula( $condicao, $formularequest) {
 
-
-        $resposta = new RespostaDoAvaliador();
+        /** inicio ICOMB **/
         $n = 0;
         foreach ($this->universo->elementos as $elemento) {
             if($condicao->evaluate($elemento)){
@@ -221,13 +220,17 @@ class Avaliador {
         $formula_binomio = new Binomio();
         $resultado1 = $formula_binomio->calcula($n,$p);
         $resultado2 = $formularequest->formula->calcula($formularequest->n, $formularequest->p);
-
-        if($resultado1 != $resultado2){
-            $resposta->estado = "ERRO";
-            $resposta->mensagem = "Cálculo Inválido";
-        }else{
+        /** fim ICOMB **/
+        
+        $resposta = new RespostaDoAvaliador();
+        if($resultado1 == $resultado2){
             $resposta->estado = "OK";
             $resposta->objeto = $formularequest; //retorna o request que tem a formula e os valores
+            $resposta->objeto->resultado = $resultado2;
+            
+        }else{            
+            $resposta->estado = "ERRO";
+            $resposta->mensagem = "Cálculo Inválido";
         }
         return $resposta;
     }

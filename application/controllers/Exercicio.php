@@ -134,7 +134,11 @@ class Exercicio extends CI_Controller {
         $quantidadeErros = $this->icomb->getQuantidadeErroEstagio();
         $quantidadeAcertos = $this->icomb->getQuantidadeAcertosEstagio();
 
-        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno, 'tempoEsperado' => $tempoEsperado, 'tempoDemorado' => $convertTempoDemorado, 'tempoEsperadoS' => $tempoEsperadoS, 'tempoDemoradoS' => $tempoDemoradoS, 'diffPositivaouNegativa' => $diffPositivaouNegativa,'quantidadeErros' => $quantidadeErros, 'quantidadeAcertos' => $quantidadeAcertos);
+        /*enviando dados da sessão para view p/ mostrar estágios corretos - ana*/
+        
+        $estagiosCorretos = $this->icomb->coletaEstagiosCorretos();
+        $resultadoFinal = $this->icomb->coletaResultadoFinal();
+        $arrayDadosExercicio = array('formula' => $formula, 'retorno' => $retorno, 'tempoEsperado' => $tempoEsperado, 'tempoDemorado' => $convertTempoDemorado, 'tempoEsperadoS' => $tempoEsperadoS, 'tempoDemoradoS' => $tempoDemoradoS, 'diffPositivaouNegativa' => $diffPositivaouNegativa,'quantidadeErros' => $quantidadeErros, 'quantidadeAcertos' => $quantidadeAcertos, 'estagiosCorretos' =>$estagiosCorretos, 'resultadoFinal' => $resultadoFinal);
 
         $this->load->view('/layout/header.php');
         $this->load->view('/layout/menu-exercicio.php', $arrayDadosExercicio);

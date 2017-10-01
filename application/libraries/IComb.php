@@ -409,5 +409,24 @@ class IComb {
         $desenvolvimento = $this->getSessao('desenvolvimento');
         return $desenvolvimento->acertos_formula;
     }
+    
+    public function coletaEstagiosCorretos(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $estagios = $desenvolvimento->estagios;
+        
+        $estagiosCorretos = array();
+        foreach ($estagios as $estagio){
+            if($estagio->estado == 'FINALIZADO'){
+                $estagiosCorretos[] =  $estagio;
+            }
+        }
+        return $estagiosCorretos;
+    }
+    
+    public function coletaResultadoFinal(){
+        $desenvolvimento = $this->getSessao('desenvolvimento');        
+        $exercicio_solucao = $desenvolvimento->exercicio->solucao;
+        return $exercicio_solucao->resultado;
+    }
 
 }

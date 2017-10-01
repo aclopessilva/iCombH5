@@ -2,7 +2,7 @@
 
 class Binomio
 {
-    public $nome = 'binomio';
+    public $nome = 'Combinação';
     public $notacao = 'C(n,p)';
 
 

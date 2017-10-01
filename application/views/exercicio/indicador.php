@@ -1,63 +1,92 @@
 <section id="exercicio">
 
-	<div class="container">
-    <div class="row">
+    <div class="container">
+        <div class="row">
       <div class="col-xs-2" style="float: right;" >
-         <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalLogs">Logs</button>
-      </div>
-    </div>
-		<div class="row titleIndicador">
-			<h3>Parabéns! Sua resposta está correta!</h3>	
-		</div>
-		<div class="row d1">
-			Veja abaixo seu desempenho:
-		</div>
-		<div style="padding-left: 50px;">
-			<div class="row d2">
-				1 elemento tal que o valor é  Ás
-			</div>
-			<div class="row d2">
-				Número de possibilidade: C(4,1) = 4
-			</div>
-		</div>
-		<br>
-		<div class="row d1 text-center">
-			Resultado:
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-6">
-				Acertos: <?php echo $quantidadeAcertos; ?> <br>
-				Erros: <?php echo $quantidadeErros; ?> <br> <br>
-				<div id="donutchart" style="width: 700px; height: 350px;"></div>
-			</div>
-			<div class="col-xs-6">
-				Tempo esperado: <?php echo $tempoEsperado ?><br>
-				Tempo levado pelo aluno: <?php echo $tempoDemorado ?><br> 
-        <?php echo $diffPositivaouNegativa ?><br> 
-				<div class="row" style="padding-top: 100px;">
-					<div id="barchart_material" style="width: 600px; height: 140px;"></div>
-				</div>			  
-			</div>
-		</div>
+             <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalLogs">Logs</button>
+            </div>
+        </div>
+        <div class="row titleIndicador">            
+            <div class="col-xs-12">
+                <h3>Parabéns! Sua resposta está correta!</h3>	
+            </div>
+        </div>
+        <div class="row d1">
+            <div class="col-xs-12">
+                <p>Detalhes da resposta:</p>
+                <div class="container" >
+                <!-- interando os estagios corretos -ana -->
+                <?php 
+                $contador = 0;
+                foreach ($estagiosCorretos as $estagioCorreto){
+                    $contador++;
+                    $quantidade =  $estagioCorreto->condicao->quantidade;
+                    $expressoes =  $estagioCorreto->condicao->expressoes;
+                ?>
+                        <div class="row d2">
+
+                            <div class="col-xs-12">
+                                <p><?=$contador?>° Estágio: </p>
+                                <p><?=$quantidade?> elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):</p>
+                                <ul>
+                                <?php foreach($expressoes as $expressao){?>
+                                    <li><p><?=$expressao->texto?></p></li>
+                                <?php }?>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row d2">
+                            <div class="col-xs-12">
+                            <?php 
+                            $n = $estagioCorreto->formula->n;
+                            $p = $estagioCorreto->formula->p;
+                            $textoFormula = str_replace("n", $n ,$estagioCorreto->formula->formula->notacao);
+                            $textoFormula = str_replace("p", $p ,$textoFormula );
+                            ?>
+                            <p>Número de possibilidades: Fórmula utlizada <b><?=$estagioCorreto->formula->formula->nome?></b> <?=$textoFormula?> = <?=$estagioCorreto->formula->resultado?></p>
+                            </div>
+                        </div>
+                <?php }?>
+                </div>
+            </div>
+        </div> 
+        <div class="row ">
+            <div class="col-xs-12 text-center"><p>Resultado: <?=$resultadoFinal?></p></div>
+        </div>
+             
+        <div class="row">
+                <div class="col-xs-6">
+                        Acertos: <?php echo $quantidadeAcertos; ?> <br>
+                        Erros: <?php echo $quantidadeErros; ?> <br> <br>
+                        <div id="donutchart" style="width: 700px; height: 350px;"></div>
+                </div>
+                <div class="col-xs-6">
+                        Tempo esperado: <?php echo $tempoEsperado ?><br>
+                        Tempo levado pelo aluno: <?php echo $tempoDemorado ?><br>
+                        <?php echo $diffPositivaouNegativa ?><br> 
+                        <div class="row" style="padding-top: 100px;">
+                                <div id="barchart_material" style="width: 600px; height: 140px;"></div>
+                        </div>			  
+                </div>
+        </div>
 	</div>
-	<div class="row">
+        <div class="row">
     <div class="col-xs-2" style="float: right;" >
-        <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
-    </div>
-  </div>
-  </br>
-  <div class="row">
+                <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
+            </div>
+        </div>
+        </br>
+        <div class="row">
       <div class="col-xs-2" style="float: right;" >
-          <a href="<?php echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Baixar PDF</button></a>
-      </div>
-  </div>
-  <br>
-   <div class="row">
+                <a href="<?php echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Baixar PDF</button></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
       <div class="col-xs-2" style="float: right;" >     
-           <a href="email"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
-      </div>
-  </div>
+                <a href="email"><button type="button" class="btn btn-info btnExercicio">Enviar PDF</button></a>
+           </div>
+        </div>
 </section>
 
 <!-- Modal -->

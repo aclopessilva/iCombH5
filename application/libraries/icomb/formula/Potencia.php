@@ -9,7 +9,7 @@
 class Potencia
 {
 
-    public $nome = 'potencia';
+    public $nome = 'Potencia';
     public $notacao = 'n^p';
 
     public function calcula($n, $p){

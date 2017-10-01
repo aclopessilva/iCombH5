@@ -2,7 +2,7 @@
 
 class Arranjo
 {
-    public $nome = 'arranjo';
+    public $nome = 'Arranjo';
     public $notacao = 'A(n,p)';
     public function calcula($n, $p){
         $q = $n-$p;

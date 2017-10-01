@@ -423,18 +423,6 @@ ul.social-buttons li a:active {
   outline: none;
 }
 
-::-moz-selection {
-  text-shadow: none;
-}
-::selection {
-  text-shadow: none;
-}
-img::selection {
-  background: transparent;
-}
-img::-moz-selection {
-  background: transparent;
-}
 body {
 }
 

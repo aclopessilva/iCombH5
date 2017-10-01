@@ -1,7 +1,7 @@
 <?php
 class Value
 {
-    public $nome = 'valor';
+    public $nome = 'Valor';
     public $notacao = 'n';
 
     public function calcula($n){

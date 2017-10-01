@@ -1,16 +1,16 @@
 <?php
 
-class Factorial
+class Fatorial
 {
-    public $nome = 'factorial';
+    public $nome = 'Fatorial';
     public $notacao = 'p!';
 
     public function calcula($n){
-        $factorial = 1;
+        $fatorial = 1;
         for ($x=$n; $x>=1; $x--)
         {
-            $factorial = $factorial * $x;
+            $fatorial = $fatorial * $x;
         }
-        return $factorial;
+        return $fatorial;
     }
 }
