@@ -133,7 +133,7 @@
                     <label class="col-sm-4" for="nomeUsuario">Seu nome:</label>
 
                       <div class="col-sm-8" style="padding-bottom: 10px;">
-                        <input type="text" class="form-control" name="nomeUsuario" id="nomeUsuario" />
+                        <input type="text" class="form-control" onkeypress="return txtBoxFormat(event);" name="nomeUsuario" id="nomeUsuario" />
                       </div>
 
                     <label class="col-sm-4" for="emailDestino">Email do destinatário:</label>
@@ -205,5 +205,29 @@
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
   }
+
+  /*
+  *
+  *Js para campo aceitar apenas letras
+  * 
+   */  
+   function txtBoxFormat(evtKeyPress) {
+        var i, nCount, sValue, fldLen, mskLen,bolMask, sCod, nTecla;
+
+        if(document.all) { // Internet Explorer
+            nTecla = evtKeyPress.keyCode;
+        } else if(document.layers) { // Nestcape
+            nTecla = evtKeyPress.which;
+        } else {
+            nTecla = evtKeyPress.which;
+            if (nTecla == 8) {
+                return true;
+            }
+        }
+        if (nTecla != 8)
+          return ((nTecla <= 47) || (nTecla >= 58)); 
+        else 
+          return true;
+    }
 </script>
 
