@@ -272,17 +272,19 @@ class Exercicio extends CI_Controller {
 
     }
 
-    public function geraPDF(){    
+    public function geraPDF(){  
+        $quantidadeErros = $this->icomb->getQuantidadeErroEstagio();
+        $quantidadeAcertos = $this->icomb->getQuantidadeAcertosEstagio();
+        $estagiosCorretos = $this->icomb->coletaEstagiosCorretos();
+        $resultadoFinal = $this->icomb->coletaResultadoFinal();
+        $relacionamentoFinal = $this->icomb->relacionamentoResultadoFinal();  
+        $retorno = $this->icomb->getLogs();
+
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
 
         $nome = "icombh5";
         $email = "anaerikaveronica@gmail.com";
-        $endereco = "Rua do Andradas 9999 nº 12";
-        $cep = "99999-999";
-        $cidade = "Guarulhos";
-        $estado = "RS";
-        $telefone= "9999-9999";
         $observacoes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis";
 
         $pdf= new FPDF("P","pt","A4");
@@ -290,7 +292,7 @@ class Exercicio extends CI_Controller {
         $pdf->AddPage();
          
         $pdf->SetFont('arial','B',18);
-        $pdf->Cell(0,5,"Relatório",0,1,'C');
+        $pdf->Cell(0,5,"iCombH5",0,1,'C');
         $pdf->Cell(0,5,"","B",1,'C');
         $pdf->Ln(50);
 
@@ -305,53 +307,75 @@ class Exercicio extends CI_Controller {
         $pdf->Cell(70,20,"E-mail:",0,0,'L');
         $pdf->setFont('arial','',12);
         $pdf->Cell(70,20,$email,0,1,'L');
-         
-        //Endereço
-        $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"Endereço:",0,0,'L');
-        $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$endereco,0,1,'L');
-         
-        //cep
-        $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"CEP:",0,0,'L');
-        $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$cep,0,1,'L');
-         
-        //cidade
-        $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"Cidade:",0,0,'L');
-        $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$cidade,0,1,'L');
-         
-        //Estado
-        $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"Estado:",0,0,'L');
-        $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$estado,0,1,'L');
-         
+
         $pdf->ln(10);
-        //Observações
+        //acertos
         $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"Observações:",0,1,'L');
+        $pdf->Cell(70,20,"N Acertos:",0,0,'L');
         $pdf->setFont('arial','',12);
-        $pdf->MultiCell(0,20,$observacoes,0,'J');
-         
+        $pdf->Cell(0,20,$quantidadeAcertos,0,1,'L');
+
+        //erros
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"N Erros:",0,0,'L');
+        $pdf->setFont('arial','',12);
+        $pdf->Cell(0,20,$quantidadeErros,0,1,'L');
+
+        $pdf->ln(10);
+        $pdf->MultiCell(0,20,'O(s) estagio(s) se relaciona(m) por meio de '. $relacionamentoFinal,0,'J');
+        $pdf->MultiCell(0,20,'Resultado final: ' . $resultadoFinal . ' possibilidade(s) em total.',0,'J');
+        
+        $contador = 0;
+        $pdf->ln(10);
+        foreach ($estagiosCorretos as $estagioCorreto){
+            $contador++;
+            $quantidade =  $estagioCorreto->condicao->quantidade;
+            $expressoes =  $estagioCorreto->condicao->expressoes;
+        }
+
+            $pdf->MultiCell(0,20, utf8_decode($contador. 'Estágio:'),0,'J');
+            $pdf->MultiCell(0,20,$quantidade.  utf8_decode('elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):'),0,'J');
+
+            foreach($expressoes as $expressao)
+                $pdf->MultiCell(0,20, utf8_decode($expressao->texto),0,'J');
+
+        $n = $estagioCorreto->formula->n;
+        $p = $estagioCorreto->formula->p;
+        $textoFormula = str_replace("n", $n ,$estagioCorreto->formula->formula->notacao);
+        $textoFormula = str_replace("p", $p ,$textoFormula );
+
+         $pdf->ln(10);
+        $pdf->MultiCell(0,20, utf8_decode('Fórmula utilizada '.$estagioCorreto->formula->formula->nome . ' ' . $textoFormula),0,'J');
+        $pdf->MultiCell(0,20, utf8_decode('Resultado: '. $estagioCorreto->formula->resultado. ' possibilidade(s).'),0,'J'); 
+
+        //LOGS
+        $pdf->ln(10);
+        $pdf->ln(10);
+        $pdf->SetFont('arial','B',12);
+        $pdf->Cell(70,20,"LOGS:",0,1,'L');
+        $pdf->setFont('arial','',12);
+       
+
+        foreach ($retorno as $row)
+            $pdf->Cell(0,20, utf8_decode($row->texto),0,1,'L');
+
+
+
         //cabeçalho da tabela 
-        $pdf->SetFont('arial','B',14);
-        $pdf->Cell(130,20,'Coluna 1',1,0,"L");
-        $pdf->Cell(140,20,'Coluna 2',1,0,"L");
-        $pdf->Cell(130,20,'Coluna 3',1,0,"L");
-        $pdf->Cell(160,20,'Coluna 4',1,1,"L");
+        // $pdf->SetFont('arial','B',14);
+        // $pdf->Cell(130,20,'Coluna 1',1,0,"L");
+        // $pdf->Cell(140,20,'Coluna 2',1,0,"L");
+        // $pdf->Cell(130,20,'Coluna 3',1,0,"L");
+        // $pdf->Cell(160,20,'Coluna 4',1,1,"L");
          
         //linhas da tabela
-        $pdf->SetFont('arial','',12);
-        for($i= 1; $i <10;$i++){
-            $pdf->Cell(130,20,"Linha ".$i,1,0,"L");
-            $pdf->Cell(140,20,rand(),1,0,"L");
-            $pdf->Cell(130,20,rand(),1,0,"L");
-            $pdf->Cell(160,20,rand(),1,1,"L");
-        }
+        // $pdf->SetFont('arial','',12);
+        // for($i= 1; $i <10;$i++){
+        //     $pdf->Cell(130,20,"Linha ".$i,1,0,"L");
+        //     $pdf->Cell(140,20,rand(),1,0,"L");
+        //     $pdf->Cell(130,20,rand(),1,0,"L");
+        //     $pdf->Cell(160,20,rand(),1,1,"L");
+        // }
         $pdf->Output("icombh5_".$timestamp.".pdf","D");
     }
 
