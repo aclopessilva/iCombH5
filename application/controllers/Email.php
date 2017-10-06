@@ -140,7 +140,7 @@ class Email extends CI_Controller {
         $nomeAluno  = "EVA";
 		$Nome		= "fdfdsfdsdsf";	// Pega o valor do campo Nome
 		$Fone		= "156165515156";	// Pega o valor do campo Telefone
-		$EmailPara	=  'joaopaulorosadelima@gmail.com';	// Pega o valor do campo Email
+		$EmailPara	=  'erika.parhg19@gmail.com';	// Pega o valor do campo Email
 		$Mensagem	= "gfdgfdfdgfdgfdgfdgf";	// Pega os valores do campo Mensagem
 
 		//configs
@@ -156,6 +156,8 @@ class Email extends CI_Controller {
 		$mail->Username = GUSER;
 		$mail->Password = GPWD;
 
+		$mail->From = "icombh5@gmail.com";
+		$mail->FromName = "iCombH5";
 		$mail->AddAddress($EmailPara); //para quem vai enviar
 
 		$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
