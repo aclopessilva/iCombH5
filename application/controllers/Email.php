@@ -11,11 +11,11 @@ class Email extends CI_Controller {
 	public function email_controller()
 	{	
 		$this->load->library('IComb', 'icomb');
-		// $DATA = ARRAY('NUSUARIO' => $THIS->INPUT->POST('NOMEUSUARIO'),
-		// 'EMAIL' => $THIS->INPUT->POST('EMAILDESTINO'));
+		 $DATA = ARRAY('nUsuario' => $this->input->POST('nomeUsuario'),
+		 'Email' => $this->input->POST('emailDestino'));
 
-		// $NUSUARIO = $THIS->INPUT->POST('NOMEUSUARIO');
-		// $EMAIL = $THIS->INPUT->POST('EMAILDESTINO');
+		$NomeAluno = $this->input->POST('nomeUsuario');
+		$EmailPara = $this->input->POST('emailDestino');
 		
 		// $THIS->LOAD->LIBRARY('EMAIL');
 
@@ -58,7 +58,7 @@ class Email extends CI_Controller {
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
 
-        $nome = "icombh5";
+        // $nome = $NUSUARIO;
         $email = "anaerikaveronica@gmail.com";
         $observacoes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis";
 
@@ -75,7 +75,7 @@ class Email extends CI_Controller {
         $pdf->SetFont('arial','B',12);
         $pdf->Cell(70,20,"Nome:",0,0,'L');
         $pdf->setFont('arial','',12);
-        $pdf->Cell(0,20,$nome,0,1,'L');
+        $pdf->Cell(0,20,$NomeAluno,0,1,'L');
          
         //email
         $pdf->SetFont('arial','B',12);
@@ -137,10 +137,9 @@ class Email extends CI_Controller {
         $doc = $pdf->Output("icombh5_".$timestamp.".pdf","S");
 		//FIM PDF______________________________________________________________________________________________________________________________________________
 
-        $nomeAluno  = "EVA";
-		$Nome		= "fdfdsfdsdsf";	// Pega o valor do campo Nome
+        // $nomeAluno 	= $NUSUARIO;
 		$Fone		= "156165515156";	// Pega o valor do campo Telefone
-		$EmailPara	=  'erika.parhg19@gmail.com';	// Pega o valor do campo Email
+		//$EmailPara	=  'veronicazazula@gmail.com';	// Pega o valor do campo Email
 		$Mensagem	= "gfdgfdfdgfdgfdgfdgf";	// Pega os valores do campo Mensagem
 
 		//configs
@@ -149,7 +148,7 @@ class Email extends CI_Controller {
 		$mail->IsSMTP(true); 		// Define que a mensagem será SMTP
 		$mail->Host = "smtp.gmail.com"; // Endereço do servidor SMTP
 		$mail->SMTPSecure = 'tls';	// SSL REQUERIDO pelo GMail
-		$mail->Port = 587; //587
+		$mail->Port = 587; //587 //465
 		$mail->SMTPAuth = true; // Usa autenticação SMTP? (opcional)
 		$mail->SMTPDebug = 1;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
 
@@ -163,11 +162,13 @@ class Email extends CI_Controller {
 		$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
 
 		$mail->Subject  = "Mensagem Teste"; // Assunto da mensagem 
-		$mail->Body = "Este é o corpo da mensagem de teste, em <b>HTML</b>!  :)"; //PODE SER HTML
+		$HTML = $this->load->VIEW('EMAIL/TEMPLATEMAIL.PHP', $DATA, TRUE);		
+		//$THIS->EMAIL->MESSAGE($HTML);
+		$mail->Body = $HTML; //PODE SER HTML
 		$mail->AltBody = "Este é o corpo da mensagem de teste, em Texto Plano! \r\n :)"; //NAO SEI EXATAMENTE
 
 		//$doc = $pdf->Output('', 'S');
-		$mail->AddStringAttachment($doc, 'icombH5-'.$nomeAluno.'.pdf', 'base64', 'application/pdf');
+		$mail->AddStringAttachment($doc, 'icombH5-'.$NomeAluno.'.pdf', 'base64', 'application/pdf');
 
 		$enviado = $mail->Send(); //envia
 		// Limpa os destinatários e os anexos
