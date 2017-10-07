@@ -342,7 +342,7 @@ class IComb {
         //calculamos o resultado do usuario
         $estagios = $desenvolvimento->estagios;
 
-
+        //deixar um comentario p/ entender essa logica aqui
         $resultado_usuario = 0;
         if($relacionamento == "M"){
             $resultado_usuario = 1;

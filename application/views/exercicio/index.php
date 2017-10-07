@@ -94,6 +94,7 @@
     </div>
 </section>
 
+<!-- Modal Tutorial -->
 <div id="ModalTutorial" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -203,7 +204,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Formula -->
 <div class="modal fade" id="ModalFormulas" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

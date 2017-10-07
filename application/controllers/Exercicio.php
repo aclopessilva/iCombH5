@@ -8,10 +8,10 @@ require_once("C:/xampp/htdocs/icombh5/application/libraries/fpdf/fpdf.php");
 class Exercicio extends CI_Controller {
 
     public function __construct() {
-        parent::__construct();
-        //precarregando models para todos os metdos
-        $this->load->model('Exercicio_model');
 
+        parent::__construct();
+        //Precarregamento das Models para todos os metodos
+        $this->load->model('Exercicio_model');
         $this->load->model('Elemento_model');
         $this->load->model('Formula_model');
 
@@ -19,10 +19,12 @@ class Exercicio extends CI_Controller {
         //$this->load->library('IComb', 'icomb');
     }
     
-    public function index()
-    {
-            // Recupera os contatos através do model
+    public function index(){
+
+            // Recupera os exercicios através da model 'Exercicio_model'
             $exercicios = $this->Exercicio_model->GetAll('exercicio');
+
+            // Declaracao de variaveis para separacao dos exercicios pela categoria de universo
             $universo1 = array();
             $universo2 = array();
             $universo3 = array();
@@ -43,6 +45,8 @@ class Exercicio extends CI_Controller {
                 }
 
             }
+
+            // Recupera as formulas através da model 'Formula_model'
             $formula = $this->Formula_model->GetAll();
 
             $arrayExercicio = array('exercicio1' => $universo1, 'exercicio2' => $universo2, 'exercicio3' => $universo3, 'exercicio4' => $universo4, 'formula' => $formula);
@@ -160,6 +164,15 @@ class Exercicio extends CI_Controller {
         $this->load->view('/layout/footer.php');
     }
 
+    
+    
+    /**
+     * AJAX -> 
+     *      formulario
+     * 
+     * 
+     * <- JSON
+     */
     public function ValidaCondicao() {
         $request = new stdClass();
         $request->numElementos = $_POST['num_elementos'];

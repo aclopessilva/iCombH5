@@ -1,7 +1,8 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Formula_model extends CI_Model {
-  // Variável que define o nome da tabela
+
+    // Variável que define que a tabela utilizada aqui é a FORMULA
   var $table = "formula";
 
   function __construct() {

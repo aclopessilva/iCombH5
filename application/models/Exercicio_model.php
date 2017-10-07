@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 class Exercicio_model extends CI_Model {
 
-    // Variável que define o nome da tabela
+    // Variável que define que a tabela utilizada aqui é a EXERCICIO
     var $table = "exercicio";
 
     function __construct() {
@@ -13,6 +13,7 @@ class Exercicio_model extends CI_Model {
         $this->load->database();
     }
 
+    //Metodo que coleta todos os dados de um exercicio em especifico, pelo seu id
     function GetById($id) {
         if (is_null($id))
             return false;
@@ -69,6 +70,7 @@ class Exercicio_model extends CI_Model {
         }
     }
 
+    //Metodo que coleta todos os exercicios e seus dados
     function GetAll() {
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0) {
