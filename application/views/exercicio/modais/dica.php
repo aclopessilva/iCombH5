@@ -9,10 +9,10 @@
             </div>
             <div class="modal-body">
                 <p><?php echo $exercicio->dica ?></p>
-            </div>       
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal">Fechar</button>
+            </div>   
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Fechar</button>
+            </div>    
         </div>
     </div>
 </div>

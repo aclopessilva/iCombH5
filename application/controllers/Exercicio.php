@@ -151,7 +151,8 @@ class Exercicio extends CI_Controller {
             'quantidadeAcertos' => $quantidadeAcertos, 
             'estagiosCorretos' =>$estagiosCorretos, 
             'resultadoFinal' => $resultadoFinal,
-            'relacionamentoFinal' => $relacionamentoFinal
+            'relacionamentoFinal' => $relacionamentoFinal,
+            'exercicio' => $exercicio
         );
 
         $this->load->view('/layout/header.php');
@@ -273,6 +274,9 @@ class Exercicio extends CI_Controller {
     }
 
     public function geraPDF(){  
+        $idExercicio = $this->input->POST('idExercicio');
+        $descricaoExercicio = $this->input->POST('descricaoExercicio'); 
+        
         $quantidadeErros = $this->icomb->getQuantidadeErroEstagio();
         $quantidadeAcertos = $this->icomb->getQuantidadeAcertosEstagio();
         $estagiosCorretos = $this->icomb->coletaEstagiosCorretos();
@@ -283,10 +287,6 @@ class Exercicio extends CI_Controller {
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
 
-        $nome = "icombh5";
-        $email = "anaerikaveronica@gmail.com";
-        $observacoes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis";
-
         $pdf= new FPDF("P","pt","A4");
         $pdf= new FPDF("P","pt","A4");
         $pdf->AddPage();
@@ -296,17 +296,12 @@ class Exercicio extends CI_Controller {
         $pdf->Cell(0,5,"","B",1,'C');
         $pdf->Ln(50);
 
-        //nome
+        $pdf->ln(10);
+        //dados exercicio
         $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"Nome:",0,0,'L');
+        $pdf->Cell(70,20,"Exercicio :".$idExercicio,0,1,'L');
         $pdf->setFont('arial','',12);
-        $pdf->Cell(0,20,$nome,0,1,'L');
-         
-        //email
-        $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"E-mail:",0,0,'L');
-        $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$email,0,1,'L');
+        $pdf->MultiCell(0,20,utf8_decode('Enunciado: '.$descricaoExercicio),0,'J');
 
         $pdf->ln(10);
         //acertos
@@ -359,23 +354,6 @@ class Exercicio extends CI_Controller {
         foreach ($retorno as $row)
             $pdf->Cell(0,20, utf8_decode($row->texto),0,1,'L');
 
-
-
-        //cabeçalho da tabela 
-        // $pdf->SetFont('arial','B',14);
-        // $pdf->Cell(130,20,'Coluna 1',1,0,"L");
-        // $pdf->Cell(140,20,'Coluna 2',1,0,"L");
-        // $pdf->Cell(130,20,'Coluna 3',1,0,"L");
-        // $pdf->Cell(160,20,'Coluna 4',1,1,"L");
-         
-        //linhas da tabela
-        // $pdf->SetFont('arial','',12);
-        // for($i= 1; $i <10;$i++){
-        //     $pdf->Cell(130,20,"Linha ".$i,1,0,"L");
-        //     $pdf->Cell(140,20,rand(),1,0,"L");
-        //     $pdf->Cell(130,20,rand(),1,0,"L");
-        //     $pdf->Cell(160,20,rand(),1,1,"L");
-        // }
         $pdf->Output("icombh5_".$timestamp.".pdf","D");
     }
 

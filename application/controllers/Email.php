@@ -16,38 +16,10 @@ class Email extends CI_Controller {
 
 		$NomeAluno = $this->input->POST('nomeUsuario');
 		$EmailPara = $this->input->POST('emailDestino');
-		
-		// $THIS->LOAD->LIBRARY('EMAIL');
+		$idExercicio = $this->input->POST('idExercicio');
+		$descricaoExercicio = $this->input->POST('descricaoExercicio');	
 
-		// $CONFIG = ARRAY('PROTOCOL' => 'SMTP',
-	 //  					'SMTP_HOST' => 'SMTP.MAILTRAP.IO',
-	 //  					'SMTP_PORT' => 2525,
-	 //  					'SMTP_USER' => '1F3C1F8CAF8B9C',
-	 //  					'SMTP_PASS' => 'C32E208BF17FE2',
-	 //  					'CRLF' => "\R\N",
-	 //  					'NEWLINE' => "\R\N",
-	 //  					'MAILPATH' => '/ USR / SBIN / SENDMAIL',
-	 //  					'CHARSET' =>'UTF-8',
-	 //  					'MAILTYPE'=>'HTML',
-	 //  					'WORDWRAP' => TRUE
-		// );
-		
-		// $THIS->EMAIL->INITIALIZE($CONFIG);	
-		// $THIS->EMAIL->FROM("ICOMBH5@MAIL.COM", 'ICOMBH5');
-		// $THIS->EMAIL->SUBJECT("ICOMBH5, ".$NUSUARIO);
-		// $THIS->EMAIL->TO($EMAIL); 
-		
-		// $HTML = $THIS->LOAD->VIEW('EMAIL/TEMPLATEMAIL.PHP',$DATA,TRUE);		
-	 //  	$THIS->EMAIL->MESSAGE($HTML);
-	  
-	 // 	$THIS->EMAIL->ATTACH('C:/XAMPP/HTDOCS/ICOMBH5/USER_GUIDE/IMG/IMAGENS_BARALHO/ASCOPAS.PNG');
-		// $THIS->EMAIL->SEND();
-
-		// ECHO $THIS->EMAIL->PRINT_DEBUGGER();
-		// REDIRECT('EXERCICIOS');
-
-
-		//PDF___________________________________________________________________________________________________________________________
+		//PDF______________________________________________________________________________________________________________
 		$quantidadeErros = $this->icomb->getQuantidadeErroEstagio();
         $quantidadeAcertos = $this->icomb->getQuantidadeAcertosEstagio();
         $estagiosCorretos = $this->icomb->coletaEstagiosCorretos();
@@ -57,10 +29,6 @@ class Email extends CI_Controller {
 
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
-
-        // $nome = $NUSUARIO;
-        $email = "anaerikaveronica@gmail.com";
-        $observacoes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis";
 
         $pdf= new FPDF("P","pt","A4");
         $pdf= new FPDF("P","pt","A4");
@@ -77,11 +45,12 @@ class Email extends CI_Controller {
         $pdf->setFont('arial','',12);
         $pdf->Cell(0,20,$NomeAluno,0,1,'L');
          
-        //email
+	    $pdf->ln(10);
+        //dados exercicio
         $pdf->SetFont('arial','B',12);
-        $pdf->Cell(70,20,"E-mail:",0,0,'L');
+        $pdf->Cell(70,20,"Exercicio :".$idExercicio,0,1,'L');
         $pdf->setFont('arial','',12);
-        $pdf->Cell(70,20,$email,0,1,'L');
+        $pdf->MultiCell(0,20,utf8_decode('Enunciado: '.$descricaoExercicio),0,'J');
 
         $pdf->ln(10);
         //acertos
@@ -135,7 +104,7 @@ class Email extends CI_Controller {
             $pdf->Cell(0,20, utf8_decode($row->texto),0,1,'L');
 
         $doc = $pdf->Output("icombh5_".$timestamp.".pdf","S");
-		//FIM PDF______________________________________________________________________________________________________________________________________________
+		//FIM PDF____________________________________________________________________________________________________________
 
         // $nomeAluno 	= $NUSUARIO;
 		$Fone		= "156165515156";	// Pega o valor do campo Telefone
@@ -161,7 +130,7 @@ class Email extends CI_Controller {
 
 		$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
 
-		$mail->Subject  = "Mensagem Teste"; // Assunto da mensagem 
+		$mail->Subject  = 'iCombH5 - '.$NomeAluno; // Assunto da mensagem 
 		$HTML = $this->load->VIEW('EMAIL/TEMPLATEMAIL.PHP', $DATA, TRUE);		
 		//$THIS->EMAIL->MESSAGE($HTML);
 		$mail->Body = $HTML; //PODE SER HTML
