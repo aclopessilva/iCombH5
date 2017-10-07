@@ -75,22 +75,27 @@
                 </div>
         </div>
 	</div>
-        <div class="row">
-    <div class="col-xs-2" style="float: right;" >
-                <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
-            </div>
-        </div>
-        </br>
-        <div class="row">
-      <div class="col-xs-2" style="float: right;" >
-                <a href="<?php echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Baixar PDF</button></a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-      <div class="col-xs-2" style="float: right;" >     
-        <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalEmail">Enviar</button>
-      </div>
+  <br>
+  <div class="row" style="padding-right: 50px;" >
+    <div class="" style="float: right;" >
+      <a href="<?php echo site_url("exercicios") ?>"><button type="button" class="btn btn-info btnExercicio">Fazer outro exercício</button></a>
+    </div>
+
+    <div class="" style="float: right;" >
+        <!-- <a href="<?php //echo site_url("pdf") ?>"><button type="button" class="btn btn-info btnExercicio">Baixar PDF</button></a> -->
+      <form action="pdf" method="post">
+        <input type="hidden" value="<?php echo $exercicio->id; ?>" name="idExercicio" />
+        <input type="hidden" value="<?php echo $exercicio->descricao; ?>" name="descricaoExercicio" />
+
+        <div class="col-sm-12">
+          <input type="submit" value="Baixar pdf" class="btn btnExercicio"/>
+        </div>                        
+      </form> 
+    </div>
+
+    <div class="" style="float: right;" >     
+      <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalEmail">Enviar Email</button>
+    </div>
   </div>
 </section>
 
@@ -133,7 +138,7 @@
                     <label class="col-sm-4" for="nomeUsuario">Seu nome:</label>
 
                       <div class="col-sm-8" style="padding-bottom: 10px;">
-                        <input type="text" class="form-control" name="nomeUsuario" id="nomeUsuario" />
+                        <input type="text" class="form-control" onkeypress="return txtBoxFormat(event);" name="nomeUsuario" id="nomeUsuario" />
                       </div>
 
                     <label class="col-sm-4" for="emailDestino">Email do destinatário:</label>
@@ -141,9 +146,12 @@
                       <div class="col-sm-8" style="padding-bottom: 15px;">
                         <input type="text" class="form-control" name="emailDestino" id="emailDestino" />
                       </div>
-            
+
+                      <input type="hidden" value="<?php echo $exercicio->id; ?>" name="idExercicio" />
+                      <input type="hidden" value="<?php echo $exercicio->descricao; ?>" name="descricaoExercicio" />
+
                       <div class="col-sm-12">
-                         <input type="submit" value="Enviar Relatório"class="btn btnExercicio"/>
+                         <input type="submit" value="Enviar Relatório" class="btn btnExercicio"/>
                       </div>                        
                   </form> 
 
@@ -205,5 +213,29 @@
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
   }
+
+  /*
+  *
+  *Js para campo aceitar apenas letras
+  * 
+   */  
+   function txtBoxFormat(evtKeyPress) {
+        var i, nCount, sValue, fldLen, mskLen,bolMask, sCod, nTecla;
+
+        if(document.all) { // Internet Explorer
+            nTecla = evtKeyPress.keyCode;
+        } else if(document.layers) { // Nestcape
+            nTecla = evtKeyPress.which;
+        } else {
+            nTecla = evtKeyPress.which;
+            if (nTecla == 8) {
+                return true;
+            }
+        }
+        if (nTecla != 8)
+          return ((nTecla <= 47) || (nTecla >= 58)); 
+        else 
+          return true;
+    }
 </script>
 
