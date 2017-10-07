@@ -273,7 +273,7 @@
                             <div class="row">
                                 <div class="col-sm-12" >
                                     <button type="button" class="btn btnExercicio" id="finalizar">Finalizar</button>
-                                    <a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btnExercicio" >Indicador</button></a>
+                                    <!--<a href="<?php echo site_url("indicador") ?>"><button type="button" class="btn btnExercicio" >Indicador</button></a>-->
                                 </div>
 
                             </div>
@@ -996,21 +996,60 @@
         }
 
         //somente procuramos os atributos se o usuario selecionou qualquer coisa menos vazio
-        jQuery.ajax({
-            type: "POST",
-            url: "<?= base_url()?>/exercicio/Finaliza",
-            data: "relacionamento="+relacionamento,
-            beforeSend: mostraEspera,
-            complete: escondeEspera,
-            success: function(data){
-                if(data.estado == 'OK'){
-                    alert("Parabens resposta correta!");
+        $.ajax(
+            {
+                type: "POST",
+                url: "<?= base_url()?>/exercicio/Finaliza",
+                data: "relacionamento="+relacionamento,
+                beforeSend: mostraEspera,
+                complete: escondeEspera,
+                success: function(data){
+                    if(data.estado == 'OK'){
 
-                }else{
-                    alert(data.mensagem);
+                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>/indicador'>Parabens, voce acertou! Clique aqui para ver os detalhes</a>");
+
+                    }else{
+                        alert(data.mensagem);
+                    }
                 }
             }
+        );
+    }
+
+
+    /**
+     * Metodo que cria um modal para mostrar o resultado do exercicio que ele acaba de realizar
+     */
+    function modalResultadoExercicio(heading, formContent) {
+        var html =  '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
+        html += '<div class="modal-dialog">';
+        html += '<div class="modal-content">';
+        html += '<div class="modal-header">';
+        //html += '<a class="close" data-dismiss="modal">×</a>';
+        html += '<h4>'+heading+'</h4>'
+
+        html += '<img src="http://localhost/icombh5/user_guide/img/teste.jpg" />';
+        html += '</div>';
+        html += '<div class="modal-body">';
+        html += formContent;
+        html += '<div class="modal-header">';
+        html += '</div>';
+        html += '<div class="modal-footer">';
+        //html += '<span class="btn btn-primary" data-dismiss="modal">Fechar</span>';
+        html += '</div>';  // content
+        html += '</div>';  // dialog
+        html += '</div>';  // footer
+        html += '</div>';  // modalWindow
+        $('body').append(html);
+        $("#dynamicModal").modal({
+            backdrop: 'static',
+            keyboard: false
         });
+        $("#dynamicModal").modal('show');
+        $('#dynamicModal').on('hidden.bs.modal', function (e) {
+            $(this).remove();
+        });
+
     }
 </script>
 <!-- //JS para validar condição -->
