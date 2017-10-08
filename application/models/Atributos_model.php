@@ -46,20 +46,20 @@ class Atributos_model extends CI_Model {
         
     }
     
-    function GetValorPredicadoByChave($idUniverso, $idChave){
+    function GetValorPredicadoByChave($idUniverso, $nomeChave){
         
-        if (is_null($idChave))
+        if (is_null($nomeChave))
             return false;
         $sql = "(SELECT"
                 . " DISTINCT valor"
                 . " FROM `atributos`"
-                . " WHERE chave = '".$idChave."'"
+                . " WHERE chave = '".$nomeChave."'"
                 . " AND universo_id = ".$idUniverso."
                     AND valor is not null)
                 UNION
                 (SELECT DISTINCT predicado as valor
                 FROM `atributos`
-                WHERE chave = '".$idChave."' AND universo_id = ".$idUniverso. " AND predicado is not null)";
+                WHERE chave = '".$nomeChave."' AND universo_id = ".$idUniverso. " AND predicado is not null)";
         $query = $this->db->query($sql);
         return $query->result();
         

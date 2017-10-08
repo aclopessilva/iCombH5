@@ -10,10 +10,11 @@ class Exercicio extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-        //Precarregamento das Models para todos os metodos
+        //Precarregamento das Models para os metodos mencionados neste Controller
         $this->load->model('Exercicio_model');
         $this->load->model('Elemento_model');
         $this->load->model('Formula_model');
+        $this->load->model('Atributos_model');
 
         //esta sendo carregado no config/autoload.php
         //$this->load->library('IComb', 'icomb');
@@ -21,10 +22,10 @@ class Exercicio extends CI_Controller {
     
     public function index(){
 
-            // Recupera os exercicios através da model 'Exercicio_model'
+            // Recupera todos os exercicios
             $exercicios = $this->Exercicio_model->GetAll('exercicio');
 
-            // Declaracao de variaveis para separacao dos exercicios pela categoria de universo
+            // Declaracao de variaveis para separacao dos exercicios por categoria (universo)
             $universo1 = array();
             $universo2 = array();
             $universo3 = array();
@@ -46,19 +47,20 @@ class Exercicio extends CI_Controller {
 
             }
 
-            // Recupera as formulas através da model 'Formula_model'
+            // Recupera todas as formulas
             $formula = $this->Formula_model->GetAll();
 
+            //Empacota tudo em uma array e manda pra view
             $arrayExercicio = array('exercicio1' => $universo1, 'exercicio2' => $universo2, 'exercicio3' => $universo3, 'exercicio4' => $universo4, 'formula' => $formula);
+
             $this->load->view('exercicio/get', $arrayExercicio);
     }
 
-    public function trocaChaves($idUniverso, $idChave){
-        
-        $this->load->model('Atributos_model');
-        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $idChave);
-//        print_r ($idChave);
-//        print_r ($valorPredicado);
+    public function trocaChaves($idUniverso, $nomeChave){
+        // Objetivo: coletar os elementos a serem exibidos no dropdown
+        //de acordo com a chave (suit, value, team, player, etc) escolhida
+
+        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $nomeChave);
         
         $this->output
             ->set_content_type('application/json')
