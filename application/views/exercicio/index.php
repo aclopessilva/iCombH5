@@ -94,9 +94,6 @@
     </div>
 </section>
 
-<?php $this->load->view('/exercicio/modais/tutorial.php'); ?>
-<?php $this->load->view('/exercicio/modais/formula.php'); ?>
-
 <script type="text/javascript">
     $('#click_advance1').click(function() {
                 $('#display_advance2').toggle('1000');
