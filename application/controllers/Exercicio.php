@@ -56,21 +56,23 @@ class Exercicio extends CI_Controller {
             $this->load->view('exercicio/get', $arrayExercicio);
     }
             
-    public function resolucao($idExercicio) {
-
-        // Recupera todas as formulas
+    public function resolucao($id) {
         $formula = $this->Formula_model->GetAll();
-        $exercicio = $this->Exercicio_model->GetById($idExercicio);
+
+        $exercicio = $this->Exercicio_model->GetById($id);
 
         $idUniverso = $exercicio->universo_id;
         $elementosUniverso = $this->Elemento_model->GetByUniverse($idUniverso);
+
+       
+        $this->load->model('Atributos_model');
         $chaves = $this->Atributos_model->GetByChaveChaveDesc($idUniverso);
         $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $chaves[0]->chave);
         
         $arrayDadosExercicio = 
                 array(
                     'exercicio' => $exercicio, 
-                    'formula' => $formula,
+                    'formula' => $formula, 
                     'chaves' => $chaves, 
                     'elementosUniverso' => $elementosUniverso,
                     'valorPredicado' => $valorPredicado
@@ -84,7 +86,7 @@ class Exercicio extends CI_Controller {
 
 
         //carrega o exercicio completo
-        $exercicioFull = $this->Exercicio_model->GetWithFullSolution($idExercicio);
+        $exercicioFull = $this->Exercicio_model->GetWithFullSolution($id);
         //chama iniciar icomb
         $this->icomb->iniciaDesenvolvimento($exercicioFull);
     }

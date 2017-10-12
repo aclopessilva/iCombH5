@@ -11,7 +11,7 @@
                 <?php foreach ($formula as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="<?= base_url($row->imagem ) ?>" alt=" " width="250">
+                            <img src="<?= base_url($row->imagem ) ?>" alt="">
                         </div>
                         <div class="col-md-1" id="text-formula">
                             <p><?= $row->expressao ?></p>
