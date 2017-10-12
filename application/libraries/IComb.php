@@ -30,9 +30,9 @@ class IComb {
         $this->CI = & get_instance();
     }
 
-    public function iniciaDesenvolvimento($exercicio) {
+    public function iniciaDesenvolvimento($icomb_exercicio) {
         $desenvolvimento = new stdClass();  //classe generica, ainda nao definida.
-        $desenvolvimento->exercicio = $exercicio;
+        $desenvolvimento->exercicio = $icomb_exercicio->exercicio;
         $desenvolvimento->inicio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
         $desenvolvimento->erros_formula = 0;
@@ -40,12 +40,12 @@ class IComb {
         $time = date('d/m h:i A');
         //1. o universo tem que ser uma classe com uma lista de elementos (Classe Elementos)
         $universo = new Universo();
-        $universo = $universo->createFromBDObject($exercicio->universo);
+        $universo = $universo->createFromBDObject($icomb_exercicio->universo);
 
         //print_r($universo);
         //2. A solucao tem que ter um array da classes de tipo condicao (que representam os estagios).
         $solucao = new Solucao();
-        $solucao = $solucao->createFromBDObject($exercicio->solucao);
+        $solucao = $solucao->createFromBDObject($icomb_exercicio->solucao);
 
         //iniciamos o avaliador
         $avaliador = new Avaliador();
@@ -55,7 +55,7 @@ class IComb {
         $desenvolvimento->avaliador = $avaliador;
 
         $desenvolvimento->log = new Log();
-        $desenvolvimento->log->putEntry($time.' - Iniciando desenvolvimento do exercicio '.$exercicio->id);
+        $desenvolvimento->log->putEntry($time.' - Iniciando desenvolvimento do exercicio '.$icomb_exercicio->exercicio->id);
 
         //Iniciamos uma lista de estagios.
         //Essa lista vai conter os estagios que o usuario esta montando e foram validados ou em processo de validacao.

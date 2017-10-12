@@ -196,7 +196,7 @@ class Exercicio extends CI_Controller {
         }
 
 
-        $this->load->model('Atributos_model');
+        //$this->load->model('Atributos_model');
         $idUniverso = $_POST['universo_id'];
         $chaves = $this->Atributos_model->GetByChaveChaveDesc($idUniverso);
         //retorna lista de registros com propriedades "chave" e "chave_desc"

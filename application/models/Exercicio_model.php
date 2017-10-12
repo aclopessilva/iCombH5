@@ -3,6 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+include_once APPPATH .'libraries/icomb/ICombExercicio.php';
+
 class Exercicio_model extends CI_Model {
 
     // Variável que define que a tabela utilizada aqui é a EXERCICIO
@@ -24,10 +26,12 @@ class Exercicio_model extends CI_Model {
 
     /**
      * Retorna um objeto exercicio com objeto solucao interno identico ao icomb
-     * @return type
+     * @return ICombExercicio
      */
     function GetWithFullSolution($id) {
-        
+
+        $iCombExercicio = new ICombExercicio();
+
         $this->load->model('Solucao_model');
         $this->load->model('Estagio_model');
         $this->load->model('Expressao_model');
@@ -39,11 +43,12 @@ class Exercicio_model extends CI_Model {
         $this->db->where('id', $id);
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0) {
-            $exercicio = $query->row();
+            $exercicio_bd = $query->row();
+            $iCombExercicio->exercicio = $exercicio_bd;
             //carregando a solucao
-            if (isset($exercicio->solucao_id)) {
-                $solucao = $this->Solucao_model->GetById($exercicio->solucao_id);                
-                $solucao->estagios = $this->Estagio_model->GetBySolucaoId($exercicio->solucao_id);
+            if (isset($exercicio_bd->solucao_id)) {
+                $solucao = $this->Solucao_model->GetById($exercicio_bd->solucao_id);
+                $solucao->estagios = $this->Estagio_model->GetBySolucaoId($exercicio_bd->solucao_id);
                 
                 foreach($solucao->estagios as $estagio){
                     $estagio->expressoes = $this->Expressao_model->GetByEstagioId($estagio->id);                    
@@ -52,19 +57,19 @@ class Exercicio_model extends CI_Model {
                     }
                 }
                 //adicionamos a solucao como uma propriedade do objeto exercicio
-                $exercicio->solucao = $solucao;
+                $iCombExercicio->solucao = $solucao;
             }
             //carregando o universo e seus elementos
-            if (isset($exercicio->universo_id)) {
-                $universo = $this->Universo_model->GetById($exercicio->universo_id);
-                $universo->elementos = $this->Elemento_model->GetByUniverse($exercicio->universo_id);
+            if (isset($exercicio_bd->universo_id)) {
+                $universo = $this->Universo_model->GetById($exercicio_bd->universo_id);
+                $universo->elementos = $this->Elemento_model->GetByUniverse($exercicio_bd->universo_id);
                 //procuramos pelos atributos do elemento e adicionamos ao atributo "atributos"
                 foreach ($universo->elementos as $elemento){
                     $elemento->atributos = $this->Atributos_model->GetByElemento($elemento->id);
                 }
-                $exercicio->universo = $universo; 
+                $iCombExercicio->universo = $universo;
             }
-            return $exercicio;
+            return $iCombExercicio;
         } else {
             return null;
         }
