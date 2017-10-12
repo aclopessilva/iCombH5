@@ -55,18 +55,6 @@ class Exercicio extends CI_Controller {
 
             $this->load->view('exercicio/get', $arrayExercicio);
     }
-
-    public function trocaChaves($idUniverso, $nomeChave){
-        // Objetivo: coletar os elementos a serem exibidos no dropdown
-        //de acordo com a chave (suit, value, team, player, etc) escolhida
-
-        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $nomeChave);
-        
-        $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($valorPredicado));
-    }
             
     public function resolucao($idExercicio) {
 
@@ -174,6 +162,19 @@ class Exercicio extends CI_Controller {
      * 
      * <- JSON
      */
+
+    public function trocaChaves($idUniverso, $nomeChave){
+        // Objetivo: coletar os elementos a serem exibidos no dropdown
+        //de acordo com a chave (suit, value, team, player, etc) escolhida
+
+        $valorPredicado = $this->Atributos_model->GetValorPredicadoByChave($idUniverso, $nomeChave);
+        
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($valorPredicado));
+    }
+    
     public function ValidaCondicao() {
         $request = new stdClass();
         $request->numElementos = $_POST['num_elementos'];
@@ -212,23 +213,23 @@ class Exercicio extends CI_Controller {
 
     }
 
-    public function logs() {
+//    public function logs() {
+//
+//        $retorno = $this->icomb->getLogs();
+//        //convertemos o objeto em formato json, para entendimento do javascript
+//        $this->output
+//            ->set_content_type('application/json')
+//            ->set_status_header(200)
+//            ->set_output(json_encode($retorno));
+//
+//    }
 
-        $retorno = $this->icomb->getLogs();
-        //convertemos o objeto em formato json, para entendimento do javascript
-        $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($retorno));
-
-    }
-
-    public function testevaloresdeerro() {
-
-        echo "getDuracaoExercicio:".$this->icomb->getDuracaoExercicio()."<br>";
-        echo "getQuantidadeErroEstagio:".$this->icomb->getQuantidadeErroEstagio()."<br>";
-
-    }
+//    public function testevaloresdeerro() {
+//
+//        echo "getDuracaoExercicio:".$this->icomb->getDuracaoExercicio()."<br>";
+//        echo "getQuantidadeErroEstagio:".$this->icomb->getQuantidadeErroEstagio()."<br>";
+//
+//    }
 
     public function ValidaEstagio() {
 
