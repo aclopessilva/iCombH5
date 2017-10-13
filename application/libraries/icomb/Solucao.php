@@ -11,7 +11,7 @@
  *
  * @author Jane Asher
  */
-class Solucao extends ICombClass {
+class Solucao {
 
     public $resultado;
     public $formato_legado;

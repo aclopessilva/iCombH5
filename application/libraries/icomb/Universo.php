@@ -11,7 +11,7 @@
  *
  * @author Jane Asher
  */
-class Universo extends ICombClass {
+class Universo{
 
     public $tipo;
     public $quantidade;
@@ -38,5 +38,6 @@ class Universo extends ICombClass {
         }
         return $universo;
     }
+
 
 }

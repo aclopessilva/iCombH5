@@ -11,7 +11,7 @@
  *
  * @author Jane Asher
  */
-class Expressao extends ICombClass{
+class Expressao {
 
     //put your code here
     public $atributo;

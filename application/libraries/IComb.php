@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once 'icomb/ICombClass.php';
+include_once 'icomb/Desenvolvimento.php';
 include_once 'icomb/Avaliador.php';
 include_once 'icomb/Universo.php';
 include_once 'icomb/Solucao.php';
@@ -31,8 +31,9 @@ class IComb {
     }
 
     public function iniciaDesenvolvimento($icomb_exercicio) {
-        $desenvolvimento = new stdClass();  //classe generica, ainda nao definida.
+        $desenvolvimento = new Desenvolvimento();  //classe generica, ainda nao definida.
         $desenvolvimento->exercicio = $icomb_exercicio->exercicio;
+        $desenvolvimento->exercicio->solucao = $icomb_exercicio->solucao;
         $desenvolvimento->inicio = new DateTime();
         $desenvolvimento->estado = 'INICIADO';
         $desenvolvimento->erros_formula = 0;
@@ -155,7 +156,7 @@ class IComb {
      * @param $condicao
      * @return mixed
      */
-    public function verificaErro($condicao){
+    private function verificaErro($condicao){
         //TODO: verificar uso de booleano "corrige"
         $time = $time = date('d/m h:i A');
 

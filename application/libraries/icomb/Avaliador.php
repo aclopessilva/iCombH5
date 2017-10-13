@@ -15,7 +15,7 @@ class Avaliador {
     
     private $universo;
     private $solucao;
-    private $elementos;
+    //private $elementos;
     
     
     private $elemParticao;
@@ -28,7 +28,7 @@ class Avaliador {
         $this->solucao = $solucao;
         
         //itera a traves dos elementos do universo e avalia se a solucao consegue identificar algum.
-        $this->elementos = $this->universo->elementos;
+        //$this->universo->elementos = $this->universo->elementos;
 
         // README: Enquanto no java, objetos podem ser usados como indices do array, o php array tem limitacao para aceitar isso
         // para contornar esse problema sera usada a clase SplObjectStorage como "array" para armazenar os objetos no indice do array.
@@ -40,7 +40,7 @@ class Avaliador {
 
         $estagios = $this->solucao->condicoes; //aqui nos representamos estagios em lugar de condicoes (como o icomb faz)
         
-        foreach ($this->elementos  as $elemento ){
+        foreach ($this->universo->elementos  as $elemento ){
             foreach ($estagios as $estagio){
 //                print_r($estagio);
                 if($estagio->evaluate($elemento)){
@@ -88,7 +88,7 @@ class Avaliador {
         $setElementos = array();
         $setCondicoes = array();
         
-        foreach($this->elementos  as $elemento){
+        foreach($this->universo->elementos  as $elemento){
             if ($condicao->evaluate($elemento)) {
 
                 //So adicionamos no SET se nao existir o valor previamente

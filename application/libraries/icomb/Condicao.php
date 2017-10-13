@@ -11,7 +11,7 @@
  *
  * @author Jane Asher
  */
-class Condicao extends ICombClass{
+class Condicao {
 
     public $quantidade;
     public $expressoes = array();
