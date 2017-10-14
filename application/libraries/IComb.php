@@ -23,14 +23,15 @@ include_once 'icomb/formula/Value.php';
 
 include_once 'icomb/Log.php';
 include_once 'icomb/Entry.php';
+include_once 'icomb/Sessao.php';
 
 class IComb {
 
-    protected $CI;
+    public $sessao;
 
-    public function __construct() {
-        // Assign the CodeIgniter super-object
-        $this->CI = & get_instance();
+    public function __construct()
+    {
+        $this->sessao = new Sessao();
     }
 
     public function iniciaDesenvolvimento($icomb_exercicio) {
@@ -65,7 +66,7 @@ class IComb {
         //Essa lista vai conter os estagios que o usuario esta montando e foram validados ou em processo de validacao.
         $desenvolvimento->estagios = array();
 
-        $this->saveSessao('desenvolvimento', $desenvolvimento);
+        $this->sessao->saveDesenvolvimento( $desenvolvimento);
     }
 
     /**
@@ -85,7 +86,7 @@ class IComb {
         //TODO: verificar uso de booleano "corrige"
         $time = $time = date('d/m h:i A');
 
-        $objeto_de_sessao = $this->getSessao('desenvolvimento');
+        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
         //$desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
@@ -107,7 +108,7 @@ class IComb {
                 $resposta_estagio = $avaliador->adicionaCondicao($estagio->condicao);
                 if($resposta_estagio == 'ERROR'){
                     $desenvolvimento->log->putEntry($time.' - Condicao com ERRO mensagem: '. $resposta_estagio->mensagem );
-                    $this->saveSessao('desenvolvimento', $desenvolvimento);
+                    $this->sessao->saveDesenvolvimento( $desenvolvimento);
                     return $resposta_estagio;
                 }
             }
@@ -134,12 +135,12 @@ class IComb {
             $desenvolvimento->estagios[] = $estagio;
 
             $desenvolvimento->log->putEntry($time.' - Condicao Validada sem erros');
-            $this->saveSessao('desenvolvimento', $desenvolvimento);
+            $this->sessao->saveDesenvolvimento( $desenvolvimento);
         }else{
             // date_default_timezone_get('Brazil/Brazilian');
             // $date = date('dd/MM/YYYY HH:ii', time());
             $desenvolvimento->log->putEntry($time.' - Condicao adicionada com ERRO mensagem: '. $resposta->mensagem );
-            $this->saveSessao('desenvolvimento', $desenvolvimento);
+            $this->sessao->saveDesenvolvimento( $desenvolvimento);
         }
 
         return $resposta;
@@ -204,13 +205,13 @@ class IComb {
 
 
     public function getLogs(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         return $desenvolvimento->log->entries;
     }
 
     public function eliminarEstagio($estagio_numero){
         $time = $time = date('d/m h:i A');
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         $lista_de_estagios = $desenvolvimento->estagios;
         $resposta = new stdClass();
 
@@ -222,7 +223,7 @@ class IComb {
                         $resposta->mensagem = "ja foi deletado";
                     }else{
                         $estagio->estado = 'DELETADO';
-                        $this->saveSessao('desenvolvimento', $desenvolvimento);
+                        $this->sessao->saveDesenvolvimento( $desenvolvimento);
 
                         $resposta->estado = "OK";
                         $resposta->mensagem = "Estagio deletado!";
@@ -245,7 +246,7 @@ class IComb {
 
     public function validaEstagioAtual($request){
         $time = $time = date('d/m h:i A');
-        $objeto_de_sessao = $this->getSessao('desenvolvimento');
+        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
         $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
         //obtemos a formula
@@ -273,7 +274,7 @@ class IComb {
 
             //armazenamos o estagio na lista de estagios, incluindo a formula validada.
             $desenvolvimento->estagios[sizeof($desenvolvimento->estagios) - 1] = $estagio;
-            $this->saveSessao('desenvolvimento', $desenvolvimento);
+            $this->sessao->saveDesenvolvimento( $desenvolvimento);
 
             $desenvolvimento->acertos_formula++;
             $desenvolvimento->log->putEntry($time.' - Finalizou um estágio corretamente');
@@ -283,25 +284,10 @@ class IComb {
             $resposta->estagio = $estagio;
         }else{
             $desenvolvimento->erros_formula++;
-            $this->saveSessao('desenvolvimento', $desenvolvimento);
+            $this->sessao->saveDesenvolvimento( $desenvolvimento);
         }
 
         return $resposta;
-    }
-
-    /**
-     * FUNCOES DE UTILIDADE PARA ACESSAR A SESSAO
-     */
-    private function saveSessao($nome, $valor) {
-        $this->CI->session->set_userdata($nome, $valor);
-    }
-
-    private function getSessao($nome) {
-        return $this->CI->session->userdata($nome);
-    }
-
-    private function deleteSessao($nome) {
-        $this->CI->session->unset_userdata($nome);
     }
 
     private function parseDesenvolvimento($desenvolvimento){
@@ -322,7 +308,7 @@ class IComb {
 
     function finalizaExercicio($relacionamento){
 
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
 
         //calculamos o resultado do usuario
         $estagios = $desenvolvimento->estagios;
@@ -378,13 +364,13 @@ class IComb {
         }
 
         $desenvolvimento->resposta = $resposta;
-        $this->saveSessao('desenvolvimento', $desenvolvimento);
+        $this->sessao->saveDesenvolvimento( $desenvolvimento);
 
         return $resposta;
     }
 
     public function getDuracaoExercicio(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         if($desenvolvimento->estado == 'FINALIZADO'){
             $datetime1 = $desenvolvimento->inicio;
             $datetime2 = $desenvolvimento->fim;
@@ -406,17 +392,17 @@ class IComb {
     
     
     public function getQuantidadeErroEstagio(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         return $desenvolvimento->erros_formula;
     }
 
     public function getQuantidadeAcertosEstagio(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         return $desenvolvimento->acertos_formula;
     }
     
     public function coletaEstagiosCorretos(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         $estagios = $desenvolvimento->estagios;
         
         $estagiosCorretos = array();
@@ -429,18 +415,18 @@ class IComb {
     }
     
     public function coletaResultadoFinal(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
         return $desenvolvimento->resposta->resultado;
     }
     
     public function relacionamentoResultadoFinal(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');        
+        $desenvolvimento = $this->sessao->getDesenvolvimento();        
         return $desenvolvimento->resposta->relacionamento;
         
     }
 
     public function obtemExercicioResolvido(){
-        $desenvolvimento = $this->getSessao('desenvolvimento');        
+        $desenvolvimento = $this->sessao->getDesenvolvimento();        
         return $desenvolvimento->exercicio;
     }
 
