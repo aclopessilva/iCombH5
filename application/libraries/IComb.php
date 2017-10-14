@@ -31,7 +31,7 @@ class IComb {
     }
 
     public function iniciaDesenvolvimento($icomb_exercicio) {
-        $desenvolvimento = new Desenvolvimento();  //classe generica, ainda nao definida.
+        $desenvolvimento = new Desenvolvimento();
         $desenvolvimento->exercicio = $icomb_exercicio->exercicio;
         $desenvolvimento->exercicio->solucao = $icomb_exercicio->solucao;
         $desenvolvimento->inicio = new DateTime();

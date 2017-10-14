@@ -4,9 +4,9 @@ class Desenvolvimento
 {
     public $exercicio;
     public $inicio;
-    public $estado = 'INICIADO';
-    public $erros_formula = 0;
-    public $acertos_formula = 0;
+    public $estado;
+    public $erros_formula;
+    public $acertos_formula;
     public $avaliador;
     public $log;
     public $estagios = array();
