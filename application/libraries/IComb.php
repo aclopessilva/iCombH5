@@ -12,6 +12,7 @@ include_once 'icomb/Expressao.php';
 include_once 'icomb/RespostaDoAvaliador.php';
 include_once 'icomb/Estagio.php';
 
+include_once 'icomb/formula/Formula.php';
 include_once 'icomb/formula/FormulaFactory.php';
 include_once 'icomb/formula/Potencia.php';
 include_once 'icomb/formula/Arranjo.php';

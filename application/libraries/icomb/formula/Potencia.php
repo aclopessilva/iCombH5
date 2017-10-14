@@ -6,7 +6,7 @@
  * Time: 13:39
  */
 
-class Potencia
+class Potencia extends Formula
 {
 
     public $nome = 'Potencia';

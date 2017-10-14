@@ -1,6 +1,6 @@
 <?php
 
-class Arranjo
+class Arranjo extends Formula
 {
     public $nome = 'Arranjo';
     public $notacao = 'A(n,p)';

@@ -1,10 +1,10 @@
 <?php
-class Value
+class Value extends Formula
 {
     public $nome = 'Valor';
     public $notacao = 'n';
 
-    public function calcula($n){
+    public function calcula($n, $p = null){
         return $n;
     }
 }

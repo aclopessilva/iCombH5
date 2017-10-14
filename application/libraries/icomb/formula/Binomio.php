@@ -1,6 +1,6 @@
 <?php
 
-class Binomio
+class Binomio extends Formula
 {
     public $nome = 'Combinação';
     public $notacao = 'C(n,p)';
