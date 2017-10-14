@@ -12,6 +12,7 @@ include_once 'icomb/Expressao.php';
 include_once 'icomb/RespostaDoAvaliador.php';
 include_once 'icomb/Estagio.php';
 
+include_once 'icomb/FormulaRequest.php';
 include_once 'icomb/formula/Formula.php';
 include_once 'icomb/formula/FormulaFactory.php';
 include_once 'icomb/formula/Potencia.php';
@@ -75,90 +76,12 @@ class IComb {
      * @return mixed Retorna um objeto contendo o necessario para mostrar na view.
      */
     public function validaCondicao($request, $chaves = array()) {
-/*
 
-        "condicao": {
-            "quantidade": "1",
-			"expressoes": [
-                    {
-                        "atributo": "value",
-                        "pertence": "true",
-                        "elementos": ["as"]
-                    },
-                    {
-                        "atributo": "value",
-                        "pertence": "true",
-                        "elementos": ["as"]
-                    }
-        ]
-		},
-        */
-        $condicao = new Condicao();
-        $condicao->quantidade =$request->numElementos;
-        $condicao->chaves = $chaves;
-
-        if($request->numPropriedades == 1){
-
-            $expressao =  new Expressao();
-            $expressao->atributo = $request->atributo;
-            // o $request->pertence pode vir como String ou seja "true", "false"
-            // vamos transformar "true" como  booleano true
-            if($request->pertence == "true"){
-                $expressao->pertence = true;
-            }else{
-                $expressao->pertence = false;
-            }
-
-            $expressao->elementos = array();
-            $expressao->elementos[] = $request->caracteristica;
-
-            $condicao->addExpressao($expressao);
-
-        }elseif ($request->numPropriedades == 2){
-
-            $expressao =  new Expressao();
-            $expressao->atributo = $request->atributo;
-            // o $request->pertence pode vir como String ou seja "true", "false"
-            // vamos transformar "true" como  booleano true
-            if($request->pertence == "true"){
-                $expressao->pertence = true;
-            }else{
-                $expressao->pertence = false;
-            }
-            $expressao->elementos = array();
-            $expressao->elementos[] = $request->caracteristica;
-            $condicao->addExpressao($expressao);
-
-
-            $expressao2 =  new Expressao();
-            $expressao2->atributo = $request->atributo2;
-            // o $request->pertence2 pode vir como String ou seja "true", "false"
-            // vamos transformar "true" como  booleano true
-            if($request->pertence2 == "true"){
-                $expressao2->pertence = true;
-            }else{
-                $expressao2->pertence = false;
-            }
-            $expressao2->elementos = array();
-            $expressao2->elementos[] = $request->caracteristica2;
-            $condicao->addExpressao($expressao2);
-        }
+        $condicao = $this->preparaCondicaoParaAvaliacao($request, $chaves);
 
         //aqui sera possivel retornar ou adaptar a resposta da validacao.
         //por enquanto somente retornamos o que o metodo verificaErro retorna.
-        return $this->verificaErro($condicao);
 
-
-    }
-
-
-    /**
-     * A validacao de condicao é delegada para a classe avalidador, que possui a logica de validacao no metodo "adicionaCondicao"
-     *
-     * @param $condicao
-     * @return mixed
-     */
-    private function verificaErro($condicao){
         //TODO: verificar uso de booleano "corrige"
         $time = $time = date('d/m h:i A');
 
@@ -223,6 +146,63 @@ class IComb {
 
     }
 
+    private function preparaCondicaoParaAvaliacao($request, $chaves){
+        $condicao = new Condicao();
+        $condicao->quantidade =$request->numElementos;
+        $condicao->chaves = $chaves;
+
+        if($request->numPropriedades == 1){
+
+            $expressao =  new Expressao();
+            $expressao->atributo = $request->atributo;
+            // o $request->pertence pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence == "true"){
+                $expressao->pertence = true;
+            }else{
+                $expressao->pertence = false;
+            }
+
+            $expressao->elementos = array();
+            $expressao->elementos[] = $request->caracteristica;
+
+            $condicao->addExpressao($expressao);
+
+        }elseif ($request->numPropriedades == 2){
+
+            $expressao =  new Expressao();
+            $expressao->atributo = $request->atributo;
+            // o $request->pertence pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence == "true"){
+                $expressao->pertence = true;
+            }else{
+                $expressao->pertence = false;
+            }
+            $expressao->elementos = array();
+            $expressao->elementos[] = $request->caracteristica;
+            $condicao->addExpressao($expressao);
+
+
+            $expressao2 =  new Expressao();
+            $expressao2->atributo = $request->atributo2;
+            // o $request->pertence2 pode vir como String ou seja "true", "false"
+            // vamos transformar "true" como  booleano true
+            if($request->pertence2 == "true"){
+                $expressao2->pertence = true;
+            }else{
+                $expressao2->pertence = false;
+            }
+            $expressao2->elementos = array();
+            $expressao2->elementos[] = $request->caracteristica2;
+            $condicao->addExpressao($expressao2);
+        }
+
+        return $condicao;
+    }
+
+
+
     public function getLogs(){
         $desenvolvimento = $this->getSessao('desenvolvimento');
         return $desenvolvimento->log->entries;
@@ -258,6 +238,8 @@ class IComb {
             $resposta->mensagem = "Estagio com numero ".$estagio_numero." não existe";
         }
 
+        $asdasdas = $_POST['asdas'];
+
         return $resposta;
     }
 
@@ -272,7 +254,7 @@ class IComb {
 
 
         //montamos o objeto que contem a formula e os valores
-        $formularequest = new stdClass();
+        $formularequest = new FormulaRequest();
         $formularequest->formula = $formula;
         $formularequest->n = $request->n;
         $formularequest->p = $request->p;
