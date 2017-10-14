@@ -16,7 +16,7 @@ include_once 'icomb/formula/FormulaFactory.php';
 include_once 'icomb/formula/Potencia.php';
 include_once 'icomb/formula/Arranjo.php';
 include_once 'icomb/formula/Binomio.php';
-include_once 'icomb/formula/Factorial.php';
+include_once 'icomb/formula/Fatorial.php';
 include_once 'icomb/formula/Value.php';
 
 include_once 'icomb/Log.php';
