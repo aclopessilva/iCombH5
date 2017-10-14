@@ -27,7 +27,7 @@ class Avaliador {
         $this->universo = $universo;
         $this->solucao = $solucao;
         
-        //itera a traves dos elementos do universo e avalia se a solucao consegue identificar algum.
+        //itera atraves dos elementos do universo e avalia se a solucao consegue identificar algum.
         //$this->universo->elementos = $this->universo->elementos;
 
         // README: Enquanto no java, objetos podem ser usados como indices do array, o php array tem limitacao para aceitar isso
@@ -217,8 +217,15 @@ class Avaliador {
         }
 
         $p = intval ($condicao->quantidade);
+
+        //PONTO: pode ser refatorado pegando a formula da tabela solucao.
         $formula_binomio = new Binomio();
         $resultado1 = $formula_binomio->calcula($n,$p);
+
+
+
+
+
         $resultado2 = $formularequest->formula->calcula($formularequest->n, $formularequest->p);
         /** fim ICOMB **/
         

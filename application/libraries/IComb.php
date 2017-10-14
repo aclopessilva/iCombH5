@@ -20,6 +20,7 @@ include_once 'icomb/formula/Fatorial.php';
 include_once 'icomb/formula/Value.php';
 
 include_once 'icomb/Log.php';
+include_once 'icomb/Entry.php';
 
 class IComb {
 
