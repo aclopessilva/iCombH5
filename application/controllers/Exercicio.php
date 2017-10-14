@@ -2,8 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//de repente mudar o caminho, para nao precisar citar por completo (veronica)
-require_once("C:/xampp/htdocs/icombh5/application/libraries/fpdf/fpdf.php");
+require_once(APPPATH."/libraries/fpdf/fpdf.php");
 
 class Exercicio extends CI_Controller {
 
