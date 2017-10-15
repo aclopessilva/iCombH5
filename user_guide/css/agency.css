@@ -272,8 +272,25 @@ header .intro-text .intro-heading {
     margin-bottom: 50px;
   }
 }
+
+.ImgUnivTamanho{
+  width: 170px;
+   margin: 0 0 0 29%;
+}
+
+ @media screen and (min-width:766px) {
+   .ImgUnivTamanho{
+      width: 170px;
+   margin: 0 0 0 14%;
+}
+}
+
 section {
-  padding: 100px 0;
+  padding: 70px 0;
+}
+
+section.universo {
+      padding: 0px 0;
 }
 section h2.section-heading {
   font-size: 40px;
@@ -290,7 +307,7 @@ section h3.section-subheading {
 }
 @media (min-width: 768px) {
   section {
-    padding: 150px 0;
+    padding: 70px 0;
   }
 }
 .service-heading {
@@ -558,4 +575,8 @@ input:-webkit-autofill:focus {
 .item-estagio{
   margin-bottom: 10px;
   border-bottom: 1px solid #f9eeee;
+}
+
+.BtnIndicadorAlign{
+  float: right;
 }

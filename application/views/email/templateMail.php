@@ -653,7 +653,7 @@ Acesso nosso site e conheça mais.</span></div>
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial, &quot;helvetica neue&quot: ;, helvetica, sans-serif: ;font-size: 16px;padding: 15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                <a class="mcnButton " title="Visite o iCombH5" href="http://www.google.com.br" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #000;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">Visite o iCombH5</a>
+                                <a class="mcnButton " title="Visite o iCombH5" href="<?=base_url()?>" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #000;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">Visite o iCombH5</a>
                             </td>
                         </tr>
                     </tbody>
