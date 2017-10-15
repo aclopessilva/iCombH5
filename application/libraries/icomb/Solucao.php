@@ -6,11 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of Condicao
- *
- * @author Jane Asher
- */
 class Solucao {
 
     public $resultado;

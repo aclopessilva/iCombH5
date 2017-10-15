@@ -6,11 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of Expressao
- *
- * @author Jane Asher
- */
 class Expressao {
 
     //put your code here

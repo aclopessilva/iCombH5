@@ -85,9 +85,11 @@ class IComb {
 
         //TODO: verificar uso de booleano "corrige"
         $time = $time = date('d/m h:i A');
+//
+//        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
+//        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 
-        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
-        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
 
         //$desenvolvimento->log->putEntry('Usuario inicia validacao de condicao '. serialize($condicao));
         $desenvolvimento->log->putEntry($time.' - Foi iniciada uma validação da condição');
@@ -244,8 +246,10 @@ class IComb {
 
     public function validaEstagioAtual($request){
         $time = $time = date('d/m h:i A');
-        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
-        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
+//        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
+//        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
+
+        $desenvolvimento = $this->sessao->getDesenvolvimento();
 
         //obtemos a formula
         $formulaFactory = new FormulaFactory();
@@ -288,21 +292,21 @@ class IComb {
         return $resposta;
     }
 
-    private function parseDesenvolvimento($desenvolvimento){
-        $this->fixObject($desenvolvimento->exercicio);
-        $this->fixObject($desenvolvimento->avaliador);
-        $this->fixObject($desenvolvimento->log);
-        foreach ($desenvolvimento->estagios as $estagio){
-            $this->fixObject($estagio);
-        }
-        return $desenvolvimento;
-     }
-
-    function fixObject(&$object) {
-        if (!is_object($object) && gettype($object) == 'object')
-            return ($object = unserialize(serialize($object)));
-        return $object;
-    }
+//    private function parseDesenvolvimento($desenvolvimento){
+//        $this->fixObject($desenvolvimento->exercicio);
+//        $this->fixObject($desenvolvimento->avaliador);
+//        $this->fixObject($desenvolvimento->log);
+//        foreach ($desenvolvimento->estagios as $estagio){
+//            $this->fixObject($estagio);
+//        }
+//        return $desenvolvimento;
+//     }
+//
+//    function fixObject(&$object) {
+//        if (!is_object($object) && gettype($object) == 'object')
+//            return ($object = unserialize(serialize($object)));
+//        return $object;
+//    }
 
     function finalizaExercicio($relacionamento){
 

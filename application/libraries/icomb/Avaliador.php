@@ -6,11 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of Avaliador
- *
- * @author Jane Asher
- */
 class Avaliador {
     
     private $universo;

@@ -6,12 +6,7 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of Log
- *
- * @author Jane Asher
- */
-class Log {    
+class Log {
     public $entries = array();
     
     public function putEntry($valor){

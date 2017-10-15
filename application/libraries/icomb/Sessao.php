@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jane Asher
- * Date: 14/10/2017
- * Time: 17:00
- */
 
 class Sessao
 {
-    public $desenvolvimento;
-
     protected $CI;
 
 

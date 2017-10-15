@@ -6,11 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of Element
- *
- * @author Jane Asher
- */
 class Element {
 
     //put your code here

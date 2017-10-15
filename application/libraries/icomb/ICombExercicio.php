@@ -11,7 +11,6 @@
  *
  * Classe que contem o necessario para o icomb iniciar
  *
- * @author Jane Asher
  */
 class ICombExercicio{
     public $universo;
