@@ -239,8 +239,6 @@ class IComb {
             $resposta->mensagem = "Estagio com numero ".$estagio_numero." não existe";
         }
 
-        $asdasdas = $_POST['asdas'];
-
         return $resposta;
     }
 
