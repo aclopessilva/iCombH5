@@ -195,7 +195,7 @@ fieldset[disabled] .btn-xl.active {
 @media (min-width: 768px) {
   .navbar-custom {
     /*/background-color: transparent;*/
-    padding: 25px 0;
+    padding: 12px 0;
     -webkit-transition: padding 0.3s;
     -moz-transition: padding 0.3s;
     transition: padding 0.3s;
@@ -579,4 +579,8 @@ input:-webkit-autofill:focus {
 
 .BtnIndicadorAlign{
   float: right;
+}
+
+.espaçoEx{
+  padding-top: 5%;}
 }
