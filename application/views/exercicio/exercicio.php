@@ -1006,7 +1006,7 @@
                 success: function(data){
                     if(data.estado == 'OK'){
 
-                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>/indicador'>Parabens, voce acertou! Clique aqui para ver os detalhes</a>");
+                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>/indicador'>Clique aqui</a>");
 
                     }else{
                         alert(data.mensagem);
@@ -1028,13 +1028,16 @@
         //html += '<a class="close" data-dismiss="modal">×</a>';
         html += '<h4>'+heading+'</h4>'
 
-        html += '<img src="http://localhost/icombh5/user_guide/img/teste.jpg" />';
+        html += '<img src="http://localhost/icombh5/user_guide/img/CorretoImg.jpeg" />';
         html += '</div>';
         html += '<div class="modal-body">';
-        html += formContent;
+        html += '<div class="BtnIndicadorAlign">'+formContent;
+        html += ' para ver os detalhes. </div>';        
         html += '<div class="modal-header">';
         html += '</div>';
         html += '<div class="modal-footer">';
+
+        
         //html += '<span class="btn btn-primary" data-dismiss="modal">Fechar</span>';
         html += '</div>';  // content
         html += '</div>';  // dialog

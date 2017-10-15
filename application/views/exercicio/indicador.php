@@ -1,9 +1,9 @@
 <section id="exercicio">
 
     <div class="container">
-        <div class="row">
+        <div class="row espaçoEx">
       <div class="col-xs-2" style="float: right;" >
-             <button type="button" class="btn btn-info btnExercicio" data-toggle="modal" data-target="#ModalLogs">Logs</button>
+             <button type="button" class="btn btn-info btnExercicio " data-toggle="modal" data-target="#ModalLogs">Logs</button>
             </div>
         </div>
         <div class="row titleIndicador">            

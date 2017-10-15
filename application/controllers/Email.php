@@ -124,14 +124,14 @@ class Email extends CI_Controller {
 		$mail->Username = GUSER;
 		$mail->Password = GPWD;
 
-		$mail->From = "icombh5@gmail.com";
-		$mail->FromName = "iCombH5";
+		$mail->From = "icombh5@gmail.com";//Email remetente, do icombH5
+		$mail->FromName = "iCombH5"; //Nome remetente,icombH5
 		$mail->AddAddress($EmailPara); //para quem vai enviar
 
 		$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
 
 		$mail->Subject  = 'iCombH5 - '.$NomeAluno; // Assunto da mensagem 
-		$HTML = $this->load->VIEW('EMAIL/TEMPLATEMAIL.PHP', $DATA, TRUE);		
+		$HTML = $this->load->VIEW('EMAIL/TEMPLATEMAIL.PHP', $DATA, TRUE); // Conteúdo e layout que aparecerá no email enviado 	
 		//$THIS->EMAIL->MESSAGE($HTML);
 		$mail->Body = $HTML; //PODE SER HTML
 		$mail->AltBody = "Este é o corpo da mensagem de teste, em Texto Plano! \r\n :)"; //NAO SEI EXATAMENTE

@@ -1,7 +1,7 @@
 <section id="services">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center espaçoEx">
                 <h2 class="section-heading">Exercícios</h2>
                 <h3 class="section-subheading text-muted">Selecione um exercício para resolução:</h3>
             </div>

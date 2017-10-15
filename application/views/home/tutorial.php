@@ -6,7 +6,6 @@
             </div>
         </div>
 
-
         <h4>Como resolver um exercício?</h4><br>
         <div class="container-fluid">
             <div class="row">

@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>iCombH5</title>
+
+   <link rel="shortcut icon" href="<?=base_url()?>user_guide/img/iCombH5.png"/>
     <link href="<?=base_url()?>user_guide/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=base_url()?>user_guide/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
