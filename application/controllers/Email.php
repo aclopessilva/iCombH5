@@ -11,8 +11,8 @@ class Email extends CI_Controller {
 
     public function email_controller() {
         $this->load->library('IComb', 'icomb');
-        $DATA = ARRAY('nUsuario' => $this->input->POST('nomeUsuario'),
-            'Email' => $this->input->POST('emailDestino'));
+        $DATA = ARRAY(  'nUsuario' => $this->input->POST('nomeUsuario'),
+                        'Email' => $this->input->POST('emailDestino'));
 
         $NomeAluno = $this->input->POST('nomeUsuario');
         $EmailPara = $this->input->POST('emailDestino');

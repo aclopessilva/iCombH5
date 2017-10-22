@@ -1006,7 +1006,7 @@
                 success: function(data){
                     if(data.estado == 'OK'){
 
-                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>/indicador'>Clique aqui</a>");
+                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>indicador'>Clique aqui</a>");
 
                     }else{
                         alert(data.mensagem);

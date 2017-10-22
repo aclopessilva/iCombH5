@@ -1,32 +1,29 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* Classe chamada pelo Desenvolvimento para executar metodos de validacao
  */
 
 class Avaliador {
-
-    private $universo;
-    private $solucao;
+    
+    private $universo; //IComb passa o valor para esse atributo
+    private $solucao;  //IComb passa o valor para esse atributo
     //private $elementos;
 
+    private $elemParticao; //Valor ainda a definir
+    private $elemResposta; //Valor ainda a definir
+    private $particoes;    //Valor ainda a definir
 
-    private $elemParticao;
-    private $elemResposta;
-    private $particoes;
-
-    //put your code here
+    //Metodo inicializado pelo IComb
     public function init($universo, $solucao) {
         $this->universo = $universo;
         $this->solucao = $solucao;
 
         //itera atraves dos elementos do universo e avalia se a solucao consegue identificar algum.
         //$this->universo->elementos = $this->universo->elementos;
-        // README: Enquanto no java, objetos podem ser usados como indices do array, o php array tem limitacao para aceitar isso
-        // para contornar esse problema sera usada a clase SplObjectStorage como "array" para armazenar os objetos no indice do array.
-        // https://stackoverflow.com/questions/4642980/can-i-use-an-instantiated-object-as-an-array-key?lq=1
+        // README: Enquanto no Java os objetos podem ser usados como indices de Array, o PHP Array tem limitacao para aceitar isso
+        // Para contornar esse problema, sera usada a classe SplObjectStorage como "array" para armazenar os objetos no indice do array.
+        // Reference: https://stackoverflow.com/questions/4642980/can-i-use-an-instantiated-object-as-an-array-key?lq=1
 
         $this->elemParticao = new SplObjectStorage();
         $this->elemResposta = new SplObjectStorage();

@@ -343,18 +343,18 @@ class Exercicio extends CI_Controller {
             $expressoes =  $estagioCorreto->condicao->expressoes;
         }
 
-            $pdf->MultiCell(0,20, utf8_decode($contador. 'Estágio:'),0,'J');
-            $pdf->MultiCell(0,20,$quantidade.  utf8_decode('elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):'),0,'J');
+        $pdf->MultiCell(0,20, utf8_decode($contador. 'Estágio:'),0,'J');
+        $pdf->MultiCell(0,20,$quantidade.  utf8_decode('elemento(s) cumpre(m) a(s) seguinte(s) condição(ões):'),0,'J');
 
-            foreach($expressoes as $expressao)
-                $pdf->MultiCell(0,20, utf8_decode($expressao->texto),0,'J');
+        foreach($expressoes as $expressao)
+        $pdf->MultiCell(0,20, utf8_decode($expressao->texto),0,'J');
 
         $n = $estagioCorreto->formula->n;
         $p = $estagioCorreto->formula->p;
         $textoFormula = str_replace("n", $n ,$estagioCorreto->formula->formula->notacao);
         $textoFormula = str_replace("p", $p ,$textoFormula );
 
-         $pdf->ln(10);
+        $pdf->ln(10);
         $pdf->MultiCell(0,20, utf8_decode('Fórmula utilizada '.$estagioCorreto->formula->formula->nome . ' ' . $textoFormula),0,'J');
         $pdf->MultiCell(0,20, utf8_decode('Resultado: '. $estagioCorreto->formula->resultado. ' possibilidade(s).'),0,'J'); 
 
