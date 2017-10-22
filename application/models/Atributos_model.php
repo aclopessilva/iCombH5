@@ -1,5 +1,8 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class Atributos_model extends CI_Model {
 
     var $table = "atributos";
@@ -27,42 +30,40 @@ class Atributos_model extends CI_Model {
     }
 
     function GetByElemento($idElemento) {
-        if (is_null($idElemento)){
+        if (is_null($idElemento)) {
             return false;
         }
         $this->db->where('elemento_id', $idElemento);
         $query = $this->db->get($this->table);
         return $query->result();
     }
-    
-    function GetByChaveChaveDesc($idUniverso){
-        
+
+    function GetByChaveChaveDesc($idUniverso) {
+
         if (is_null($idUniverso))
             return false;
         $sql = "SELECT DISTINCT chave, chave_desc FROM `atributos` WHERE universo_id = ?";
         $query = $this->db->query($sql, $idUniverso);
         //$query = $this->db->get($this->table);
         return $query->result();
-        
     }
-    
-    function GetValorPredicadoByChave($idUniverso, $nomeChave){
-        
+
+    function GetValorPredicadoByChave($idUniverso, $nomeChave) {
+
         if (is_null($nomeChave))
             return false;
         $sql = "(SELECT"
                 . " DISTINCT valor"
                 . " FROM `atributos`"
-                . " WHERE chave = '".$nomeChave."'"
-                . " AND universo_id = ".$idUniverso."
+                . " WHERE chave = '" . $nomeChave . "'"
+                . " AND universo_id = " . $idUniverso . "
                     AND valor is not null)
                 UNION
                 (SELECT DISTINCT predicado as valor
                 FROM `atributos`
-                WHERE chave = '".$nomeChave."' AND universo_id = ".$idUniverso. " AND predicado is not null)";
+                WHERE chave = '" . $nomeChave . "' AND universo_id = " . $idUniverso . " AND predicado is not null)";
         $query = $this->db->query($sql);
         return $query->result();
-        
     }
-    
+
 }

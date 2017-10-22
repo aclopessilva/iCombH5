@@ -1,12 +1,10 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* Classe que converte o objeto de BD Universo em classe para o entendimento do IComb
  */
 
-class Universo{
+class Universo {
 
     public $tipo;
     public $quantidade;
@@ -25,7 +23,7 @@ class Universo{
                 $elemento->name = $db_elemento->id;
                 $elemento->imagem = $db_elemento->imagem;
 
-                foreach ($db_elemento->atributos as $atributo){
+                foreach ($db_elemento->atributos as $atributo) {
                     $elemento->addAttribute($atributo->chave, $atributo->valor, array($atributo->predicado));
                 }
                 array_push($universo->elementos, $elemento);
@@ -33,6 +31,5 @@ class Universo{
         }
         return $universo;
     }
-
 
 }

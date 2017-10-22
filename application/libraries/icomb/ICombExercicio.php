@@ -9,10 +9,11 @@
 /**
  * Description of ICombExercicio.php
  *
- * Classe que contem o necessario para o icomb iniciar
+ * Classe que contem o necessario para a classe IComb iniciar
  *
  */
-class ICombExercicio{
+class ICombExercicio {
+
     public $universo;
     public $solucao;
     public $exercicio;

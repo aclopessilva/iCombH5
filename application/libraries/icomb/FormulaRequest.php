@@ -1,15 +1,13 @@
 <?php
 
-class FormulaRequest
-{
+/*
+ * Classe utilizada pelo 
+ */
+
+class FormulaRequest {
 
     public $formula;
     public $n;
     public $p;
-    /**
-     * FormulaRequest constructor.
-     */
-    public function __construct()
-    {
-    }
+
 }

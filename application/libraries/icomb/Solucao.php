@@ -1,10 +1,8 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Classe que converte o objeto de BD Solucao em classe para o entendimento do IComb
+*/
 
 class Solucao {
 
@@ -34,11 +32,11 @@ class Solucao {
                         //considerando isso, vamos usar uma validacao para colocar um boolean real no pertence
                         if ($db_expressao->pertence == 't') {//true
                             $expressao->pertence = true;
-                        }else{ //qualquer outra coisa que estiver na tabela
+                        } else { //qualquer outra coisa que estiver na tabela
                             $expressao->pertence = false;
                         }
-                        if(isset($db_expressao->caracteristicas)){
-                            foreach ($db_expressao->caracteristicas as $db_caracteristica){
+                        if (isset($db_expressao->caracteristicas)) {
+                            foreach ($db_expressao->caracteristicas as $db_caracteristica) {
                                 array_push($expressao->elementos, $db_caracteristica->valor);
                             }
                         }

@@ -1,5 +1,8 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class Elemento_model extends CI_Model {
 
     var $table = "elemento";
@@ -27,7 +30,7 @@ class Elemento_model extends CI_Model {
     }
 
     function GetByUniverse($idUniverse) {
-        if (is_null($idUniverse)){
+        if (is_null($idUniverse)) {
             return false;
         }
         $this->db->where('universo_id', $idUniverse);

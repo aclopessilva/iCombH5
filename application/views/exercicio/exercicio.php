@@ -78,7 +78,7 @@
                                                 <select class="form-control" name="num_propriedades" id="num_propriedades">
                                                     <option value = 0 selected>Nenhuma propriedade</option>
                                                     <option value = 1 >Uma propriedade</option>
-                                                    <option value = 2>Duas propriedade</option>
+                                                    <option value = 2>Duas propriedades</option>
                                                 </select>
                                             </div>
 
