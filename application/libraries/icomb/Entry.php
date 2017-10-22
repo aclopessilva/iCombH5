@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe que representa as entradas do log
+ * Classe que representa as entradas do Log
  */
 class Entry
 {

@@ -1,7 +1,8 @@
 <?php
 
 /*
- * Classe utilizada pelo 
+ * Classe utilizada pelo IComb para montar o objeto que calculara a formula,
+ * de acordo com os valores e formula que o usuario escolheu
  */
 
 class FormulaRequest {

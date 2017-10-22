@@ -6,8 +6,6 @@
 
 class Element {
 
-    //put your code here
-
     public $id;
     public $name;
     public $attributes; //array de strings
