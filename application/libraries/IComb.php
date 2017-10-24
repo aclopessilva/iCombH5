@@ -66,7 +66,7 @@ class IComb {
         //Essa lista vai conter os estagios que o usuario esta montando e foram validados ou em processo de validacao.
         $desenvolvimento->estagios = array();
 
-        $this->sessao->saveDesenvolvimento( $desenvolvimento);
+        $this->sessao->saveDesenvolvimento($desenvolvimento);
     }
 
     /**
@@ -245,7 +245,7 @@ class IComb {
     }
 
     public function validaEstagioAtual($request){
-        $time = $time = date('d/m h:i A');
+        $time = date('d/m h:i A');
 //        $objeto_de_sessao = $this->sessao->getDesenvolvimento();
 //        $desenvolvimento = $this->parseDesenvolvimento($objeto_de_sessao);
 

@@ -78,7 +78,7 @@
                                                 <select class="form-control" name="num_propriedades" id="num_propriedades">
                                                     <option value = 0 selected>Nenhuma propriedade</option>
                                                     <option value = 1 >Uma propriedade</option>
-                                                    <option value = 2>Duas propriedade</option>
+                                                    <option value = 2>Duas propriedades</option>
                                                 </select>
                                             </div>
 
@@ -1006,7 +1006,7 @@
                 success: function(data){
                     if(data.estado == 'OK'){
 
-                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>/indicador'>Clique aqui</a>");
+                        modalResultadoExercicio('Resultado final',"<a class=\"btn btn-primary\"  href='<?= base_url()?>indicador'>Clique aqui para ver os detalhes.</a>");
 
                     }else{
                         alert(data.mensagem);
@@ -1032,7 +1032,7 @@
         html += '</div>';
         html += '<div class="modal-body">';
         html += '<div class="BtnIndicadorAlign">'+formContent;
-        html += ' para ver os detalhes. </div>';        
+        html += '</div>';        
         html += '<div class="modal-header">';
         html += '</div>';
         html += '<div class="modal-footer">';

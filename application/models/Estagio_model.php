@@ -1,5 +1,8 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class Estagio_model extends CI_Model {
 
     var $table = "estagio";
@@ -15,7 +18,7 @@ class Estagio_model extends CI_Model {
         $query = $this->db->get($this->table);
         return $query->row();
     }
-    
+
     function GetBySolucaoId($id) {
         if (is_null($id))
             return false;
@@ -23,6 +26,5 @@ class Estagio_model extends CI_Model {
         $query = $this->db->get($this->table);
         return $query->result();
     }
-    
 
 }
